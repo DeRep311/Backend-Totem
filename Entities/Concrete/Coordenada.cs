@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class Coordenada
+public partial class Coordenada: IEntity
 {
     public int Id { get; set; }
 

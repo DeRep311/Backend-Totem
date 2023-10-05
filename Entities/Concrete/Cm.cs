@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class Cm
+public partial class Cm: IEntity
 {
     public int IdC { get; set; }
 

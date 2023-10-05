@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class Horario
+public partial class Horario: IEntity
 {
     public int IdH { get; set; }
 

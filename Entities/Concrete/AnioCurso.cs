@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class AnioCurso
+public partial class AnioCurso: IEntity
 {
     public int Anio { get; set; }
 
