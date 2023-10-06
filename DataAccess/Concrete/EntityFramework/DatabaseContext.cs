@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Entities;
+
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace DataAccess.Models;
 
 public partial class DatabaseContext : DbContext
 {
     public DatabaseContext()
     {
+        
     }
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
     {
     }
+    
 
     public virtual DbSet<Administrador> Administradors { get; set; }
 
@@ -60,10 +63,14 @@ public partial class DatabaseContext : DbContext
         => optionsBuilder.UseMySql("server=190.135.204.178;database=apheleondb;user=root;password=789874506082005", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.5-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
+
     {
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
+
+
+           
 
         modelBuilder.Entity<Administrador>(entity =>
         {
@@ -141,6 +148,7 @@ public partial class DatabaseContext : DbContext
         modelBuilder.Entity<Coordenada>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
+           
 
             entity.ToTable("coordenadas");
 
@@ -370,6 +378,7 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Ubicacione>(entity =>
         {
+       
             entity.HasKey(e => e.Codigo).HasName("PRIMARY");
 
             entity.ToTable("ubicaciones");
@@ -421,6 +430,8 @@ public partial class DatabaseContext : DbContext
 
         OnModelCreatingPartial(modelBuilder);
     }
+    
+    
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

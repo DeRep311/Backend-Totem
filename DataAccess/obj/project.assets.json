@@ -1348,6 +1348,32 @@
         "runtime": {
           "lib/net7.0/ZstdSharp.dll": {}
         }
+      },
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.11"
+        },
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
+        }
+      },
+      "Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entities.dll": {}
+        }
       }
     }
   },
@@ -3931,10 +3957,21 @@
         "zstdsharp.port.0.7.1.nupkg.sha512",
         "zstdsharp.port.nuspec"
       ]
+    },
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
+    },
+    "Entities/1.0.0": {
+      "type": "project",
+      "path": "../Entities/Entities.csproj",
+      "msbuildProject": "../Entities/Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Entities >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.11",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
@@ -3943,30 +3980,36 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\endcu\\.nuget\\packages\\": {}
+    "C:\\Users\\DeRep\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
-      "packagesPath": "C:\\Users\\endcu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\obj\\",
+      "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
+      "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\endcu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -4018,7 +4061,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -13,4 +13,7 @@ public partial class Coordenada: IEntity
     public float CooY { get; set; }
 
     public int Foto { get; set; }
+
+    
+    
 }

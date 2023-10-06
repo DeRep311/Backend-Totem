@@ -1,31 +1,98 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {}
+    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
-        "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\endcu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\endcu\\Documents\\GitHub\\Aphebackend-Definitivo\\DataAccess\\obj\\",
+        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj",
+        "projectName": "Core",
+        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\endcu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -77,7 +144,66 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
