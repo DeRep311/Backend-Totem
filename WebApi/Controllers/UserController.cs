@@ -7,11 +7,14 @@ namespace Name.Controllers
     [ApiController]
     public class User : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("Get")]
+        public async Task<IActionResult> GetUsers()
         {
             
+            
+
+
             return Ok();
-        }
+        } 
     }
 }
