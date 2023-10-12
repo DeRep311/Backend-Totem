@@ -1,6 +1,6 @@
 namespace Core.entities;
 
-interface IDTO
+public interface IDTO
 {
     
 }

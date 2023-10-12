@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Core.DataAccess;
 using Core.entities;
 
-class EfEntityRepositoryBase<TEntity, Tcontext> : IEntityRepository<TEntity>
+public class EfEntityRepositoryBase<TEntity, Tcontext> : IEntityRepository<TEntity>
 where TEntity : class, IEntity, new()
 where Tcontext : DbContext, new()
 {
-    public void Add(TEntity entitiy)
+    public virtual void Add(TEntity entitiy)
     {
         using Tcontext context = new();
         var addEntity = context.Entry(entitiy);
@@ -16,21 +16,22 @@ where Tcontext : DbContext, new()
         context.SaveChanges();
     }
 
-    public void Delete(TEntity entity)
+    public virtual void Delete(TEntity entity)
     {
         using Tcontext context = new();
+        
         var deleteEntity = context.Entry(entity);
         deleteEntity.State = EntityState.Deleted;
         context.SaveChanges();
     }
 
-    public TEntity Get(Expression<Func<TEntity, bool>> filter)
+    public virtual TEntity Get(Expression<Func<TEntity, bool>> filter)
     {
         using Tcontext context = new();
         return context.Set<TEntity>().SingleOrDefault(filter);
     }
 
-    public List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
+    public virtual List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
     {
         using Tcontext context= new();
 
@@ -39,12 +40,14 @@ where Tcontext : DbContext, new()
         
         }
 
-    public void Update(TEntity entity)
+    public virtual void Update(TEntity newentity, TEntity oldentity)
     {
         using Tcontext context = new();
 
-        var updatecontext = context.Entry(entity);
+        context.Entry(oldentity).State= EntityState.Detached;
+        var updatecontext = context.Entry(newentity);
         updatecontext.State= EntityState.Modified;
+        context.Entry(oldentity).CurrentValues.SetValues(newentity);
         context.SaveChanges();
     }
 }

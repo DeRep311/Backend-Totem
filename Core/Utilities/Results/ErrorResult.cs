@@ -1,4 +1,4 @@
-class ErrorResult : Result
+public class ErrorResult : Result
 {
     public ErrorResult( string Mess) : base(false, Mess)
     {

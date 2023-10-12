@@ -60,7 +60,7 @@ public partial class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=190.135.204.178;database=apheleondb;user=root;password=789874506082005", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.5-mariadb"));
+        => optionsBuilder.UseMySql("server=26.71.26.165;database=apheleondb;user=root;password=789874506082005", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.5-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 
@@ -403,7 +403,8 @@ public partial class DatabaseContext : DbContext
             entity.HasKey(e => e.Cedula).HasName("PRIMARY");
 
             entity.ToTable("usuario");
-
+            
+    
             entity.Property(e => e.Cedula)
                 .ValueGeneratedNever()
                 .HasColumnType("int(8)")

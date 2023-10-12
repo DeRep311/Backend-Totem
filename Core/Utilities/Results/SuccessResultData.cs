@@ -1,4 +1,4 @@
-class SuccessResultData<T> : DataResult<T>
+public class SuccessResultData<T> : DataResult<T>
 {
     public SuccessResultData(T data, string Mess) : base(data, true, Mess)
     {

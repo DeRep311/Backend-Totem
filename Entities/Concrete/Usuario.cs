@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Core.entities;
 
 namespace DataAccess.Models;
@@ -17,4 +18,8 @@ public partial class Usuario: IEntity
     public string Direccion { get; set; }
 
     public int Pin { get; set; }
+
+    [NotMapped]
+
+    public String TypeUser {get;set;}
 }

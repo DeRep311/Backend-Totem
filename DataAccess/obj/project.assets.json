@@ -1353,7 +1353,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.11"
+          "Microsoft.EntityFrameworkCore": "7.0.11",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "MySql.EntityFrameworkCore": "7.0.5",
+          "Pomelo.EntityFrameworkCore.MySql": "7.0.0"
         },
         "compile": {
           "bin/placeholder/Core.dll": {}
@@ -3971,9 +3974,11 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Core >= 1.0.0",
       "Entities >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.11",
+      "Microsoft.EntityFrameworkCore.Relational >= 7.0.11",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
       "MySql.EntityFrameworkCore >= 7.0.5",
       "Pomelo.EntityFrameworkCore.MySql >= 7.0.0"
@@ -4006,6 +4011,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj"
+            },
             "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
               "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj"
             }
@@ -4029,6 +4037,10 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[7.0.11, )"
+          },
+          "Microsoft.EntityFrameworkCore.Relational": {
             "target": "Package",
             "version": "[7.0.11, )"
           },

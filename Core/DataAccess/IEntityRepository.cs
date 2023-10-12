@@ -17,6 +17,6 @@ public interface IEntityRepository <T> where T:class,IEntity,new()
 
     void Delete(T entity);
 
-    void Update(T entity);
+    void Update(T newentity, T oldentity);
 
 }}
