@@ -4,7 +4,7 @@ using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class Coordenada: IEntity
+public partial class Coordenada :IEntity
 {
     public int Id { get; set; }
 
@@ -14,6 +14,5 @@ public partial class Coordenada: IEntity
 
     public int Foto { get; set; }
 
-    
-    
+    public virtual ICollection<Ubicacione> Codigos { get; set; } = new List<Ubicacione>();
 }

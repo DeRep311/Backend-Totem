@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class EstudiaEn: IEntity
+public partial class EstudiaEn
 {
     public int Cedula { get; set; }
+
+    public int? IdC { get; set; }
 }

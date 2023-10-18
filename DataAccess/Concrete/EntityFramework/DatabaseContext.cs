@@ -2,31 +2,22 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace DataAccess.Models;
 
 public partial class DatabaseContext : DbContext
 {
     public DatabaseContext()
     {
-        
     }
 
     public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
     {
     }
-    
-
-    public virtual DbSet<Administrador> Administradors { get; set; }
 
     public virtual DbSet<Anio> Anios { get; set; }
 
     public virtual DbSet<AnioCurso> AnioCursos { get; set; }
-
-    public virtual DbSet<Cm> Cms { get; set; }
-
-    public virtual DbSet<Codigo> Codigos { get; set; }
 
     public virtual DbSet<Coordenada> Coordenadas { get; set; }
 
@@ -44,15 +35,7 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<Materium> Materia { get; set; }
 
-    public virtual DbSet<Operador> Operadors { get; set; }
-
     public virtual DbSet<Plano> Planos { get; set; }
-
-    public virtual DbSet<Privado> Privados { get; set; }
-
-    public virtual DbSet<Publico> Publicos { get; set; }
-
-    public virtual DbSet<Tiene> Tienes { get; set; }
 
     public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
 
@@ -60,30 +43,13 @@ public partial class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=26.71.26.165;database=apheleondb;user=root;password=789874506082005", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.5-mariadb"));
+        => optionsBuilder.UseMySql("server=localhost;database=apheleondb;user=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.28-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-
     {
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
-
-
-           
-
-        modelBuilder.Entity<Administrador>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("administrador");
-
-            entity.HasIndex(e => e.Cedula, "FK_administrador_usuario");
-
-            entity.Property(e => e.Cedula)
-                .HasColumnType("int(8)")
-                .HasColumnName("cedula");
-        });
 
         modelBuilder.Entity<Anio>(entity =>
         {
@@ -113,47 +79,20 @@ public partial class DatabaseContext : DbContext
             entity.Property(e => e.IdC)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_c");
-        });
 
-        modelBuilder.Entity<Cm>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("cm");
-
-            entity.HasIndex(e => e.IdC, "id_c");
-
-            entity.HasIndex(e => e.IdM, "id_m");
-
-            entity.Property(e => e.IdC)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
-            entity.Property(e => e.IdM)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_m");
-        });
-
-        modelBuilder.Entity<Codigo>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("codigo");
-
-            entity.Property(e => e.Codigo1)
-                .IsRequired()
-                .HasMaxLength(5)
-                .HasColumnName("codigo");
+            entity.HasOne(d => d.AnioNavigation).WithMany()
+                .HasForeignKey(d => d.Anio)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_anioCurso_anio");
         });
 
         modelBuilder.Entity<Coordenada>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
-           
 
             entity.ToTable("coordenadas");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
                 .HasColumnType("int(5)")
                 .HasColumnName("id");
             entity.Property(e => e.CooX).HasColumnName("coo_x");
@@ -165,23 +104,23 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Curso>(entity =>
         {
-            entity.HasKey(e => e.IdC).HasName("PRIMARY");
+            entity
+                .HasNoKey()
+                .ToTable("curso");
 
-            entity.ToTable("curso");
+            entity.HasIndex(e => e.IdC, "FK_materia_idx");
 
-            entity.HasIndex(e => e.Cedula, "cedula");
-
-            entity.Property(e => e.IdC)
-                .ValueGeneratedNever()
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
-            entity.Property(e => e.Cedula)
-                .HasColumnType("int(8)")
-                .HasColumnName("cedula");
+            entity.Property(e => e.Anio)
+                .HasColumnType("int(5)")
+                .HasColumnName("anio");
             entity.Property(e => e.Generacion)
                 .IsRequired()
                 .HasMaxLength(5)
                 .HasColumnName("generacion");
+            entity.Property(e => e.IdC)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(11)")
+                .HasColumnName("id_c");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(7)
@@ -194,11 +133,16 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("docente");
 
-            entity.HasIndex(e => e.Cedula, "cedula_id");
+            entity.HasIndex(e => e.Cedula, "docente_ibfk_1_idx");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
+
+            entity.HasOne(d => d.CedulaNavigation).WithMany()
+                .HasForeignKey(d => d.Cedula)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("docente_ibfk_1");
         });
 
         modelBuilder.Entity<EstudiaEn>(entity =>
@@ -207,11 +151,16 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("estudia_en");
 
-            entity.HasIndex(e => e.Cedula, "cedula_id");
+            entity.HasIndex(e => e.IdC, "estudia_en_curso_idx");
+
+            entity.HasIndex(e => e.Cedula, "estudia_en_ibfk_1");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
+            entity.Property(e => e.IdC)
+                .HasColumnType("int(11)")
+                .HasColumnName("id_c");
         });
 
         modelBuilder.Entity<Estudiante>(entity =>
@@ -220,11 +169,16 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("estudiante");
 
-            entity.HasIndex(e => e.Cedula, "FK__usuario");
+            entity.HasIndex(e => e.Cedula, "estudiante_usuario_idx");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
+
+            entity.HasOne(d => d.CedulaNavigation).WithMany()
+                .HasForeignKey(d => d.Cedula)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("estudiante_usuario");
         });
 
         modelBuilder.Entity<Horario>(entity =>
@@ -234,7 +188,6 @@ public partial class DatabaseContext : DbContext
             entity.ToTable("horario");
 
             entity.Property(e => e.IdH)
-                .ValueGeneratedNever()
                 .HasColumnType("int(11)")
                 .HasColumnName("id_h");
             entity.Property(e => e.HoraFinal)
@@ -257,11 +210,13 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("horario_cm_ubicaciones");
 
+            entity.HasIndex(e => new { e.IdM, e.IdC }, "FK_horariocm_ubicaciones_idx");
+
             entity.HasIndex(e => e.Codigo, "codigo");
 
-            entity.HasIndex(e => e.IdC, "id_c");
+            entity.HasIndex(e => e.IdH, "id_H");
 
-            entity.HasIndex(e => e.IdH, "id_h");
+            entity.HasIndex(e => e.IdC, "id_c");
 
             entity.HasIndex(e => e.IdM, "id_m");
 
@@ -275,10 +230,25 @@ public partial class DatabaseContext : DbContext
                 .HasColumnName("id_c");
             entity.Property(e => e.IdH)
                 .HasColumnType("int(11)")
-                .HasColumnName("id_h");
+                .HasColumnName("id_H");
             entity.Property(e => e.IdM)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_m");
+
+            entity.HasOne(d => d.CodigoNavigation).WithMany()
+                .HasForeignKey(d => d.Codigo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ubicaciones");
+
+            entity.HasOne(d => d.IdHNavigation).WithMany()
+                .HasForeignKey(d => d.IdH)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_horarios");
+
+            entity.HasOne(d => d.IdMNavigation).WithMany()
+                .HasForeignKey(d => d.IdM)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_horariocm_ubicaciones");
         });
 
         modelBuilder.Entity<Materium>(entity =>
@@ -287,37 +257,32 @@ public partial class DatabaseContext : DbContext
 
             entity.ToTable("materia");
 
+            entity.HasIndex(e => e.IdM, "FK_horariocm_idx");
+
             entity.HasIndex(e => e.Cedula, "cedula");
 
+            entity.HasIndex(e => e.IdC, "id_c");
+
             entity.Property(e => e.IdM)
-                .ValueGeneratedNever()
                 .HasColumnType("int(11)")
                 .HasColumnName("id_m");
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
+            entity.Property(e => e.IdC)
+                .HasColumnType("int(11)")
+                .HasColumnName("id_c");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(30)
                 .HasColumnName("nombre");
         });
 
-        modelBuilder.Entity<Operador>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("operador");
-
-            entity.HasIndex(e => e.Cedula, "cedula_id");
-
-            entity.Property(e => e.Cedula)
-                .HasColumnType("int(8)")
-                .HasColumnName("cedula");
-        });
-
         modelBuilder.Entity<Plano>(entity =>
         {
-            entity.HasKey(e => e.CodigoP).HasName("PRIMARY");
+            entity.HasKey(e => new { e.CodigoP, e.PlanoImg })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
             entity.ToTable("planos");
 
@@ -330,58 +295,13 @@ public partial class DatabaseContext : DbContext
                 .HasColumnName("plano_img");
         });
 
-        modelBuilder.Entity<Privado>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("privado");
-
-            entity.HasIndex(e => e.Codigo, "codigo");
-
-            entity.Property(e => e.Codigo)
-                .IsRequired()
-                .HasMaxLength(5)
-                .HasColumnName("codigo");
-        });
-
-        modelBuilder.Entity<Publico>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("publico");
-
-            entity.HasIndex(e => e.Codigo, "codigo");
-
-            entity.Property(e => e.Codigo)
-                .HasMaxLength(5)
-                .HasColumnName("codigo");
-        });
-
-        modelBuilder.Entity<Tiene>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("tiene");
-
-            entity.HasIndex(e => e.Codigo, "codigo");
-
-            entity.HasIndex(e => e.Id, "id");
-
-            entity.Property(e => e.Codigo)
-                .IsRequired()
-                .HasMaxLength(5)
-                .HasColumnName("codigo");
-            entity.Property(e => e.Id)
-                .HasColumnType("int(5)")
-                .HasColumnName("id");
-        });
-
         modelBuilder.Entity<Ubicacione>(entity =>
         {
-       
             entity.HasKey(e => e.Codigo).HasName("PRIMARY");
 
             entity.ToTable("ubicaciones");
+
+            entity.HasIndex(e => new { e.CodigoP, e.PlanoImg }, "FK_ubicacion_planos_idx");
 
             entity.HasIndex(e => e.CodigoP, "codigo_p");
 
@@ -396,6 +316,47 @@ public partial class DatabaseContext : DbContext
                 .IsRequired()
                 .HasMaxLength(25)
                 .HasColumnName("nombre");
+            entity.Property(e => e.PlanoImg)
+                .HasColumnType("int(11)")
+                .HasColumnName("plano_img");
+            entity.Property(e => e.Privado)
+                .HasDefaultValueSql("b'1'")
+                .HasColumnType("bit(1)");
+            entity.Property(e => e.Publico)
+                .HasDefaultValueSql("b'0'")
+                .HasColumnType("bit(1)");
+
+            entity.HasOne(d => d.Plano).WithMany(p => p.Ubicaciones)
+                .HasForeignKey(d => new { d.CodigoP, d.PlanoImg })
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ubicacion_planos");
+
+            entity.HasMany(d => d.Ids).WithMany(p => p.Codigos)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Tiene",
+                    r => r.HasOne<Coordenada>().WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_tiene_Coo"),
+                    l => l.HasOne<Ubicacione>().WithMany()
+                        .HasForeignKey("Codigo")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_tiene_ubi"),
+                    j =>
+                    {
+                        j.HasKey("Codigo", "Id")
+                            .HasName("PRIMARY")
+                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+                        j.ToTable("tiene");
+                        j.HasIndex(new[] { "Codigo" }, "codigo");
+                        j.HasIndex(new[] { "Id" }, "id");
+                        j.IndexerProperty<string>("Codigo")
+                            .HasMaxLength(5)
+                            .HasColumnName("codigo");
+                        j.IndexerProperty<int>("Id")
+                            .HasColumnType("int(5)")
+                            .HasColumnName("id");
+                    });
         });
 
         modelBuilder.Entity<Usuario>(entity =>
@@ -403,12 +364,14 @@ public partial class DatabaseContext : DbContext
             entity.HasKey(e => e.Cedula).HasName("PRIMARY");
 
             entity.ToTable("usuario");
-            
-    
+
             entity.Property(e => e.Cedula)
                 .ValueGeneratedNever()
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
+            entity.Property(e => e.Administrador)
+                .HasDefaultValueSql("'1'")
+                .HasColumnType("tinyint(4)");
             entity.Property(e => e.Apellido)
                 .IsRequired()
                 .HasMaxLength(20)
@@ -421,6 +384,9 @@ public partial class DatabaseContext : DbContext
                 .IsRequired()
                 .HasMaxLength(20)
                 .HasColumnName("nombre");
+            entity.Property(e => e.Operador)
+                .HasDefaultValueSql("'0'")
+                .HasColumnType("tinyint(4)");
             entity.Property(e => e.Pin)
                 .HasColumnType("int(4)")
                 .HasColumnName("pin");
@@ -431,8 +397,6 @@ public partial class DatabaseContext : DbContext
 
         OnModelCreatingPartial(modelBuilder);
     }
-    
-    
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

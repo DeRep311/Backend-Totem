@@ -1,5 +1,6 @@
 namespace Name.Controllers
 {
+    using DataAccess.Models;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -45,18 +46,37 @@ namespace Name.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add (){
+        public async Task<IActionResult> Add (Usuario user){
+            var result=_userManager.Add(user);
 
-            return Ok();
+            if (result.Success)
+            {
+                return Ok();
+                
+            }else{
+                return BadRequest();
+            }
+
+           
 
         }
 
-        [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete (){
+        [HttpDelete("Delete/{cedula}")]
+        public async Task<IActionResult> Delete (int cedula){
 
-            return Ok();
+            var result=_userManager.Delete(cedula);
+
+            if (result.Success)
+            {
+                return Ok();
+                
+            }else{
+                return BadRequest();
+            }
 
         }
+
+        
 
 
 

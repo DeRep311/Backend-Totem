@@ -5,7 +5,7 @@ using Core.entities;
 
 namespace DataAccess.Models;
 
-public partial class Usuario: IEntity
+public partial class Usuario:IEntity
 {
     public int Cedula { get; set; }
 
@@ -19,7 +19,11 @@ public partial class Usuario: IEntity
 
     public int Pin { get; set; }
 
+    public sbyte? Administrador { get; set; }
+
+    public sbyte? Operador { get; set; }
+
     [NotMapped]
 
-    public String TypeUser {get;set;}
+    public string TypeUser{get; set;}
 }
