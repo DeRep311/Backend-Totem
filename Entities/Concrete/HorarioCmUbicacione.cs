@@ -7,7 +7,7 @@ public partial class HorarioCmUbicacione
 {
     public int IdM { get; set; }
 
-    public int IdC { get; set; }
+  
 
     public string Codigo { get; set; }
 

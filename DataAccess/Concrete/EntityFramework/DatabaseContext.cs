@@ -210,24 +210,24 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("horario_cm_ubicaciones");
 
-            entity.HasIndex(e => new { e.IdM, e.IdC }, "FK_horariocm_ubicaciones_idx");
+            entity.HasIndex(e => new { e.IdM }, "FK_horariocm_ubicaciones_idx");
 
             entity.HasIndex(e => e.Codigo, "codigo");
 
             entity.HasIndex(e => e.IdH, "id_H");
-
-            entity.HasIndex(e => e.IdC, "id_c");
+    
+           
 
             entity.HasIndex(e => e.IdM, "id_m");
-
+            
+          
             entity.Property(e => e.Codigo)
                 .IsRequired()
                 .HasMaxLength(5)
                 .HasDefaultValueSql("''")
                 .HasColumnName("codigo");
-            entity.Property(e => e.IdC)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
+
+               
             entity.Property(e => e.IdH)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_H");
@@ -304,6 +304,9 @@ public partial class DatabaseContext : DbContext
             entity.HasIndex(e => new { e.CodigoP, e.PlanoImg }, "FK_ubicacion_planos_idx");
 
             entity.HasIndex(e => e.CodigoP, "codigo_p");
+
+            entity.Property(e=>e.CodigoDependendiente)
+            .HasColumnName("CodigoDependiente");
 
             entity.Property(e => e.Codigo)
                 .HasMaxLength(5)

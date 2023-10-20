@@ -1,0 +1,9 @@
+@startuml
+class Curso <<partial>> {
+    + IdC : int <<get>> <<set>>
+    + Generacion : string <<get>> <<set>>
+    + Nombre : string <<get>> <<set>>
+    + Anio : int <<get>> <<set>>
+}
+IEntity <|-- Curso
+@enduml

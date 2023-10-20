@@ -1,0 +1,6 @@
+@startuml
+class EstudiaEn <<partial>> {
+    + Cedula : int <<get>> <<set>>
+    + IdC : int? <<get>> <<set>>
+}
+@enduml

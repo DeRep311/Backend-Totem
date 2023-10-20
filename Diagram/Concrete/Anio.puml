@@ -1,0 +1,6 @@
+@startuml
+class Anio <<partial>> {
+    + Anio1 : int <<get>> <<set>>
+}
+IEntity <|-- Anio
+@enduml

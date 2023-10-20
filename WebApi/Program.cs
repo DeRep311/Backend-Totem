@@ -10,6 +10,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserServices, UserManager>();
 builder.Services.AddScoped<IUserDal, EfUserDal>();
+builder.Services.AddScoped<IAuthServices, AuthManager>();
+builder.Services.AddScoped<ICursoServices, CursoManager>();
+builder.Services.AddScoped<ICursoDal, EfCursosDal>();
+builder.Services.AddScoped<IMateriaServices, MateriaManager>();
+builder.Services.AddScoped<IMateriaDal, EfMateriaDal>();
+
 
 
 

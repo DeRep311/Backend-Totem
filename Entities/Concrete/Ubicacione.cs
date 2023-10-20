@@ -17,6 +17,8 @@ public partial class Ubicacione:IEntity
 
     public int PlanoImg { get; set; }
 
+    public String CodigoDependendiente { get; set; }
+
     public virtual Plano Plano { get; set; }
 
     public virtual ICollection<Coordenada> Ids { get; set; } = new List<Coordenada>();

@@ -12,6 +12,8 @@ public class MateriaManager : IMateriaServices
         _cursoservices = cursoServices;
         _materiadal = materiadal;
     }
+
+    
     public IResult Add(Materium materia, int IdCurso)
     {
         var result = _cursoservices.Get(IdCurso);

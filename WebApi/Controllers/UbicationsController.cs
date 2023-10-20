@@ -7,7 +7,7 @@ namespace Name.Controllers
     [ApiController]
     public class Ubication : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("")]
         public async Task<IActionResult> Get()
         {
             

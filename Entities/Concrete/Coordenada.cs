@@ -15,4 +15,7 @@ public partial class Coordenada :IEntity
     public int Foto { get; set; }
 
     public virtual ICollection<Ubicacione> Codigos { get; set; } = new List<Ubicacione>();
+
+    
+
 }

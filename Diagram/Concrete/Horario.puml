@@ -1,0 +1,9 @@
+@startuml
+class Horario <<partial>> {
+    + IdH : int <<get>> <<set>>
+    + HoraInicio : string <<get>> <<set>>
+    + HoraFinal : string <<get>> <<set>>
+    + NombreDia : string <<get>> <<set>>
+}
+IEntity <|-- Horario
+@enduml

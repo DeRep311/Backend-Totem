@@ -1,0 +1,7 @@
+@startuml
+class Docente <<partial>> {
+    + Cedula : int <<get>> <<set>>
+    + <<virtual>> CedulaNavigation : Usuario <<get>> <<set>>
+}
+IEntity <|-- Docente
+@enduml

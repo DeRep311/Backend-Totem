@@ -1,0 +1,8 @@
+@startuml
+class AnioCurso <<partial>> {
+    + Anio : int <<get>> <<set>>
+    + IdC : int <<get>> <<set>>
+    + <<virtual>> AnioNavigation : Anio <<get>> <<set>>
+}
+IEntity <|-- AnioCurso
+@enduml

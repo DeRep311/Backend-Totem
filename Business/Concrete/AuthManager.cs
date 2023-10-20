@@ -5,7 +5,7 @@ public class AuthManager : IAuthServices
 {
 
     private IUserDal _userDal;
-    AuthManager(IUserDal userDal){
+    public AuthManager(IUserDal userDal){
         
         _userDal = userDal;
     }
