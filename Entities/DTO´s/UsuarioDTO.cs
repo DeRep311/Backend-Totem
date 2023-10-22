@@ -5,10 +5,10 @@ public class UsuarioDTO:IDTO
 {
     public UsuarioDTO(Usuario user){
         this.user = user;
-        if (user.Operador== 1)
+        if (user.Operador== true)
         {
             this.IsOperator = true;
-        }if (user.Administrador== 1)
+        }if (user.Administrador==true)
         {
             this.IsAdmin = true; }
         else {

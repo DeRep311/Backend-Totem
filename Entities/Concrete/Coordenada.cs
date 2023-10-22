@@ -13,6 +13,10 @@ public partial class Coordenada :IEntity
     public float CooY { get; set; }
 
     public int Foto { get; set; }
+    
+    public bool Inicio {get; set;}
+
+    public bool Final {get; set;}
 
     public virtual ICollection<Ubicacione> Codigos { get; set; } = new List<Ubicacione>();
 

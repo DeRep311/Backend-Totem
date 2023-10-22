@@ -8,25 +8,35 @@ namespace Name.Controllers
     public class UserController : ControllerBase
     {
         private IUserServices _userManager;
+        private IAuthServices _AuthManager;
 
-        public UserController(IUserServices user)
+        public UserController(IUserServices user, IAuthServices authServices)
         {
             _userManager = user;
+            _AuthManager = authServices;
         }
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetUsers()
         {
-            var result = _userManager.GetAll();
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest(result);
-            }
+          try
+          {
+              var result = _userManager.GetAll();
+  
+              if (result.Success)
+              {
+                  return Ok(result);
+              }
+              else
+              {
+                  return BadRequest(result);
+              }
+          }
+          catch (System.Exception r)
+          {
+            
+            return BadRequest(r.Message);
+          }
         }
 
         [HttpGet("Get/{cedula}")]
@@ -73,6 +83,21 @@ namespace Name.Controllers
             }else{
                 return BadRequest();
             }
+
+        }
+
+        [HttpPost("Auth")]
+
+        public async Task<IActionResult> Auth (AuthDTO data){
+
+            var result = _AuthManager.Login(data);
+
+            if (result.Success)
+            {
+                return Ok(result);
+                
+            }
+            return BadRequest(result);
 
         }
 

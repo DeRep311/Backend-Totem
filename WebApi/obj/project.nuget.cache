@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rgBeixTXMM4PnX9Bszy5ftfC8ZNoOiRWA218friUea80bLqqaGpWlZetYkKUjHaRaja89gvtRv29Ov0q+wX8wQ==",
+  "dgSpecHash": "rjDkOGYJozcPDpebRaDbqw0iiPB7nvdfPT6QJMAMRGsACreF0WLhf04cmIxl6VJzAPB5O+LwloPRABybL0Uixw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\webapi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DeRep\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\DeRep\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

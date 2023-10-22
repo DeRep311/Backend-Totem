@@ -4,6 +4,7 @@ public class UserManager : IUserServices
 {
 
     private IUserDal _userDal;
+    
 
     public UserManager(IUserDal userDal)
     {
@@ -15,6 +16,13 @@ public class UserManager : IUserServices
     public IResult Add(Usuario user)
     {
         _userDal.Add(user);
+        if (user.Docente != null && user.Docente== true)
+        {
+
+            
+
+            
+        }
 
         return new SuccessResult();
     }

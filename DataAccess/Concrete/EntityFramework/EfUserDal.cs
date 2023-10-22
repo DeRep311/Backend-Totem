@@ -9,37 +9,51 @@ public class EfUserDal : EfEntityRepositoryBase<Usuario, DatabaseContext>, IUser
 
     public Usuario GetUserRol(Usuario user)
     {
-        using DatabaseContext context = new();
-        if (context.Docentes.Any(d => d.Cedula == user.Cedula))
-        {
-            user.TypeUser = "Docente";
-            return user;
-        }
-        if (context.Estudiantes.Any(d => d.Cedula == user.Cedula))
-        {
-            user.TypeUser = "Estudiante";
-            return user;
-        }
 
-        return user;
+        try
+        {
+            using DatabaseContext context = new();
+            var result = context.Docentes.Any(d => d.Cedula == user.Cedula);
+            if (result)
+            {
+                user.Docente= true;
+                return user;
+            }
+        result = context.Estudiantes.Any(d => d.Cedula == user.Cedula);
+    
+            if (result)
+            {
+                user.Estudiante = true;
+                return user;
+            }
+    
+    
+            return user;
+        }
+        catch (System.Exception e)
+        {
+            
+            System.Console.WriteLine(e.Message);
+            return user;
+        }
     }
 
     public List<Usuario> GetUserRolist(List<Usuario> listuser)
     {
 
         using DatabaseContext context = new();
-        List<Usuario> ListaConType = new List<Usuario>();
+        List<Usuario> ListaConType = new ();
 
         foreach (var user in listuser)
         {
             if (context.Docentes.Any(d => d.Cedula == user.Cedula))
             {
-                user.TypeUser = "Docente";
+                user.Docente = true;
                 ListaConType.Add(user);
             }
             if (context.Estudiantes.Any(d => d.Cedula == user.Cedula))
             {
-                user.TypeUser = "Estudiante";
+                user.Docente = true;
                 ListaConType.Add(user);
             }
 

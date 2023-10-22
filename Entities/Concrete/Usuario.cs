@@ -19,11 +19,12 @@ public partial class Usuario:IEntity
 
     public int Pin { get; set; }
 
-    public sbyte? Administrador { get; set; }
+    public bool? Administrador { get; set; }
 
-    public sbyte? Operador { get; set; }
+    public bool? Operador { get; set; }
 
     [NotMapped]
-
-    public string TypeUser{get; set;}
+    public bool? Docente {get; set;}
+    [NotMapped]
+    public bool? Estudiante {get; set;}
 }
