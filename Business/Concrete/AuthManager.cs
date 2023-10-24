@@ -18,11 +18,11 @@ public class AuthManager : IAuthServices
 
     if (dato is AuthDTO datos)
     {
-      var result = _userDal.Get(e => e.Cedula == datos.cedula);
+      var result = _userDal.Get(e => e.Cedula == datos.Cedula);
     if (result != null)
     {
 
-      if (result.Pin == datos.pin)
+      if (result.Pin == datos.Pin)
       {
         UsuarioDTO user = new(result);
 
@@ -38,5 +38,6 @@ public class AuthManager : IAuthServices
     }
 
    
+ 
     
 }

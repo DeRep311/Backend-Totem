@@ -1,9 +1,11 @@
 using Core.entities;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+namespace DataAccess.DTOs;
 
-public class AuthDTO : IDTO
+public class AuthDTO :IDTO
 {
-    public int cedula {get; set;}
-    public int pin {get; set;}
+    public int Cedula {get; set;}
+    public int Pin {get; set;}
+
     
 }

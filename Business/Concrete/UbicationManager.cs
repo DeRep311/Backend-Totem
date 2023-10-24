@@ -3,20 +3,20 @@ using DataAccess.Models;
 public class UbicationManager : IUbicationServices
  {
         private readonly IUbicationDal _UbicationDal;
-        private readonly ICoordenadaDal _CordenadasDal;
         
-        public UbicationManager(IUbicationDal UbicationDal, ICoordenadaDal coordenadaDal)
+        public UbicationManager(IUbicationDal UbicationDal)
         {
-            _CordenadasDal= coordenadaDal;
             _UbicationDal = UbicationDal;
         }
-        public IResult Add(Ubicacione Ubication, Coordenada coordenada)
+        public IResult Add(Ubicacione Ubication)
         {
             var result =_UbicationDal.Get(e=> e.Codigo == Ubication.Codigo);
 
-            if (result != null)
+            if (result == null)
             {
-                _CordenadasDal.Add(coordenada);
+
+               _UbicationDal.Add(Ubication);
+               
                 return new SuccessResult();
                 
             }
@@ -56,7 +56,7 @@ public class UbicationManager : IUbicationServices
 
            if (result != null)
            {
-            _UbicationDal.Update(result, result);
+            _UbicationDal.Update(newUbication, result);
            }
             return new SuccessResult();
         }

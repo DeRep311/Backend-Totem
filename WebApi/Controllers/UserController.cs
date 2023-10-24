@@ -1,5 +1,6 @@
 namespace Name.Controllers
 {
+    using DataAccess.DTOs;
     using DataAccess.Models;
     using Microsoft.AspNetCore.Mvc;
 
@@ -88,15 +89,19 @@ namespace Name.Controllers
 
         [HttpPost("Auth")]
 
-        public async Task<IActionResult> Auth (AuthDTO data){
+        public async Task<IActionResult> Auth ([FromBody] AuthDTO data){
 
             var result = _AuthManager.Login(data);
-
+            System.Console.WriteLine(data);
             if (result.Success)
             {
                 return Ok(result);
                 
             }
+            //quiero retornar en consola el valor de result cuando se ejecute la funcion
+            System.Console.WriteLine(result);
+
+
             return BadRequest(result);
 
         }

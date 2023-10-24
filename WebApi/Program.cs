@@ -8,6 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Inyecciones de dependencias
 builder.Services.AddScoped<IUserServices, UserManager>();
 builder.Services.AddScoped<IUserDal, EfUserDal>();
 builder.Services.AddScoped<IAuthServices, AuthManager>();
@@ -15,6 +17,8 @@ builder.Services.AddScoped<ICursoServices, CursoManager>();
 builder.Services.AddScoped<ICursoDal, EfCursosDal>();
 builder.Services.AddScoped<IMateriaServices, MateriaManager>();
 builder.Services.AddScoped<IMateriaDal, EfMateriaDal>();
+builder.Services.AddScoped<IUbicationServices, UbicationManager>();
+builder.Services.AddScoped<IUbicationDal, EfUbicacionDal>();
 
 
 

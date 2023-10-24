@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Core.entities;
 using DataAccess.Models;
+namespace DataAccess.DTOs;
 
 public class MateriasDTO:IDTO
 {

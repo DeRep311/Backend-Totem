@@ -1,10 +1,11 @@
 using Core.entities;
 using DataAccess.Models;
 namespace DataAccess.DTOs;
-public class UsuarioDTO:IDTO
+public class UsuarioDTO: IDTO
 {
     public UsuarioDTO(Usuario user){
-        this.user = user;
+        user.Pin = 0;
+        this.User = user;
         if (user.Operador== true)
         {
             this.IsOperator = true;
@@ -14,13 +15,29 @@ public class UsuarioDTO:IDTO
         else {
             this.IsAdmin = false;
             this.IsOperator = false; }
+        if (user.Docente==true){
+            this.IsDocente = true;
+        }
+        else{
+            this.IsDocente = false;
+        }
+        if (user.Estudiante==true){
+            this.IsEstudiante = true;
+        }
+        else{
+            this.IsEstudiante = false;
+        }
 
 
     }
 
-    Usuario user { get; }
+    Usuario User { get; }
     bool IsAdmin { get; }
     bool IsOperator { get; }
+
+    bool IsDocente { get; }
+
+    bool IsEstudiante { get; }
 
     
 }
