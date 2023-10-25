@@ -31,13 +31,13 @@ public class UsuarioDTO: IDTO
 
     }
 
-    Usuario User { get; }
-    bool IsAdmin { get; }
-    bool IsOperator { get; }
+    Usuario User { get; set;}
+    bool IsAdmin { get; set; }
+    bool IsOperator { get; set;}
 
-    bool IsDocente { get; }
+    bool IsDocente { get; set;}
 
-    bool IsEstudiante { get; }
+    bool IsEstudiante { get; set;}
 
     
 }
