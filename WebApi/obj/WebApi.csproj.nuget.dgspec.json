@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\webapi\\WebApi.csproj": {}
+    "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Business\\Business.csproj": {
+    "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Business\\Business.csproj",
+        "projectUniqueName": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Business\\Business.csproj",
-        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Business\\obj\\",
+        "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Business\\Business.csproj",
+        "packagesPath": "C:\\Users\\yanro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Business\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yanro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,20 +26,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj"
               },
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj"
               }
             }
           }
@@ -65,21 +70,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
+    "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\obj\\",
+        "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\yanro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yanro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -87,6 +96,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -138,21 +148,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\yanro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yanro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -160,17 +174,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj"
               },
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj"
               }
             }
           }
@@ -228,21 +243,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
+    "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\obj\\",
+        "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\yanro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yanro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -250,14 +269,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj"
               }
             }
           }
@@ -287,21 +307,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\webapi\\WebApi.csproj": {
+    "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\webapi\\WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\WebApi\\WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\webapi\\WebApi.csproj",
-        "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\webapi\\obj\\",
+        "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\WebApi\\WebApi.csproj",
+        "packagesPath": "C:\\Users\\yanro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\yanro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -309,24 +333,24 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Business\\Business.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Business\\Business.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Business\\Business.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Business\\Business.csproj"
               },
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Core\\Core.csproj"
               },
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\DataAccess\\DataAccess.csproj"
               },
-              "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj"
+              "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\yanro\\OneDrive\\Documents\\GitHub\\Backend-Totem\\Entities\\Entities.csproj"
               }
             }
           }
@@ -369,7 +393,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
