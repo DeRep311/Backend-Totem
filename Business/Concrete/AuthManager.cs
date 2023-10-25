@@ -25,6 +25,7 @@ public class AuthManager : IAuthServices
       if (result.Pin == datos.Pin)
       {
         UsuarioDTO user = new(result);
+System.Console.WriteLine(user.IsDocente);
 
         return new SuccessResultData<UsuarioDTO>(user);
       }
