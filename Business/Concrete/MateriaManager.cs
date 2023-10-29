@@ -6,9 +6,11 @@ public class MateriaManager : IMateriaServices
 
     ICursoServices _cursoservices;
     IMateriaDal _materiadal;
+    IHorariosServices _horarioservices;
 
 
-    public MateriaManager(ICursoServices cursoServices, IMateriaDal materiadal){
+    public MateriaManager(ICursoServices cursoServices, IMateriaDal materiadal, IHorariosServices horarioservices){
+        _horarioservices = horarioservices;
         _cursoservices = cursoServices;
         _materiadal = materiadal;
     }
@@ -94,4 +96,6 @@ public class MateriaManager : IMateriaServices
             return new ErrorResult("Materia no encontrada");
         }
     }
+
+   
 }
