@@ -9,6 +9,8 @@ public interface IHorariosServices
     public IResult UpdateHorary(int IdH, Horario horarionew);
 
     public IDataResult<Horario> GetHorary(int idH);
+
+    public IDataResult<List<Horario>> GetAllHorary();
     
     
 }

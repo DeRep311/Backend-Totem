@@ -61,4 +61,14 @@ public class HorarioManager : IHorariosServices
         }
         return new ErrorResult("Horario no encontrado");
     }
+
+    public IDataResult<List<Horario>> GetAllHorary()
+    {
+        var result = _HorarioDal.GetAll();
+        if (result != null)
+        {
+            return new SuccessResultData<List<Horario>>(result);
+        }
+        return new ErrorDataResult<List<Horario>>();
+    }
 }

@@ -4,13 +4,18 @@ public class UserManager : IUserServices
 {
 
     private IUserDal _userDal;
+    private IDocenteDal _docenteDal;
+
+    private IEstudianteDal _estudianteDal;
     
 
-    public UserManager(IUserDal userDal)
+    public UserManager(IUserDal userDal, IDocenteDal docenteDal, IEstudianteDal estudianteDal)
     {
         _userDal = userDal;
+        _docenteDal = docenteDal;
+        _estudianteDal = estudianteDal;
     }
-
+  
 
 
     public IResult Add(Usuario user)
@@ -18,6 +23,7 @@ public class UserManager : IUserServices
         _userDal.Add(user);
         if (user.Docente != null && user.Docente== true)
         {
+
 
             
 

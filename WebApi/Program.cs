@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 //Inyecciones de dependencias
 builder.Services.AddScoped<IUserServices, UserManager>();
 builder.Services.AddScoped<IUserDal, EfUserDal>();
+
 builder.Services.AddScoped<IAuthServices, AuthManager>();
 builder.Services.AddScoped<ICursoServices, CursoManager>();
 builder.Services.AddScoped<ICursoDal, EfCursosDal>();
@@ -19,6 +20,8 @@ builder.Services.AddScoped<IMateriaServices, MateriaManager>();
 builder.Services.AddScoped<IMateriaDal, EfMateriaDal>();
 builder.Services.AddScoped<IUbicationServices, UbicationManager>();
 builder.Services.AddScoped<IUbicationDal, EfUbicacionDal>();
+builder.Services.AddScoped<IHorariosServices, HorarioManager>();
+builder.Services.AddScoped<IHorarioDal, EfHorarioDal>();
 
 
 
