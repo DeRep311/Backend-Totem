@@ -15,8 +15,14 @@ public interface IEntityRepository <T> where T:class,IEntity,new()
     
     void Add(T entitiy);
 
+    void AddRaw(List<T> entities);
+
     void Delete(T entity);
 
+    void DeleteRaw(List<T> entities);
+
     void Update(T newentity, T oldentity);
+
+
 
 }}

@@ -36,7 +36,7 @@ using Microsoft.AspNetCore.Mvc;
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(Curso curso)
+        public async Task<IActionResult> Add(CursoDTO curso)
         {
             var result = _CursoServices.Add(curso);
             if (result.Success)
@@ -53,7 +53,7 @@ using Microsoft.AspNetCore.Mvc;
         }
 
         [HttpDelete("Delete/{IdC}")]
-        public async Task<IActionResult> Delete(int IdC)
+        public async Task<IActionResult> Delete(CursoDTO IdC)
         {
             var result = _CursoServices.Delete(IdC);
             if (result.Success)
@@ -69,10 +69,27 @@ using Microsoft.AspNetCore.Mvc;
          
         }
 
-        [HttpPut("Update/{IdC}")]
-        public async Task<IActionResult> Update(int Idc, Curso curso)
+        [HttpDelete("DeleteCourseWithSomeMaterias/")]
+        public async Task<IActionResult> DeleteCourseWithSomeMaterias(CursoDTO cursowithMaterias)
         {
-            var result = _CursoServices.Update(Idc,curso);
+            var result = _CursoServices.DeleteCourseWithSomeMaterias(cursowithMaterias);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+            
+         
+        }
+
+        [HttpPut("Update/{IdC}")]
+        public async Task<IActionResult> Update(CursoDTO curso)
+        {
+            var result = _CursoServices.Update(curso);
             if (result.Success)
             {
                 return Ok(result.Message);
@@ -104,10 +121,10 @@ using Microsoft.AspNetCore.Mvc;
          
         }
 
-        [HttpGet("GetMaterias/{Id}")]
-        public async Task<IActionResult> GetMaterias(string Id)
+        [HttpGet("GetMateriasbyGroup/{Id}")]
+        public async Task<IActionResult> GetMateriasbyGroup(String Id)
         {
-            var result = _CursoServices.GetMaterias(Id);
+            var result = _CursoServices.GetMateriasbyGroup(Id);
             if (result.Success)
             {
                 return Ok(result.Data);

@@ -15,6 +15,11 @@ where Tcontext : DbContext, new()
         addEntity.State = EntityState.Added;
         context.SaveChanges();
     }
+    public virtual void AddRaw(List<TEntity> entities){
+        using Tcontext context = new();
+        context.Set<TEntity>().AddRange(entities);
+        context.SaveChanges();
+    }
 
     public virtual void Delete(TEntity entity)
     {
@@ -22,6 +27,11 @@ where Tcontext : DbContext, new()
         
         var deleteEntity = context.Entry(entity);
         deleteEntity.State = EntityState.Deleted;
+        context.SaveChanges();
+    }
+    public virtual void DeleteRaw(List<TEntity> entities){
+        using Tcontext context = new();
+        context.Set<TEntity>().RemoveRange(entities);
         context.SaveChanges();
     }
 

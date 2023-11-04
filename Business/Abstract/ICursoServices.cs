@@ -6,14 +6,17 @@ public interface ICursoServices
 {
 
 
-    public IResult Add(Curso cursonew);
-    public IResult Delete(int IdC);
-    public IResult Update(int IdC, Curso usernew);
-    public IDataResult<List<MateriasDTO>> GetMaterias(String Id);
+    public IResult Add(CursoDTO cursonew);
+    public IResult Delete(CursoDTO IdC);
+    public IResult Update(CursoDTO usernew);
+    public IResult DeleteCourseWithSomeMaterias(CursoDTO cursowithMaterias);
 
-    public IDataResult<Curso> Get(int IdC);
+     public IDataResult<List<MateriasDTO>> GetMateriasbyGroup(String Id);
+  
 
-    public IDataResult<List<Curso>> GetAll();
+    public IDataResult<CursoDTO> Get(int IdC);
+
+    public IDataResult<List<CursoDTO>> GetAll();
 
 
 
