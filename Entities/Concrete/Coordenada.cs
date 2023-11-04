@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using Core.entities;
 
-namespace DataAccess.Models;
+namespace Base.Models;
 
-public partial class Coordenada :IEntity
+public partial class Coordenada : IEntity
 {
-    public int Id { get; set; }
+    public int IdC { get; set; }
 
-    public float CooX { get; set; }
+    public float? CooX { get; set; }
 
-    public float CooY { get; set; }
+    public float? CooY { get; set; }
 
-    public int Foto { get; set; }
-    
-    public bool Inicio {get; set;}
+    public string Foto { get; set; }
 
-    public bool Final {get; set;}
+    public ulong? Inicio { get; set; }
 
-    public virtual ICollection<Ubicacione> Codigos { get; set; } = new List<Ubicacione>();
-
-    
-
+    public ulong? Final { get; set; }
+  
 }

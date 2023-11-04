@@ -1,7 +1,7 @@
-namespace Name.Controllers
-{
-    using DataAccess.Models;
-    using Microsoft.AspNetCore.Mvc;
+namespace Name.Controllers;
+
+using Base.Models;
+using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -105,7 +105,7 @@ namespace Name.Controllers
         }
 
         [HttpGet("GetMaterias/{Id}")]
-        public async Task<IActionResult> GetMaterias(int Id)
+        public async Task<IActionResult> GetMaterias(string Id)
         {
             var result = _CursoServices.GetMaterias(Id);
             if (result.Success)
@@ -121,4 +121,3 @@ namespace Name.Controllers
          
         }
     }
-}

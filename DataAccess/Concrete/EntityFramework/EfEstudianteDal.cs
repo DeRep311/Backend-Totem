@@ -1,7 +1,9 @@
-using DataAccess.Models;
+using Base.Models;
+
 using Microsoft.EntityFrameworkCore;
 
-public class EfEstudianteDal : EfEntityRepositoryBase<Estudiante, DatabaseContext>{
+public class EfEstudianteDal : EfEntityRepositoryBase<Estudiante, DatabaseContext>, IEstudianteDal
+{
 
 
    

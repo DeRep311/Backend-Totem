@@ -1,9 +1,0 @@
-@startuml
-class Materium <<partial>> {
-    + IdM : int <<get>> <<set>>
-    + Cedula : int? <<get>> <<set>>
-    + Nombre : string <<get>> <<set>>
-    + IdC : int? <<get>> <<set>>
-}
-IEntity <|-- Materium
-@enduml

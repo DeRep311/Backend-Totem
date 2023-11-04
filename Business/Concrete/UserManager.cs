@@ -1,4 +1,5 @@
-using DataAccess.Models;
+using Base.Models;
+
 
 public class UserManager : IUserServices
 {
@@ -7,13 +8,19 @@ public class UserManager : IUserServices
     private IDocenteDal _docenteDal;
 
     private IEstudianteDal _estudianteDal;
+    private IAdministradorDal _administradorDal;
+
+    private IOperadorDal _operadorDal;
     
 
-    public UserManager(IUserDal userDal, IDocenteDal docenteDal, IEstudianteDal estudianteDal)
+    public UserManager(IUserDal userDal, IDocenteDal docenteDal, IEstudianteDal estudianteDal, IAdministradorDal administradorDal, IOperadorDal operadorDal)
     {
+
         _userDal = userDal;
         _docenteDal = docenteDal;
         _estudianteDal = estudianteDal;
+        _administradorDal = administradorDal;
+        _operadorDal = operadorDal;
     }
   
 
@@ -21,14 +28,37 @@ public class UserManager : IUserServices
     public IResult Add(Usuario user)
     {
         _userDal.Add(user);
-        if (user.Docente != null && user.Docente== true)
+        switch (user.Rol)
         {
-
-
+            case "Docente":
+                Docente docente = new()
+                {
+                    Cedula = user.Cedula
+                };
+                _docenteDal.Add(docente);
+                break;
+            case "Estudiante":
+                Estudiante estudiante = new(){
+                    Cedula = user.Cedula
+                };
+                _estudianteDal.Add(estudiante);
+                break;
             
+            case "Administrador":
+                Administrador administrador = new(){
+                    Cedula = user.Cedula
+                };
+                _administradorDal.Add(administrador);
+                break;
 
-            
+            case "Operador":
+                Operador operador = new(){
+                    Cedula = user.Cedula
+                };
+                _operadorDal.Add(operador);
+                break;
         }
+      
 
         return new SuccessResult();
     }
@@ -41,6 +71,7 @@ public class UserManager : IUserServices
             return new ErrorResult("Usuario no encontradp");
         }
         _userDal.Delete(userDelet);
+        
 
         return new SuccessResult();
     }
@@ -82,3 +113,4 @@ public class UserManager : IUserServices
         return new SuccessResult();
     }
 }
+

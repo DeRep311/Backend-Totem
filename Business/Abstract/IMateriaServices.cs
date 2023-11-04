@@ -1,14 +1,14 @@
-using DataAccess.Models;
+using Base.Models;
 
 public interface IMateriaServices {
 
     IResult Add (Materium materia);
-    IResult Update (int IdM, Materium materianew);
+    IResult Update (String IdM, Materium materianew);
 
     IDataResult <List<Materium>> GetAll();
 
-    IDataResult <Materium> Get(int IdM);
+    IDataResult <Materium> Get(String IdM);
 
-    IResult Delete(int IdM);
+    IResult Delete(String IdM);
     
 }

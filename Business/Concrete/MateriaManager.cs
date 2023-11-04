@@ -1,4 +1,5 @@
-using DataAccess.Models;
+using Base.Models;
+
 
 public class MateriaManager : IMateriaServices
 
@@ -44,7 +45,7 @@ public class MateriaManager : IMateriaServices
         }
     }
 
-    public IResult Delete(int IdM)
+    public IResult Delete(String IdM)
     {
         var result = this.Get(IdM);
         if (result.Success)
@@ -61,9 +62,9 @@ public class MateriaManager : IMateriaServices
         }
     }
 
-    public IDataResult<Materium> Get(int IdM)
+    public IDataResult<Materium> Get(String IdM)
     {
-        var result = _materiadal.Get(e => e.IdM == IdM);
+        var result = _materiadal.Get(e => e.NombreMateria == IdM);
         if (result != null)
 
         {
@@ -83,9 +84,9 @@ public class MateriaManager : IMateriaServices
         return new SuccessResultData<List<Materium>>(ListaMaterias);
     }
 
-    public IResult Update(int IdM, Materium materianew)
+    public IResult Update(String IdM, Materium materianew)
     {
-        var result = _materiadal.Get(e => e.IdM == IdM);
+        var result = _materiadal.Get(e => e.NombreMateria == IdM);
         if (result != null)
         {
             _materiadal.Update(materianew, result);

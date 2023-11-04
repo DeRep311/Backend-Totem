@@ -1,3 +1,4 @@
+using Base.Models;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,11 @@ builder.Services.AddSwaggerGen();
 //Inyecciones de dependencias
 builder.Services.AddScoped<IUserServices, UserManager>();
 builder.Services.AddScoped<IUserDal, EfUserDal>();
+builder.Services.AddScoped<IAdministradorDal, EfAdministradorDal>();
+builder.Services.AddScoped<IDocenteDal, EfDocenteDal>();
+builder.Services.AddScoped<IEstudianteDal, EfEstudianteDal>();
+builder.Services.AddScoped<IOperadorDal, EfOperadorDal>();
+
 
 builder.Services.AddScoped<IAuthServices, AuthManager>();
 builder.Services.AddScoped<ICursoServices, CursoManager>();

@@ -1,4 +1,5 @@
-using DataAccess.Models;
+using Base.Models;
+
 
 public class UbicationManager : IUbicationServices
  {
@@ -10,7 +11,7 @@ public class UbicationManager : IUbicationServices
         }
         public IResult Add(Ubicacione Ubication)
         {
-            var result =_UbicationDal.Get(e=> e.Codigo == Ubication.Codigo);
+            var result =_UbicationDal.Get(e=> e.CodigoUbicaciones == Ubication.CodigoUbicaciones);
 
             if (result == null)
             {
@@ -29,7 +30,7 @@ public class UbicationManager : IUbicationServices
         }
         public IResult Delete(string codigo)
         {
-            var result = _UbicationDal.Get(e=> e.Codigo == codigo);
+            var result = _UbicationDal.Get(e=> e.CodigoUbicaciones == codigo);
             if (result != null)
             {
                 _UbicationDal.Delete(result);
@@ -47,12 +48,12 @@ public class UbicationManager : IUbicationServices
         }
         public IDataResult<Ubicacione> GetById(string codigo)
         {
-            var result = _UbicationDal.Get(u => u.Codigo == codigo);
+            var result = _UbicationDal.Get(u => u.CodigoUbicaciones == codigo);
             return new SuccessResultData<Ubicacione>(result);
         }
         public IResult Update(String Codigo, Ubicacione newUbication)
         {
-           var result = _UbicationDal.Get(e=> e.Codigo==Codigo);
+           var result = _UbicationDal.Get(e=> e.CodigoUbicaciones==Codigo);
 
            if (result != null)
            {

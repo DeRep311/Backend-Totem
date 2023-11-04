@@ -1,4 +1,4 @@
-using DataAccess.Models;
+using Base.Models;
 
 public class HorarioManager : IHorariosServices
 {

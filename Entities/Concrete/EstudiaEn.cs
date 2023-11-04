@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.entities;
 
-namespace DataAccess.Models;
+namespace Base.Models;
 
-public partial class EstudiaEn
+public partial class EstudiaEn : IEntity
 {
-    public int Cedula { get; set; }
+    public int? Cedula { get; set; }
 
-    public int? IdC { get; set; }
+    public string NombreGrupo { get; set; }
+
+    public virtual Grupo NombreGrupoNavigation { get; set; }
 }

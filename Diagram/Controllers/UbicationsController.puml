@@ -1,6 +1,0 @@
-@startuml
-class Ubication {
-    + <<async>> Get() : Task<IActionResult>
-}
-ControllerBase <|-- Ubication
-@enduml

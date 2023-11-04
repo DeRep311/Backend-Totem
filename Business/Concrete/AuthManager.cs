@@ -1,7 +1,6 @@
 using System.Reflection.Metadata.Ecma335;
 using Core.entities;
 using DataAccess.DTOs;
-using DataAccess.Models;
 
 public class AuthManager : IAuthServices
 {

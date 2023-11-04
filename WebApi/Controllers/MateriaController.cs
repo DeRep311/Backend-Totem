@@ -1,4 +1,5 @@
-using DataAccess.Models;
+
+using Base.Models;
 using Microsoft.AspNetCore.Mvc;
 
 public class MateriaController : ControllerBase
@@ -15,7 +16,7 @@ public class MateriaController : ControllerBase
 
     [HttpGet("Get/{IdM}")]
 
-    public async Task<IActionResult> Get(int IdM)
+    public async Task<IActionResult> Get(String IdM)
     {
         var result = _MateriaServices.Get(IdM);
         if (result.Success)
@@ -51,7 +52,7 @@ public class MateriaController : ControllerBase
 
     [HttpDelete("Delete/{IdM}")]
 
-    public async Task<IActionResult> Delete(int IdM)
+    public async Task<IActionResult> Delete(String IdM)
     {
         var result = _MateriaServices.Delete(IdM);
         if (result.Success)
@@ -68,7 +69,7 @@ public class MateriaController : ControllerBase
     }
 
     [HttpPut("Update/{IdM}")]
-    public async Task<IActionResult> Update(int IdM, Materium newmateria)
+    public async Task<IActionResult> Update(String IdM, Materium newmateria)
     {
         var result = _MateriaServices.Update(IdM,newmateria);
         if (result.Success)

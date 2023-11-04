@@ -1,4 +1,5 @@
-using DataAccess.Models;
+using Base.Models;
+
 
 public class EfCoordenadaDal :EfEntityRepositoryBase<Coordenada , DatabaseContext>, ICoordenadaDal
  {

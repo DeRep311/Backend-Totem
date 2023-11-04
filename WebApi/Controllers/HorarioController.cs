@@ -1,7 +1,6 @@
 namespace Name.Controllers
 {
-    using DataAccess.Models;
-
+    using Base.Models;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]

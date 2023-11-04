@@ -1,6 +1,7 @@
 
 
-using DataAccess.Models;
+using Base.Models;
+
 
 public interface IUserServices
 {

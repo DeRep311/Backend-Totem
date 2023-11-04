@@ -1,9 +1,0 @@
-@startuml
-class UsuarioDTO {
-    + UsuarioDTO(user:Usuario)
-    - user : Usuario <<get>>
-    - IsAdmin : bool <<get>>
-    - IsOperator : bool <<get>>
-}
-IDTO <|-- UsuarioDTO
-@enduml

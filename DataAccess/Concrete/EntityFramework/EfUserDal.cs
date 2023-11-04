@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
+using Base.Models;
 using Core.DataAccess;
-using DataAccess.Models;
+
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Identity.Client;
 
@@ -16,23 +17,33 @@ public class EfUserDal : EfEntityRepositoryBase<Usuario, DatabaseContext>, IUser
             var result = context.Docentes.Any(d => d.Cedula == user.Cedula);
             if (result)
             {
-                user.Docente= true;
+                user.Rol = "Docente";
                 return user;
             }
-        result = context.Estudiantes.Any(d => d.Cedula == user.Cedula);
-    
+            result = context.Estudiantes.Any(d => d.Cedula == user.Cedula);
+
             if (result)
             {
-                user.Estudiante = true;
+                user.Rol = "Estudiante";
                 return user;
             }
-    
-    
+            result = context.Administradors.Any(d => d.Cedula == user.Cedula);
+            if (result)
+            {
+                user.Rol = "Administrador";
+                return user;
+            }
+            result = context.Operadors.Any(d => d.Cedula == user.Cedula);
+            if (result)
+            {
+                user.Rol = "Operador";
+                return user;
+            }
             return user;
         }
         catch (System.Exception e)
         {
-            
+
             System.Console.WriteLine(e.Message);
             return user;
         }
@@ -42,20 +53,11 @@ public class EfUserDal : EfEntityRepositoryBase<Usuario, DatabaseContext>, IUser
     {
 
         using DatabaseContext context = new();
-        List<Usuario> ListaConType = new ();
+        List<Usuario> ListaConType = new();
 
         foreach (var user in listuser)
         {
-            if (context.Docentes.Any(d => d.Cedula == user.Cedula))
-            {
-                user.Docente = true;
-                ListaConType.Add(user);
-            }
-            if (context.Estudiantes.Any(d => d.Cedula == user.Cedula))
-            {
-                user.Docente = true;
-                ListaConType.Add(user);
-            }
+           this.GetUserRol(user);
 
             ListaConType.Add(user);
 
@@ -65,6 +67,7 @@ public class EfUserDal : EfEntityRepositoryBase<Usuario, DatabaseContext>, IUser
         return ListaConType;
     }
 
+  
 
 
 

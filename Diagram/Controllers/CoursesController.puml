@@ -1,7 +1,0 @@
-@startuml
-class Courses {
-    + Courses(cursoServices:ICursoServices, materiaServices:IMateriaServices)
-    + <<async>> Get() : Task<IActionResult>
-}
-ControllerBase <|-- Courses
-@enduml

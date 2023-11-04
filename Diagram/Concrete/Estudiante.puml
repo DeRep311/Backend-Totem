@@ -1,7 +1,0 @@
-@startuml
-class Estudiante <<partial>> {
-    + Cedula : int <<get>> <<set>>
-    + <<virtual>> CedulaNavigation : Usuario <<get>> <<set>>
-}
-IEntity <|-- Estudiante
-@enduml

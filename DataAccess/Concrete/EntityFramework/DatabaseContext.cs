@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Models;
+namespace Base.Models;
 
 public partial class DatabaseContext : DbContext
 {
@@ -15,13 +15,19 @@ public partial class DatabaseContext : DbContext
     {
     }
 
+    public virtual DbSet<Administrador> Administradors { get; set; }
+
     public virtual DbSet<Anio> Anios { get; set; }
 
-    public virtual DbSet<AnioCurso> AnioCursos { get; set; }
+    public virtual DbSet<AnioGrupo> AnioGrupos { get; set; }
+
+    public virtual DbSet<Cm> Cms { get; set; }
 
     public virtual DbSet<Coordenada> Coordenadas { get; set; }
 
     public virtual DbSet<Curso> Cursos { get; set; }
+
+    public virtual DbSet<CursoHorarioUbicacion> CursoHorarioUbicacions { get; set; }
 
     public virtual DbSet<Docente> Docentes { get; set; }
 
@@ -29,15 +35,29 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<Estudiante> Estudiantes { get; set; }
 
+    public virtual DbSet<Grupo> Grupos { get; set; }
+
+    public virtual DbSet<GrupoCursoMaterium> GrupoCursoMateria { get; set; }
+
     public virtual DbSet<Horario> Horarios { get; set; }
 
-    public virtual DbSet<HorarioCmUbicacione> HorarioCmUbicaciones { get; set; }
+    public virtual DbSet<HorarioGrupoCurso> HorarioGrupoCursos { get; set; }
+
+    public virtual DbSet<Imparte> Impartes { get; set; }
 
     public virtual DbSet<Materium> Materia { get; set; }
 
+    public virtual DbSet<Operador> Operadors { get; set; }
+
     public virtual DbSet<Plano> Planos { get; set; }
 
+    public virtual DbSet<Tiene> Tienes { get; set; }
+
     public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
+
+    public virtual DbSet<UbicacionesDependiente> UbicacionesDependientes { get; set; }
+
+    public virtual DbSet<Up> Ups { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -51,6 +71,23 @@ public partial class DatabaseContext : DbContext
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
 
+        modelBuilder.Entity<Administrador>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("administrador");
+
+            entity.HasIndex(e => e.Cedula, "FK_administrador_usuario");
+
+            entity.Property(e => e.Cedula)
+                .HasColumnType("int(8)")
+                .HasColumnName("cedula");
+
+            entity.HasOne(d => d.CedulaNavigation).WithMany()
+                .HasForeignKey(d => d.Cedula)
+                .HasConstraintName("FK_administrador_usuario");
+        });
+
         modelBuilder.Entity<Anio>(entity =>
         {
             entity.HasKey(e => e.Anio1).HasName("PRIMARY");
@@ -63,68 +100,136 @@ public partial class DatabaseContext : DbContext
                 .HasColumnName("anio");
         });
 
-        modelBuilder.Entity<AnioCurso>(entity =>
+        modelBuilder.Entity<AnioGrupo>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToTable("anio-curso");
+                .ToTable("anio-grupo");
 
-            entity.HasIndex(e => e.Anio, "anio");
+            entity.HasIndex(e => e.Anio, "FK_anio-grupo_anio");
 
-            entity.HasIndex(e => e.IdC, "id_c");
+            entity.HasIndex(e => e.NombreGrupo, "FK_anio-grupo_grupo");
 
             entity.Property(e => e.Anio)
                 .HasColumnType("int(5)")
                 .HasColumnName("anio");
-            entity.Property(e => e.IdC)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
+            entity.Property(e => e.NombreGrupo)
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
 
             entity.HasOne(d => d.AnioNavigation).WithMany()
                 .HasForeignKey(d => d.Anio)
+                .HasConstraintName("FK_anio-grupo_anio");
+
+            entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+                .HasForeignKey(d => d.NombreGrupo)
+                .HasConstraintName("a");
+        });
+
+        modelBuilder.Entity<Cm>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("cm");
+
+            entity.HasIndex(e => e.IdC, "FK__curso");
+
+            entity.HasIndex(e => e.NombreMateria, "FK__materia");
+
+            entity.Property(e => e.IdC)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(255)")
+                .HasColumnName("id_c");
+            entity.Property(e => e.NombreMateria)
+                .IsRequired()
+                .HasMaxLength(30)
+                .HasColumnName("nombre_materia");
+
+            entity.HasOne(d => d.IdCNavigation).WithMany()
+                .HasForeignKey(d => d.IdC)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_anioCurso_anio");
+                .HasConstraintName("FK_cm_curso");
+
+            entity.HasOne(d => d.NombreMateriaNavigation).WithMany()
+                .HasForeignKey(d => d.NombreMateria)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_cm_materia");
         });
 
         modelBuilder.Entity<Coordenada>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasKey(e => e.IdC).HasName("PRIMARY");
 
             entity.ToTable("coordenadas");
 
-            entity.Property(e => e.Id)
-                .HasColumnType("int(5)")
-                .HasColumnName("id");
+            entity.Property(e => e.IdC)
+                .HasColumnType("int(11)")
+                .HasColumnName("id_c");
             entity.Property(e => e.CooX).HasColumnName("coo_x");
             entity.Property(e => e.CooY).HasColumnName("coo_y");
+            entity.Property(e => e.Final)
+                .HasDefaultValueSql("b'0'")
+                .HasColumnType("bit(1)");
             entity.Property(e => e.Foto)
-                .HasColumnType("int(11)")
+                .HasMaxLength(50)
                 .HasColumnName("foto");
+            entity.Property(e => e.Inicio)
+                .HasDefaultValueSql("b'0'")
+                .HasColumnType("bit(1)");
         });
 
         modelBuilder.Entity<Curso>(entity =>
         {
+            entity.HasKey(e => e.IdC).HasName("PRIMARY");
+
+            entity.ToTable("curso");
+
+            entity.Property(e => e.IdC)
+                .HasColumnType("int(255)")
+                .HasColumnName("id_c");
+            entity.Property(e => e.NombreCurso)
+                .HasMaxLength(7)
+                .HasColumnName("nombre_curso");
+        });
+
+        modelBuilder.Entity<CursoHorarioUbicacion>(entity =>
+        {
             entity
                 .HasNoKey()
-                .ToTable("curso");
+                .ToTable("curso-horario-ubicacion");
 
-            entity.HasIndex(e => e.IdC, "FK_materia_idx");
+            entity.HasIndex(e => new { e.NombreGrupo, e.NombreMateria, e.IdH, e.IdC }, "Horario-Grupo-curso_idx");
 
-            entity.Property(e => e.Anio)
-                .HasColumnType("int(5)")
-                .HasColumnName("anio");
-            entity.Property(e => e.Generacion)
-                .IsRequired()
+            entity.HasIndex(e => e.CodigoUbicaciones, "Ubicacion_idx");
+
+            entity.HasIndex(e => e.IdC, "id_c");
+
+            entity.HasIndex(e => e.IdH, "id_h");
+
+            entity.HasIndex(e => e.NombreMateria, "nombre_materia");
+
+            entity.Property(e => e.CodigoUbicaciones)
                 .HasMaxLength(5)
-                .HasColumnName("generacion");
+                .HasColumnName("codigo_ubicaciones");
             entity.Property(e => e.IdC)
-                .ValueGeneratedOnAdd()
-                .HasColumnType("int(11)")
+                .HasColumnType("int(255)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.Nombre)
+            entity.Property(e => e.IdH)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(255)")
+                .HasColumnName("id_h");
+            entity.Property(e => e.NombreGrupo)
                 .IsRequired()
-                .HasMaxLength(7)
-                .HasColumnName("nombre");
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
+            entity.Property(e => e.NombreMateria)
+                .IsRequired()
+                .HasMaxLength(30)
+                .HasColumnName("nombre_materia");
+
+            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+                .HasForeignKey(d => d.CodigoUbicaciones)
+                .HasConstraintName("Ubicacion");
         });
 
         modelBuilder.Entity<Docente>(entity =>
@@ -133,7 +238,7 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("docente");
 
-            entity.HasIndex(e => e.Cedula, "docente_ibfk_1_idx");
+            entity.HasIndex(e => e.Cedula, "FK__usuario");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
@@ -141,8 +246,7 @@ public partial class DatabaseContext : DbContext
 
             entity.HasOne(d => d.CedulaNavigation).WithMany()
                 .HasForeignKey(d => d.Cedula)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("docente_ibfk_1");
+                .HasConstraintName("FK_docente_usuario");
         });
 
         modelBuilder.Entity<EstudiaEn>(entity =>
@@ -151,16 +255,20 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("estudia_en");
 
-            entity.HasIndex(e => e.IdC, "estudia_en_curso_idx");
+            entity.HasIndex(e => e.Cedula, "FK__usuario");
 
-            entity.HasIndex(e => e.Cedula, "estudia_en_ibfk_1");
+            entity.HasIndex(e => e.NombreGrupo, "FK_estudia_en_grupo");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
-            entity.Property(e => e.IdC)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
+            entity.Property(e => e.NombreGrupo)
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
+
+            entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+                .HasForeignKey(d => d.NombreGrupo)
+                .HasConstraintName("FK_estudia_en_grupo");
         });
 
         modelBuilder.Entity<Estudiante>(entity =>
@@ -169,7 +277,7 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("estudiante");
 
-            entity.HasIndex(e => e.Cedula, "estudiante_usuario_idx");
+            entity.HasIndex(e => e.Cedula, "FK__usuario");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
@@ -177,189 +285,301 @@ public partial class DatabaseContext : DbContext
 
             entity.HasOne(d => d.CedulaNavigation).WithMany()
                 .HasForeignKey(d => d.Cedula)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("estudiante_usuario");
+                .HasConstraintName("FK_estudiante_usuario");
+        });
+
+        modelBuilder.Entity<Grupo>(entity =>
+        {
+            entity.HasKey(e => e.NombreGrupo).HasName("PRIMARY");
+
+            entity.ToTable("grupo");
+
+            entity.Property(e => e.NombreGrupo)
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
+        });
+
+        modelBuilder.Entity<GrupoCursoMaterium>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("grupo-curso-materia");
+
+            entity.HasIndex(e => e.IdC, "FK_grupo-curso-materia_curso");
+
+            entity.HasIndex(e => e.NombreGrupo, "FK_grupo-curso-materia_grupo");
+
+            entity.HasIndex(e => e.NombreMateria, "FK_grupo-curso-materia_materia");
+
+            entity.Property(e => e.IdC)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(255)")
+                .HasColumnName("id_c");
+            entity.Property(e => e.NombreGrupo)
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
+            entity.Property(e => e.NombreMateria)
+                .HasMaxLength(30)
+                .HasColumnName("nombre_materia");
+
+            entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+                .HasForeignKey(d => d.NombreGrupo)
+                .HasConstraintName("FK_grupo-curso-materia_grupo");
         });
 
         modelBuilder.Entity<Horario>(entity =>
         {
             entity.HasKey(e => e.IdH).HasName("PRIMARY");
 
-            entity.ToTable("horario");
+            entity.ToTable("horarios");
 
             entity.Property(e => e.IdH)
-                .HasColumnType("int(11)")
+                .HasColumnType("int(255)")
                 .HasColumnName("id_h");
             entity.Property(e => e.HoraFinal)
-                .IsRequired()
                 .HasMaxLength(5)
                 .HasColumnName("hora_final");
             entity.Property(e => e.HoraInicio)
-                .IsRequired()
                 .HasMaxLength(5)
                 .HasColumnName("hora_inicio");
-            entity.Property(e => e.NombreDia)
-                .IsRequired()
+            entity.Property(e => e.NombreDelDia)
                 .HasMaxLength(9)
-                .HasColumnName("nombre_dia");
+                .HasColumnName("nombre_del_dia");
         });
 
-        modelBuilder.Entity<HorarioCmUbicacione>(entity =>
+        modelBuilder.Entity<HorarioGrupoCurso>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToTable("horario_cm_ubicaciones");
+                .ToTable("horario-grupo-curso");
 
-            entity.HasIndex(e => new { e.IdM }, "FK_horariocm_ubicaciones_idx");
+            entity.HasIndex(e => new { e.NombreGrupo, e.NombreMateria, e.IdC }, "Grupo-Curso_idx");
 
-            entity.HasIndex(e => e.Codigo, "codigo");
+            entity.HasIndex(e => e.IdH, "Horario_idx");
 
-            entity.HasIndex(e => e.IdH, "id_H");
-    
-           
+            entity.HasIndex(e => e.IdC, "id_c");
 
-            entity.HasIndex(e => e.IdM, "id_m");
-            
-          
-            entity.Property(e => e.Codigo)
-                .IsRequired()
-                .HasMaxLength(5)
-                .HasDefaultValueSql("''")
-                .HasColumnName("codigo");
+            entity.HasIndex(e => e.NombreMateria, "nombre_materia");
 
-               
+            entity.Property(e => e.IdC)
+                .HasColumnType("int(255)")
+                .HasColumnName("id_c");
             entity.Property(e => e.IdH)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_H");
-            entity.Property(e => e.IdM)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_m");
-
-            entity.HasOne(d => d.CodigoNavigation).WithMany()
-                .HasForeignKey(d => d.Codigo)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ubicaciones");
+                .HasColumnType("int(255)")
+                .HasColumnName("id_h");
+            entity.Property(e => e.NombreGrupo)
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
+            entity.Property(e => e.NombreMateria)
+                .HasMaxLength(30)
+                .HasColumnName("nombre_materia");
 
             entity.HasOne(d => d.IdHNavigation).WithMany()
                 .HasForeignKey(d => d.IdH)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_horarios");
+                .HasConstraintName("Horario");
+        });
 
-            entity.HasOne(d => d.IdMNavigation).WithMany()
-                .HasForeignKey(d => d.IdM)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_horariocm_ubicaciones");
+        modelBuilder.Entity<Imparte>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("imparte");
+
+            entity.HasIndex(e => e.Cedula, "FK_imparte_docente");
+
+            entity.HasIndex(e => new { e.NombreMateria, e.NombreGrupo, e.IdC, e.IdH }, "FK_imparte_grupo-curso-materia_idx");
+
+            entity.HasIndex(e => e.IdC, "id_c");
+
+            entity.HasIndex(e => e.IdH, "id_h");
+
+            entity.HasIndex(e => e.NombreGrupo, "nombre_grupo");
+
+            entity.Property(e => e.Cedula)
+                .HasColumnType("int(11)")
+                .HasColumnName("cedula");
+            entity.Property(e => e.IdC)
+                .ValueGeneratedOnAdd()
+                .HasColumnType("int(255)")
+                .HasColumnName("id_c");
+            entity.Property(e => e.IdH)
+                .HasColumnType("int(11)")
+                .HasColumnName("id_h");
+            entity.Property(e => e.NombreGrupo)
+                .HasMaxLength(10)
+                .HasColumnName("nombre_grupo");
+            entity.Property(e => e.NombreMateria)
+                .HasMaxLength(30)
+                .HasColumnName("nombre_materia");
         });
 
         modelBuilder.Entity<Materium>(entity =>
         {
-            entity.HasKey(e => e.IdM).HasName("PRIMARY");
+            entity.HasKey(e => e.NombreMateria).HasName("PRIMARY");
 
             entity.ToTable("materia");
 
-            entity.HasIndex(e => e.IdM, "FK_horariocm_idx");
-
-            entity.HasIndex(e => e.Cedula, "cedula");
-
-            entity.HasIndex(e => e.IdC, "id_c");
-
-            entity.Property(e => e.IdM)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_m");
-            entity.Property(e => e.Cedula)
-                .HasColumnType("int(8)")
-                .HasColumnName("cedula");
-            entity.Property(e => e.IdC)
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
-            entity.Property(e => e.Nombre)
-                .IsRequired()
+            entity.Property(e => e.NombreMateria)
                 .HasMaxLength(30)
-                .HasColumnName("nombre");
+                .HasColumnName("nombre_materia");
+        });
+
+        modelBuilder.Entity<Operador>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("operador");
+
+            entity.HasIndex(e => e.Cedula, "FK__usuario");
+
+            entity.Property(e => e.Cedula).HasColumnType("int(8)");
+
+            entity.HasOne(d => d.CedulaNavigation).WithMany()
+                .HasForeignKey(d => d.Cedula)
+                .HasConstraintName("FK_operador_usuario");
         });
 
         modelBuilder.Entity<Plano>(entity =>
         {
-            entity.HasKey(e => new { e.CodigoP, e.PlanoImg })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.CodigoP).HasName("PRIMARY");
 
             entity.ToTable("planos");
 
             entity.Property(e => e.CodigoP)
                 .HasMaxLength(10)
-                .HasDefaultValueSql("''")
                 .HasColumnName("codigo_p");
             entity.Property(e => e.PlanoImg)
-                .HasColumnType("int(11)")
+                .HasMaxLength(50)
                 .HasColumnName("plano_img");
+        });
+
+        modelBuilder.Entity<Tiene>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("tiene");
+
+            entity.HasIndex(e => e.IdC, "FK_Coordenadas_idx");
+
+            entity.HasIndex(e => e.CodigoUbicaciones, "FK_tiene_ubicaciones");
+
+            entity.Property(e => e.CodigoUbicaciones)
+                .HasMaxLength(5)
+                .HasColumnName("codigo_ubicaciones");
+            entity.Property(e => e.IdC)
+                .HasColumnType("int(11)")
+                .HasColumnName("id_c");
+
+            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+                .HasForeignKey(d => d.CodigoUbicaciones)
+                .HasConstraintName("FK_tiene_ubicaciones");
+
+            entity.HasOne(d => d.IdCNavigation).WithMany()
+                .HasForeignKey(d => d.IdC)
+                .HasConstraintName("FK_Coordenadas");
         });
 
         modelBuilder.Entity<Ubicacione>(entity =>
         {
-            entity.HasKey(e => e.Codigo).HasName("PRIMARY");
+            entity.HasKey(e => e.CodigoUbicaciones).HasName("PRIMARY");
 
             entity.ToTable("ubicaciones");
 
-            entity.HasIndex(e => new { e.CodigoP, e.PlanoImg }, "FK_ubicacion_planos_idx");
-
-            entity.HasIndex(e => e.CodigoP, "codigo_p");
-
-            entity.Property(e=>e.CodigoDependendiente)
-            .HasColumnName("CodigoDependiente");
-
-            entity.Property(e => e.Codigo)
+            entity.Property(e => e.CodigoUbicaciones)
                 .HasMaxLength(5)
-                .HasColumnName("codigo");
-            entity.Property(e => e.CodigoP)
-                .IsRequired()
-                .HasMaxLength(10)
-                .HasColumnName("codigo_p");
+                .HasColumnName("codigo_ubicaciones");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(25)
                 .HasColumnName("nombre");
-            entity.Property(e => e.PlanoImg)
-                .HasColumnType("int(11)")
-                .HasColumnName("plano_img");
             entity.Property(e => e.Privado)
-                .HasDefaultValueSql("b'1'")
-                .HasColumnType("bit(1)");
+                .HasDefaultValueSql("b'0'")
+                .HasColumnType("bit(1)")
+                .HasColumnName("privado");
             entity.Property(e => e.Publico)
                 .HasDefaultValueSql("b'0'")
-                .HasColumnType("bit(1)");
+                .HasColumnType("bit(1)")
+                .HasColumnName("publico");
+               entity.HasMany(u => u.IdCs) // Una Ubicacione tiene muchas Coordenada
+    .WithMany()
+    .UsingEntity<Tiene>(
+        j => j
+            .HasOne(uc => uc.IdCNavigation)
+            .WithMany()
+            .HasForeignKey(uc => uc.IdC)
+            .HasConstraintName("FK_tiene_Coo"),
+        l => l
+            .HasOne(uc => uc.CodigoUbicacionesNavigation)
+            .WithMany()
+            .HasForeignKey(uc => uc.CodigoUbicaciones)
+            .HasConstraintName("FK_tiene_ubi"),
+        j =>
+        {
+            j.HasKey(uc => new { uc.CodigoUbicaciones, uc.IdC })
+                .HasName("PRIMARY");
+            j.ToTable("tiene");
+            j.HasIndex(uc => uc.CodigoUbicaciones, "codigo");
+            j.HasIndex(uc => uc.IdC, "id");
+            j.IndexerProperty<string>("CodigoUbicaciones")
+                .HasMaxLength(5)
+                .HasColumnName("codigo");
+            j.IndexerProperty<int>("IdC")
+                .HasColumnType("int(11)")
+                .HasColumnName("id_c");
+        });
+        });
 
-            entity.HasOne(d => d.Plano).WithMany(p => p.Ubicaciones)
-                .HasForeignKey(d => new { d.CodigoP, d.PlanoImg })
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ubicacion_planos");
+        modelBuilder.Entity<UbicacionesDependiente>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("ubicaciones_dependiente");
 
-            entity.HasMany(d => d.Ids).WithMany(p => p.Codigos)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Tiene",
-                    r => r.HasOne<Coordenada>().WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_tiene_Coo"),
-                    l => l.HasOne<Ubicacione>().WithMany()
-                        .HasForeignKey("Codigo")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_tiene_ubi"),
-                    j =>
-                    {
-                        j.HasKey("Codigo", "Id")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("tiene");
-                        j.HasIndex(new[] { "Codigo" }, "codigo");
-                        j.HasIndex(new[] { "Id" }, "id");
-                        j.IndexerProperty<string>("Codigo")
-                            .HasMaxLength(5)
-                            .HasColumnName("codigo");
-                        j.IndexerProperty<int>("Id")
-                            .HasColumnType("int(5)")
-                            .HasColumnName("id");
-                    });
+            entity.HasIndex(e => new { e.CodigoUbicaciones, e.CodigoUbicacionesDep }, "FK__ubicaciones");
+
+            entity.HasIndex(e => e.CodigoUbicacionesDep, "codigo_ubicaciones-dep");
+
+            entity.Property(e => e.CodigoUbicaciones)
+                .HasMaxLength(5)
+                .HasColumnName("codigo_ubicaciones");
+            entity.Property(e => e.CodigoUbicacionesDep)
+                .HasMaxLength(5)
+                .HasColumnName("codigo_ubicaciones-dep");
+
+            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+                .HasForeignKey(d => d.CodigoUbicaciones)
+                .HasConstraintName("FK_ubicaciones_dependiente_ubicaciones");
+
+            entity.HasOne(d => d.CodigoUbicacionesDepNavigation).WithMany()
+                .HasForeignKey(d => d.CodigoUbicacionesDep)
+                .HasConstraintName("ubicaciones_dependiente_ibfk_1");
+        });
+
+        modelBuilder.Entity<Up>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("up");
+
+            entity.HasIndex(e => e.CodigoP, "FK__planos");
+
+            entity.HasIndex(e => e.CodigoUbicaciones, "FK__ubicaciones");
+
+            entity.Property(e => e.CodigoP)
+                .HasMaxLength(10)
+                .HasColumnName("codigo_p");
+            entity.Property(e => e.CodigoUbicaciones)
+                .HasMaxLength(5)
+                .HasColumnName("codigo_ubicaciones");
+
+            entity.HasOne(d => d.CodigoPNavigation).WithMany()
+                .HasForeignKey(d => d.CodigoP)
+                .HasConstraintName("FK_up_planos");
+
+            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+                .HasForeignKey(d => d.CodigoUbicaciones)
+                .HasConstraintName("FK_up_ubicaciones");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
@@ -372,24 +592,19 @@ public partial class DatabaseContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
-            entity.Property(e => e.Administrador)
-                .HasDefaultValueSql("'1'")
-                .HasColumnType("tinyint(4)");
             entity.Property(e => e.Apellido)
                 .IsRequired()
                 .HasMaxLength(20)
+                .HasDefaultValueSql("''")
                 .HasColumnName("apellido");
             entity.Property(e => e.Direccion)
-                .IsRequired()
-                .HasMaxLength(10)
+                .HasColumnType("int(10)")
                 .HasColumnName("direccion");
             entity.Property(e => e.Nombre)
                 .IsRequired()
                 .HasMaxLength(20)
+                .HasDefaultValueSql("''")
                 .HasColumnName("nombre");
-            entity.Property(e => e.Operador)
-                .HasDefaultValueSql("'0'")
-                .HasColumnType("tinyint(4)");
             entity.Property(e => e.Pin)
                 .HasColumnType("int(4)")
                 .HasColumnName("pin");

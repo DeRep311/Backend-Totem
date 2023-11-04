@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.entities;
 
-namespace DataAccess.Models;
+namespace Base.Models;
 
-public partial class Usuario:IEntity
+public partial class Usuario : IEntity
 {
     public int Cedula { get; set; }
 
@@ -15,16 +15,10 @@ public partial class Usuario:IEntity
 
     public int Telefono { get; set; }
 
-    public string Direccion { get; set; }
+    public int Direccion { get; set; }
 
     public int Pin { get; set; }
 
-    public bool? Administrador { get; set; }
-
-    public bool? Operador { get; set; }
-
     [NotMapped]
-    public bool? Docente {get; set;}
-    [NotMapped]
-    public bool? Estudiante {get; set;}
+    public string Rol { get; set; }
 }

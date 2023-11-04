@@ -1,4 +1,6 @@
-using DataAccess.Models;
+using Base.Models;
+using DataAccess.DTOs;
+
 
 public interface ICursoServices
 {
@@ -7,7 +9,7 @@ public interface ICursoServices
     public IResult Add(Curso cursonew);
     public IResult Delete(int IdC);
     public IResult Update(int IdC, Curso usernew);
-    public IDataResult<List<Materium>> GetMaterias(int Id);
+    public IDataResult<List<MateriasDTO>> GetMaterias(String Id);
 
     public IDataResult<Curso> Get(int IdC);
 

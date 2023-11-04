@@ -1,8 +1,0 @@
-@startuml
-class Plano <<partial>> {
-    + CodigoP : string <<get>> <<set>>
-    + PlanoImg : int <<get>> <<set>>
-    + <<virtual>> Ubicaciones : ICollection<Ubicacione> <<get>> <<set>>
-}
-IEntity <|-- Plano
-@enduml

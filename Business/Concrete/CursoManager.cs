@@ -1,4 +1,6 @@
-using DataAccess.Models;
+using Base.Models;
+using DataAccess.DTOs;
+
 
 
 public class CursoManager : ICursoServices
@@ -61,11 +63,11 @@ public class CursoManager : ICursoServices
 
     }
 
-    public IDataResult<List<Materium>> GetMaterias(int Id){
+    public IDataResult<List<MateriasDTO>> GetMaterias(String Id){
 
-        List<Materium> ListaMaterias = new();
-        ListaMaterias = _MateriaDal.GetAll(e => e.IdC==Id);
-        return new SuccessResultData<List<Materium>>(ListaMaterias);
+        List<MateriasDTO> ListaMaterias = new();
+        ListaMaterias = _MateriaDal.Getbygroup(Id);
+        return new SuccessResultData<List<MateriasDTO>>(ListaMaterias);
     }
 
     public IDataResult<List<Curso>> GetAll()
