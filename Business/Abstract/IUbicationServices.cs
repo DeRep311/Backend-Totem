@@ -1,19 +1,20 @@
 using Base.Models;
 
 
-public interface IUbicationServices {
-    
-    public IResult Add(Ubicacione Ubication);
-    public IResult Delete(string codigo);
+public interface IUbicationServices
+{
 
-    public IDataResult<List<Ubicacione>> GetAll();
+    public IResult Add(UbicationDTO Ubication);
+    public IResult Delete(UbicationDTO ubication);
 
-    public IDataResult<Ubicacione> GetById(string codigo);
+    public IDataResult<List<UbicationDTO>> GetAll();
 
-    public IResult Update(String Codigo, Ubicacione newUbication);
 
-    
-    
+
+    public IResult Update(UbicationDTO ubicacionnew);
+
+
+
 
 
 }

@@ -9,14 +9,22 @@ public class UbicationManager : IUbicationServices
         {
             _UbicationDal = UbicationDal;
         }
-        public IResult Add(Ubicacione Ubication)
+        public IResult Add(UbicationDTO Ubication)
         {
             var result =_UbicationDal.Get(e=> e.CodigoUbicaciones == Ubication.CodigoUbicaciones);
 
             if (result == null)
             {
 
-               _UbicationDal.Add(Ubication);
+               _UbicationDal.Add(new Ubicacione{
+                     CodigoUbicaciones = Ubication.CodigoUbicaciones,
+                     Nombre = Ubication.Nombre,
+                     Publico = Ubication.Publico,
+                     Privado = Ubication.Privado
+               });
+               _UbicationDal.AddCoo(Ubication);
+
+               _UbicationDal.AddPlano(Ubication);
                
                 return new SuccessResult();
                 
@@ -28,12 +36,14 @@ public class UbicationManager : IUbicationServices
             
               
         }
-        public IResult Delete(string codigo)
+        public IResult Delete(UbicationDTO ubication)
         {
-            var result = _UbicationDal.Get(e=> e.CodigoUbicaciones == codigo);
+            var result = _UbicationDal.Get(e=> e.CodigoUbicaciones == ubication.CodigoUbicaciones);
             if (result != null)
             {
                 _UbicationDal.Delete(result);
+                _UbicationDal.DeleteCoo(ubication);
+                _UbicationDal.DeletePlano(ubication, false);
                 return new SuccessResult();
                 
             }
@@ -41,25 +51,31 @@ public class UbicationManager : IUbicationServices
             
             
         }
-        public IDataResult<List<Ubicacione>> GetAll()
+        public IDataResult<List<UbicationDTO>> GetAll()
         {
             var result = _UbicationDal.GetAll();
-            return new SuccessResultData<List<Ubicacione>>(result);
+            List<UbicationDTO> ubicaciones = new();
+            foreach (var item in result)
+            {
+                  var result2 = _UbicationDal.GetYourData(item);
+                    ubicaciones.Add(result2);
+            }
+          
+            return new SuccessResultData<List<UbicationDTO>>(ubicaciones);
         }
-        public IDataResult<Ubicacione> GetById(string codigo)
+ 
+        public IResult Update(UbicationDTO ubicacionnew)
         {
-            var result = _UbicationDal.Get(u => u.CodigoUbicaciones == codigo);
-            return new SuccessResultData<Ubicacione>(result);
-        }
-        public IResult Update(String Codigo, Ubicacione newUbication)
-        {
-           var result = _UbicationDal.Get(e=> e.CodigoUbicaciones==Codigo);
+           var result = _UbicationDal.Get(e=> e.CodigoUbicaciones==ubicacionnew.CodigoUbicaciones);
+           UbicationDTO old = _UbicationDal.GetYourData(result);
 
            if (result != null)
            {
-            _UbicationDal.Update(newUbication, result);
+            _UbicationDal.Update(ubicacionnew, old);
+             return new SuccessResult();
            }
-            return new SuccessResult();
+              return new ErrorResult("Ubicacion no encontrada");
+           
         }
     
 }

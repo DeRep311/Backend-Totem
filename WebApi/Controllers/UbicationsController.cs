@@ -14,6 +14,7 @@ namespace Name.Controllers
         {
             _UbicationManager = Ubication;
         }
+        
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetUbications()
@@ -38,70 +39,160 @@ namespace Name.Controllers
             }
         }
 
-        [HttpGet("Get/{codigo}")]
-        public async Task<IActionResult> GetUbication(string codigo)
+    
+
+    [HttpPost("Add")]
+    public async Task<IActionResult> Add([FromForm] UbicationDTO ubication, IFormFileCollection files)
+    {
+        // Accede a los datos de UbicationDTO
+        List<Coordenada> coordenadas = new ();
+        
+        var codigoUbicaciones = ubication.CodigoUbicaciones;
+        var nombre = ubication.Nombre;
+        var publico = ubication.Publico;
+        var privado = ubication.Privado;
+        // Otras propiedades de UbicationDTO
+
+        // Procesa la lista de coordenadas
+        foreach (var file in files)
         {
-            var result = _UbicationManager.GetById(codigo);
-            if (result.Success)
+            if (file.Length > 0)
             {
-                return Ok(result);
-            }
-            else
-            {
-                System.Console.WriteLine(codigo);
-                return BadRequest(result);
+                // Lee el archivo adjunto y almacénalo en el servidor
+                using (var stream = new FileStream($"imagenes/{file.FileName}", FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Puedes acceder a los datos de la coordenada a través de los campos del formulario
+                var idC = int.Parse(Request.Form["IdC"]);
+                var cooX = float.Parse(Request.Form["CooX"]);
+                var cooY = float.Parse(Request.Form["CooY"]);
+                var foto = Request.Form["Foto"];
+                var inicio = bool.Parse(Request.Form["Inicio"]);
+                var final = bool.Parse(Request.Form["Final"]);
+
+                // Ahora puedes trabajar con los datos de la coordenada y la imagen almacenada en el servidor
+                var coordenada = new Coordenada
+                {
+                    IdC = idC,
+                    CooX = cooX,
+                    CooY = cooY,
+                    Foto = $"imagenes/{file.FileName}", // Ruta al archivo de imagen
+                    Inicio = inicio,
+                    Final = final
+                };
+
+                // Realiza las operaciones necesarias con la coordenada, como guardarla en la base de datos
+                coordenadas.Add(coordenada);
+            
             }
 
         }
 
-        [HttpPost("Add")]
-        public async Task<IActionResult> Add(Ubicacione Ubication)
+        // Aquí puedes procesar los datos de UbicationDTO y las coordenadas según tus necesidades
+            _UbicationManager.Add(new UbicationDTO{
+                CodigoUbicaciones = codigoUbicaciones,
+                Nombre = nombre,
+                Publico = publico,
+                Privado = privado,
+                IdCs = coordenadas
+            
+            });
+        // Devuelve una respuesta adecuada, por ejemplo, un objeto JSON con el resultado de la operación
+        return Ok(new { message = "Ubicación agregada exitosamente" });
+    }
+
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(UbicationDTO ubicacionaeliminar)
         {
-            var result = _UbicationManager.Add(Ubication);
-            if (result.Success)
+            //eliminar ubicacion y las imagenes de las coordenadas
+        
+            try
             {
-                return Ok(result);
+                var result = _UbicationManager.Delete(ubicacionaeliminar);
+
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
             }
-            else
+            catch (System.Exception r)
             {
-                return BadRequest(result);
+
+                return BadRequest(r.Message);
+            }
+
+
+            
+
+        }
+        [HttpPut("Update")]
+
+       public async Task<IActionResult> Update([FromForm] UbicationDTO ubication, IFormFileCollection files)
+    {
+        // Accede a los datos de UbicationDTO
+        List<Coordenada> coordenadas = new ();
+        
+        var codigoUbicaciones = ubication.CodigoUbicaciones;
+        var nombre = ubication.Nombre;
+        var publico = ubication.Publico;
+        var privado = ubication.Privado;
+        // Otras propiedades de UbicationDTO
+
+        // Procesa la lista de coordenadas
+        foreach (var file in files)
+        {
+            if (file.Length > 0)
+            {
+                // Lee el archivo adjunto y almacénalo en el servidor
+                using (var stream = new FileStream($"imagenes/{file.FileName}", FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Puedes acceder a los datos de la coordenada a través de los campos del formulario
+                var idC = int.Parse(Request.Form["IdC"]);
+                var cooX = float.Parse(Request.Form["CooX"]);
+                var cooY = float.Parse(Request.Form["CooY"]);
+                var foto = Request.Form["Foto"];
+                var inicio = bool.Parse(Request.Form["Inicio"]);
+                var final = bool.Parse(Request.Form["Final"]);
+
+                // Ahora puedes trabajar con los datos de la coordenada y la imagen almacenada en el servidor
+                var coordenada = new Coordenada
+                {
+                    IdC = idC,
+                    CooX = cooX,
+                    CooY = cooY,
+                    Foto = $"imagenes/{file.FileName}", // Ruta al archivo de imagen
+                    Inicio = inicio,
+                    Final = final
+                };
+
+                // Realiza las operaciones necesarias con la coordenada, como guardarla en la base de datos
+                coordenadas.Add(coordenada);
+            
             }
 
         }
 
-        [HttpDelete("Delete/{codigo}")]
-        public async Task<IActionResult> Delete(string codigo)
-        {
-
-            var result = _UbicationManager.Delete(codigo);
-
-            if (result.Success)
-            {
-                return Ok(result);
-
-            }
-            else
-            {
-                return BadRequest(result);
-            }
-
-        }
-
-        [HttpPut("Update/{codigo}")]
-
-        public async Task<IActionResult> Update(string codigo, Ubicacione newUbication)
-        {
-            var result = _UbicationManager.Update(codigo, newUbication);
-
-            if (result.Success)
-            {
-                return Ok(result);
-
-            }
-            else
-            {
-                return BadRequest(result);
-            }
-        }
+        // Aquí puedes procesar los datos de UbicationDTO y las coordenadas según tus necesidades
+            _UbicationManager.Update(new UbicationDTO{
+                CodigoUbicaciones = codigoUbicaciones,
+                Nombre = nombre,
+                Publico = publico,
+                Privado = privado,
+                IdCs = coordenadas
+            
+            });
+        // Devuelve una respuesta adecuada, por ejemplo, un objeto JSON con el resultado de la operación
+        return Ok(new { message = "Ubicación agregada exitosamente" });
+    }
     }
 }

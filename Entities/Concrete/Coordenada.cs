@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using Core.entities;
 
 namespace Base.Models;
@@ -14,8 +16,10 @@ public partial class Coordenada : IEntity
 
     public string Foto { get; set; }
 
-    public ulong? Inicio { get; set; }
+    public bool? Inicio { get; set; }
 
-    public ulong? Final { get; set; }
+    public bool? Final { get; set; }
+    [NotMapped]
+    public Stream Imagen { get; set; }
   
 }

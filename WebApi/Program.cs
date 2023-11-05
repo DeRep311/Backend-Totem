@@ -1,5 +1,6 @@
 using Base.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +53,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "imagenes");
+if (!Directory.Exists(imagePath))
+{
+    Directory.CreateDirectory(imagePath);
+}
+ app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(imagePath),
+        RequestPath = "/imagenes"
+    });
+    
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
