@@ -6,11 +6,13 @@ public class MateriaController : ControllerBase
  {
 
     private IMateriaServices _MateriaServices;
+    private IAssignServices _AssignServices;
     
 
-    public MateriaController(IMateriaServices materiaServices)
+    public MateriaController(IMateriaServices materiaServices, IAssignServices assignServices)
     {
         _MateriaServices = materiaServices;
+        _AssignServices = assignServices;
 
     }
 
@@ -85,6 +87,35 @@ public class MateriaController : ControllerBase
      
     }
 
+    [HttpPost("Assign")]
+
+    public async Task<IActionResult> Assign(AssignMateriaDTO assign)
+    {
+        var result = _AssignServices.AssignHorarytoMateria(assign.IdG, assign.IdM, assign.IdH);
+        if(result.Success)
+        {
+            return Ok(result.Message);
+        }
+        else
+        {
+            return BadRequest(result.Message);
+        }
+
+        
+     
+    }
+
+   
+
     
     
+}
+
+public class AssignMateriaDTO
+{
+    public String IdM { get; set; }
+    public int IdH { get; set; }
+
+    public String IdG { get; set; }
+
 }
