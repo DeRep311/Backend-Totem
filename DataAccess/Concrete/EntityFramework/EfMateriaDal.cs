@@ -29,7 +29,7 @@ public class EfMateriaDal : EfEntityRepositoryBase<Materium, DatabaseContext>, I
                         Cedula = docente.Cedula,
                         NombreDocente = infodocente.CedulaNavigation.Nombre,
                         ApellidoDocente = infodocente.CedulaNavigation.Apellido,
-                        Ubicacion = Ubicaciones.CodigoUbicacionesNavigation,
+                        Ubicacion = Ubicaciones.CodigoUbicaciones,
                         Horarios = infohorario
                     };
                 materiadocente.Add(queryprofesor.FirstOrDefault());

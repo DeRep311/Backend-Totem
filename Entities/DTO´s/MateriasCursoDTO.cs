@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Base.Models;
 using Core.entities;
@@ -12,7 +13,7 @@ public class MateriasDTO:IDTO
     public string NombreDocente {get; set;}
     public string ApellidoDocente {get; set;}
     
-    public Ubicacione Ubicacion {get; set;}
+    public String Ubicacion {get; set;}
     public Horario Horarios {get; set;}
     
 }

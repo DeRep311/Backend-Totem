@@ -26,6 +26,16 @@ public class HorarioManager : IHorariosServices
         return new ErrorResult("Horario ya existente");
     }
 
+    public IResult CreaterawHorary(List<Horario> horarios){
+        foreach (var item in horarios)
+        {
+            this.CreateHorario(item);
+        }
+        return new SuccessResult();
+
+
+    }
+
     public IResult DeleteHorary(int IdH)
     {
         var result = this.GetHorary(IdH);
@@ -38,6 +48,7 @@ public class HorarioManager : IHorariosServices
         return new ErrorResult("Horario no encontrado");
         
     }
+
 
     public IDataResult<Horario> GetHorary(int IdH)
     {
