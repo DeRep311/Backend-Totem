@@ -100,8 +100,6 @@ namespace Name.Controllers
                 
             }
             //quiero retornar en consola el valor de result cuando se ejecute la funcion
-            
-
 
             return BadRequest(result);
 

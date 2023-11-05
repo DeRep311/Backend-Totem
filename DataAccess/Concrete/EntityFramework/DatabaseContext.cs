@@ -461,12 +461,12 @@ public partial class DatabaseContext : DbContext
                 .ToTable("tiene");
 
             entity.HasIndex(e => e.IdC, "FK_Coordenadas_idx");
-
-            entity.HasIndex(e => e.CodigoUbicaciones, "FK_tiene_ubicaciones");
+            entity.HasIndex(t => t.CodigoUbicaciones, "codigo_ubicaciones");
 
             entity.Property(e => e.CodigoUbicaciones)
-                .HasMaxLength(5)
+                .HasColumnType("varchar(5)")
                 .HasColumnName("codigo_ubicaciones");
+
             entity.Property(e => e.IdC)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_c");
@@ -501,33 +501,7 @@ public partial class DatabaseContext : DbContext
                 .HasDefaultValueSql("b'0'")
                 .HasColumnType("bit(1)")
                 .HasColumnName("publico");
-               entity.HasMany(u => u.IdCs) // Una Ubicacione tiene muchas Coordenada
-    .WithMany()
-    .UsingEntity<Tiene>(
-        j => j
-            .HasOne(uc => uc.IdCNavigation)
-            .WithMany()
-            .HasForeignKey(uc => uc.IdC)
-            .HasConstraintName("FK_tiene_Coo"),
-        l => l
-            .HasOne(uc => uc.CodigoUbicacionesNavigation)
-            .WithMany()
-            .HasForeignKey(uc => uc.CodigoUbicaciones)
-            .HasConstraintName("FK_tiene_ubi"),
-        j =>
-        {
-            j.HasKey(uc => new { uc.CodigoUbicaciones, uc.IdC })
-                .HasName("PRIMARY");
-            j.ToTable("tiene");
-            j.HasIndex(uc => uc.CodigoUbicaciones, "codigo");
-            j.HasIndex(uc => uc.IdC, "id");
-            j.IndexerProperty<string>("CodigoUbicaciones")
-                .HasMaxLength(5)
-                .HasColumnName("codigo");
-            j.IndexerProperty<int>("IdC")
-                .HasColumnType("int(11)")
-                .HasColumnName("id_c");
-        });
+          
         });
 
         modelBuilder.Entity<UbicacionesDependiente>(entity =>
