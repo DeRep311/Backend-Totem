@@ -15,7 +15,7 @@ public class MateriaController : ControllerBase
         _AssignServices = assignServices;
 
     }
-
+[Route("api/[controller]")]
     [HttpGet("Get/{IdM}")]
 
     public async Task<IActionResult> Get(String IdM)

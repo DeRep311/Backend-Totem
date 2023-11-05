@@ -12,7 +12,7 @@ public class GroupController: ControllerBase
         _GroupServices = groupServices;
 
     }
-
+[Route("api/[controller]")]
     [HttpGet("Get/{IdG}")]
 
     public async Task<IActionResult> Get(String IdG)

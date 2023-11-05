@@ -9,7 +9,7 @@ public class PlanosController: ControllerBase
     {
         _Planos = Ubication;
     }
-    
+    [Route("api/[controller]")]
 
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()
