@@ -11,7 +11,7 @@ public class UsuarioDTO: IDTO
 
 
 public Usuario User { get; set;}
-
+public string Rol { get; set; }
 
     public UsuarioDTO(Usuario user){
 
