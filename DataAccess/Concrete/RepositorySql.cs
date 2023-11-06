@@ -186,32 +186,80 @@ public class RepositorySql : IUserDal
 
     public List<Usuario> GetAll()
     {
-        try
+    try
+{
+    List<Usuario> users = new List<Usuario>();
+
+  
+        _conection.Open();
+        using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM usuario", _conection))
         {
-            _conection.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM usuario", _conection);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            List<Usuario> users = new List<Usuario>();
-            while (reader.Read())
+            using (MySqlDataReader reader = cmd.ExecuteReader())
             {
-                Usuario user = new Usuario();
-                user.Cedula = reader.GetInt32(0);
-                user.Nombre = reader.GetString(1);
-                user.Apellido = reader.GetString(2);
-                user.Telefono = reader.GetInt32(3);
-                user.Direccion = reader.GetInt32(4);
-                user.Pin = reader.GetInt32(5);
-                users.Add(user);
+                while (reader.Read())
+                {
+                    Usuario user = new Usuario();
+                    user.Cedula = reader.GetInt32(0);
+                    user.Nombre = reader.GetString(1);
+                    user.Apellido = reader.GetString(2);
+                    user.Telefono = reader.GetInt32(3);
+                    user.Direccion = reader.GetInt32(4);
+                    user.Pin = reader.GetInt32(5);
+                    users.Add(user);
+                }
             }
-            _conection.Close();
-            return users;
         }
-        catch (Exception e)
+
+        foreach (var user in users)
         {
-            Console.WriteLine(e.Message);
-            return null;
+            using (MySqlCommand cmdDocente = new MySqlCommand("SELECT COUNT(*) FROM docente WHERE cedula=@Cedula", _conection))
+            using (MySqlCommand cmdEstudiante = new MySqlCommand("SELECT COUNT(*) FROM estudiante WHERE cedula=@Cedula", _conection))
+            using (MySqlCommand cmdOperador = new MySqlCommand("SELECT COUNT(*) FROM operador WHERE cedula=@Cedula", _conection))
+            using (MySqlCommand cmdAdministrador = new MySqlCommand("SELECT COUNT(*) FROM administrador WHERE cedula=@Cedula", _conection))
+            {
+                cmdDocente.Parameters.AddWithValue("@Cedula", user.Cedula);
+                cmdEstudiante.Parameters.AddWithValue("@Cedula", user.Cedula);
+                cmdOperador.Parameters.AddWithValue("@Cedula", user.Cedula);
+                cmdAdministrador.Parameters.AddWithValue("@Cedula", user.Cedula);
+
+                int countDocente = Convert.ToInt32(cmdDocente.ExecuteScalar());
+                int countEstudiante = Convert.ToInt32(cmdEstudiante.ExecuteScalar());
+                int countOperador = Convert.ToInt32(cmdOperador.ExecuteScalar());
+                int countAdministrador = Convert.ToInt32(cmdAdministrador.ExecuteScalar());
+
+                if (countDocente != 0)
+                {
+                    user.Rol = "Docente";
+                }
+                else if (countEstudiante != 0)
+                {
+                    user.Rol = "Estudiante";
+                }
+                else if (countOperador != 0)
+                {
+                    user.Rol = "Operador";
+                }
+                else if (countAdministrador != 0)
+                {
+                    user.Rol = "Administrador";
+                }
+            }
         }
+    
+
+    return users;
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+    // Manejar la excepción según tus necesidades
+    return new List<Usuario>();
+}
+
+            
     }
+    
+  
 
     public Usuario GetUserRol(Usuario user)
     {

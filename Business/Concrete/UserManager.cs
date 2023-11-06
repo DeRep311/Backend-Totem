@@ -6,22 +6,14 @@ public class UserManager : IUserServices
 {
 
     private IUserDal _userDal;
-    private IDocenteDal _docenteDal;
-
-    private IEstudianteDal _estudianteDal;
-    private IAdministradorDal _administradorDal;
-
-    private IOperadorDal _operadorDal;
+  
     
 
-    public UserManager(IUserDal userDal, IDocenteDal docenteDal, IEstudianteDal estudianteDal, IAdministradorDal administradorDal, IOperadorDal operadorDal)
+    public UserManager(IUserDal userDal)
     {
 
         _userDal = userDal;
-        _docenteDal = docenteDal;
-        _estudianteDal = estudianteDal;
-        _administradorDal = administradorDal;
-        _operadorDal = operadorDal;
+    
     }
   
 
@@ -69,7 +61,7 @@ public class UserManager : IUserServices
             
             return new ErrorDataResult<List<Usuario>>("No existen usuarios", null);
         }
-        user = _userDal.GetUserRolist(user);
+       
 
         return new SuccessResultData<List<Usuario>>(user);
     }

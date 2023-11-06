@@ -13,12 +13,16 @@ public class RepositorySqlCursos : IUbicationDal
     }
     public void Add(Ubicacione entitiy)
     {
-        throw new NotImplementedException();
+        _conection.Open();
+        string query = $"INSERT INTO ubicaciones (codigo_ubicaciones, nombre, publico, privado)VALUES ({entitiy.CodigoUbicaciones}, '{entitiy.Nombre}', {entitiy.Publico}, {entitiy.Privado})";
+        MySqlCommand cmd = new MySqlCommand(query, _conection);
+        cmd.ExecuteNonQuery();
+        _conection.Close();    
     }
 
     public void AddCoo(UbicationDTO ubicacion)
     {
-        throw new NotImplementedException();
+       
     }
 
     public void AddPlano(UbicationDTO ubication)
