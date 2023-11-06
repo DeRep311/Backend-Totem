@@ -2,6 +2,7 @@ using Base.Models;
 
 public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupDal
  {
+    public RepositorySqlRelations relations = new();
     public void AddCourseToGroup(String idGroup, int idCourse)
     {
         using DatabaseContext context = new();
@@ -13,13 +14,12 @@ public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupD
              
                 foreach (var item in result)
                 {
-                    context.GrupoCursoMateria.Add(new GrupoCursoMaterium()
-                    {
-                        IdC = idCourse,
-                        NombreMateria = item.NombreMateria,
-                        NombreGrupo = idGroup
-                    });
-                context.SaveChanges();
+                    relations.AddGrupoCursoMateria(new GrupoCursoMaterium {
+                       NombreMateria= item.NombreMateria, 
+                       NombreGrupo= idGroup, 
+                        IdC= idCourse});
+                    
+                
                 }
             }
         }
@@ -33,13 +33,9 @@ public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupD
         {
             foreach (var item in estudiantes)
             {
-                context.EstudiaEns.Add(new EstudiaEn()
-                {
-                    Cedula = item.Cedula,
-                    NombreGrupo = idGroup
-                });
+                relations.AddGrupoEstudiante(new EstudiaEn {Cedula= item.Cedula, NombreGrupo= idGroup});
 
-                context.SaveChanges();
+               
             }
         }
 
@@ -55,9 +51,7 @@ public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupD
                 var result = context.Cms.Where(e => e.IdC == idCourse).ToList();
                 foreach (var item in result)
                 {
-                     var result2 = context.GrupoCursoMateria.Where(e => e.NombreMateria == item.NombreMateria && e.NombreGrupo == idGroup).FirstOrDefault();
-                     context.GrupoCursoMateria.Remove(result2);
-                        context.SaveChanges();
+                    relations.removeCursoGrupoMateria(idCourse, item.NombreMateria);
                 }
               }
          }
@@ -70,9 +64,7 @@ public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupD
          {
               if (context.Estudiantes.Any(e => e.Cedula == idStudent))
               {
-                var result = context.EstudiaEns.Where(e => e.Cedula == idStudent && e.NombreGrupo == idGroup).FirstOrDefault();
-                context.EstudiaEns.Remove(result);
-                context.SaveChanges();
+                relations.removeEstudianteGrupo(idStudent, idGroup);
               }
          }
     }
@@ -82,7 +74,10 @@ public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupD
         if (context.Grupos.Any(e=>e.NombreGrupo==Group))
         {
             var result = context.EstudiaEns.Where(e=>e.NombreGrupo==Group).ToList();
-            context.EstudiaEns.RemoveRange(result);
+            foreach (var item in result)
+            {
+                relations.removeEstudianteGrupo((int)item.Cedula, Group);
+            }
         }
         {
             

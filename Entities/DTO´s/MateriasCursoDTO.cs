@@ -15,5 +15,6 @@ public class MateriasDTO:IDTO
     
     public String Ubicacion {get; set;}
     public Horario Horarios {get; set;}
-    
+
+
 }
