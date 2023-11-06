@@ -1,4 +1,5 @@
 using Base.Models;
+using DataAccess.DTOs;
 
 
 public class UserManager : IUserServices
@@ -27,37 +28,9 @@ public class UserManager : IUserServices
 
     public IResult Add(Usuario user)
     {
-        _userDal.Add(user);
-        switch (user.Rol)
-        {
-            case "Docente":
-                Docente docente = new()
-                {
-                    Cedula = user.Cedula
-                };
-                _docenteDal.Add(docente);
-                break;
-            case "Estudiante":
-                Estudiante estudiante = new(){
-                    Cedula = user.Cedula
-                };
-                _estudianteDal.Add(estudiante);
-                break;
-            
-            case "Administrador":
-                Administrador administrador = new(){
-                    Cedula = user.Cedula
-                };
-                _administradorDal.Add(administrador);
-                break;
-
-            case "Operador":
-                Operador operador = new(){
-                    Cedula = user.Cedula
-                };
-                _operadorDal.Add(operador);
-                break;
-        }
+        _userDal.AddUser(user);
+      
+      
       
 
         return new SuccessResult();
@@ -65,12 +38,12 @@ public class UserManager : IUserServices
 
     public IResult Delete(int cedula)
     {
-        Usuario userDelet = _userDal.Get(e => e.Cedula == cedula);
+        Usuario userDelet = _userDal.Get(cedula);
         if (userDelet == null)
         {
             return new ErrorResult("Usuario no encontradp");
         }
-        _userDal.Delete(userDelet);
+        _userDal.DeleteUser(cedula);
         
 
         return new SuccessResult();
@@ -78,7 +51,7 @@ public class UserManager : IUserServices
 
     public IDataResult<Usuario> Get(int cedula)
     {
-        Usuario user = _userDal.Get(e => e.Cedula == cedula);
+        Usuario user = _userDal.Get(cedula);
         if (user == null)
         {
             return new ErrorDataResult<Usuario>("usuario no encontrado", null);
@@ -103,12 +76,12 @@ public class UserManager : IUserServices
 
     public IResult Update(int cedula, Usuario usernew)
     {
-        Usuario userold = _userDal.Get(e => e.Cedula == cedula);
+        Usuario userold = _userDal.Get(cedula);
         if (userold == null)
         {
             return new ErrorResult();
         }
-        _userDal.Update(usernew, userold);
+        _userDal.UpdateUser(usernew);
 
         return new SuccessResult();
     }

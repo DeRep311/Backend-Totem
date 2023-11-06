@@ -19,6 +19,7 @@ public partial class Usuario : IEntity
 
     public int Pin { get; set; }
 
+
     [NotMapped]
     public string Rol { get; set; }
 }

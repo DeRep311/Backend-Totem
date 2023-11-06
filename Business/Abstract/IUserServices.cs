@@ -1,6 +1,7 @@
 
 
 using Base.Models;
+using DataAccess.DTOs;
 
 
 public interface IUserServices

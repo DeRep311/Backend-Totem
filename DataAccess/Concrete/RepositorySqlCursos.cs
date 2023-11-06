@@ -1,0 +1,78 @@
+using System.Linq.Expressions;
+using Base.Models;
+using MySql.Data.MySqlClient;
+
+public class RepositorySqlCursos : IUbicationDal
+{
+    private MySqlConnection _conection;
+    public RepositorySqlCursos()
+    {
+        string connectionString = "server=localhost;database=apheleontotem;user=root";
+        MySqlConnection connection = new MySqlConnection(connectionString);
+        _conection = connection;
+    }
+    public void Add(Ubicacione entitiy)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddCoo(UbicationDTO ubicacion)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddPlano(UbicationDTO ubication)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void AddRaw(List<Ubicacione> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete(Ubicacione entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteCoo(UbicationDTO ubicacion)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeletePlano(UbicationDTO ubication, bool deletePlano)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DeleteRaw(List<Ubicacione> entities)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Ubicacione Get(Expression<Func<Ubicacione, bool>> filter)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Ubicacione> GetAll(Expression<Func<Ubicacione, bool>>? filter = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public UbicationDTO GetYourData(Ubicacione ubicacione)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update(UbicationDTO ubicacion, UbicationDTO oldUbication)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update(Ubicacione newentity, Ubicacione oldentity)
+    {
+        throw new NotImplementedException();
+    }
+}

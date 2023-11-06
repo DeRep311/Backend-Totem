@@ -17,7 +17,7 @@ public class AuthManager : IAuthServices
 
     if (dato is AuthDTO datos)
     {
-      var result = _userDal.Get(e => e.Cedula == datos.Cedula);
+      var result = _userDal.Get(datos.Cedula);
     if (result != null)
     {
 

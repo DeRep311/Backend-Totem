@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 //Inyecciones de dependencias
 builder.Services.AddScoped<IUserServices, UserManager>();
-builder.Services.AddScoped<IUserDal, EfUserDal>();
+builder.Services.AddScoped<IUserDal, RepositorySql>();
 builder.Services.AddScoped<IAdministradorDal, EfAdministradorDal>();
 builder.Services.AddScoped<IDocenteDal, EfDocenteDal>();
 builder.Services.AddScoped<IEstudianteDal, EfEstudianteDal>();
