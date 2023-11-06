@@ -2,8 +2,14 @@ using Base.Models;
 using Core.DataAccess;
 
 
-public interface ICursoDal: IEntityRepository<Curso>
+public interface ICursoDal
  {
-    public List<Materium> GetYourMaterias(int IdC);
+
+   
+    public List<CursoDTO> GetAll();
+    public Curso Get(CursoDTO curso);
+    public void Add(CursoDTO curso);
+    public void Delete(CursoDTO entity);
+
     
 }

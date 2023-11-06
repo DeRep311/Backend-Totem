@@ -2,10 +2,10 @@ using System.Linq.Expressions;
 using Base.Models;
 using MySql.Data.MySqlClient;
 
-public class RepositorySqlCursos : IUbicationDal
+public class RepositorySqlUbicacion : IUbicationDal
 {
     private MySqlConnection _conection;
-    public RepositorySqlCursos()
+    public RepositorySqlUbicacion()
     {
         string connectionString = "server=localhost;database=apheleontotem;user=root";
         MySqlConnection connection = new MySqlConnection(connectionString);
