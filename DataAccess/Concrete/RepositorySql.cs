@@ -27,10 +27,10 @@ public class RepositorySql : IUserDal
         try
         {
             _conection.Open();
-           
+
             String query = $"INSERT INTO usuario (Cedula, Nombre, Apellido, Telefono, Direccion, Pin) VALUES ({user.Cedula}, '{user.Nombre}', '{user.Apellido}', {user.Telefono}, {user.Direccion}, {user.Pin})";
             MySqlCommand cmd = new MySqlCommand(query, _conection);
-    
+
             System.Console.WriteLine(cmd.CommandText);
             cmd.ExecuteNonQuery();
 
@@ -160,22 +160,68 @@ public class RepositorySql : IUserDal
     {
         try
         {
+            Usuario user = null;
+
+
             _conection.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM usuario WHERE Cedula = @Cedula", _conection);
-            cmd.Parameters.AddWithValue("@Cedula", cedula);
-            MySqlDataReader reader = cmd.ExecuteReader();
-            Usuario user2 = new Usuario();
-            while (reader.Read())
+
+            using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM usuario WHERE Cedula = @Cedula", _conection))
             {
-                user2.Cedula = reader.GetInt32(0);
-                user2.Nombre = reader.GetString(1);
-                user2.Apellido = reader.GetString(2);
-                user2.Telefono = reader.GetInt32(3);
-                user2.Direccion = reader.GetInt32(4);
-                user2.Pin = reader.GetInt32(5);
+                cmd.Parameters.AddWithValue("@Cedula", cedula);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        user = new Usuario();
+                        user.Cedula = reader.GetInt32(0);
+                        user.Nombre = reader.GetString(1);
+                        user.Apellido = reader.GetString(2);
+                        user.Telefono = reader.GetInt32(3);
+                        user.Direccion = reader.GetInt32(4);
+                        user.Pin = reader.GetInt32(5);
+                    }
+                }
             }
-            _conection.Close();
-            return user2;
+
+            if (user != null)
+            {
+                using (MySqlCommand cmdDocente = new MySqlCommand("SELECT COUNT(*) FROM docente WHERE cedula=@Cedula", _conection))
+                using (MySqlCommand cmdEstudiante = new MySqlCommand("SELECT COUNT(*) FROM estudiante WHERE cedula=@Cedula", _conection))
+                using (MySqlCommand cmdOperador = new MySqlCommand("SELECT COUNT(*) FROM operador WHERE cedula=@Cedula", _conection))
+                using (MySqlCommand cmdAdministrador = new MySqlCommand("SELECT COUNT(*) FROM administrador WHERE cedula=@Cedula", _conection))
+                {
+                    cmdDocente.Parameters.AddWithValue("@Cedula", user.Cedula);
+                    cmdEstudiante.Parameters.AddWithValue("@Cedula", user.Cedula);
+                    cmdOperador.Parameters.AddWithValue("@Cedula", user.Cedula);
+                    cmdAdministrador.Parameters.AddWithValue("@Cedula", user.Cedula);
+
+                    int countDocente = Convert.ToInt32(cmdDocente.ExecuteScalar());
+                    int countEstudiante = Convert.ToInt32(cmdEstudiante.ExecuteScalar());
+                    int countOperador = Convert.ToInt32(cmdOperador.ExecuteScalar());
+                    int countAdministrador = Convert.ToInt32(cmdAdministrador.ExecuteScalar());
+
+                    if (countDocente != 0)
+                    {
+                        user.Rol = "Docente";
+                    }
+                    else if (countEstudiante != 0)
+                    {
+                        user.Rol = "Estudiante";
+                    }
+                    else if (countOperador != 0)
+                    {
+                        user.Rol = "Operador";
+                    }
+                    else if (countAdministrador != 0)
+                    {
+                        user.Rol = "Administrador";
+                    }
+                }
+            }
+
+
+            return user;
         }
         catch (Exception e)
         {
@@ -186,94 +232,78 @@ public class RepositorySql : IUserDal
 
     public List<Usuario> GetAll()
     {
-    try
-{
-    List<Usuario> users = new List<Usuario>();
-
-  
-        _conection.Open();
-        using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM usuario", _conection))
+        try
         {
-            using (MySqlDataReader reader = cmd.ExecuteReader())
+            List<Usuario> users = new List<Usuario>();
+
+
+            _conection.Open();
+            using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM usuario", _conection))
             {
-                while (reader.Read())
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    Usuario user = new Usuario();
-                    user.Cedula = reader.GetInt32(0);
-                    user.Nombre = reader.GetString(1);
-                    user.Apellido = reader.GetString(2);
-                    user.Telefono = reader.GetInt32(3);
-                    user.Direccion = reader.GetInt32(4);
-                    user.Pin = reader.GetInt32(5);
-                    users.Add(user);
+                    while (reader.Read())
+                    {
+                        Usuario user = new Usuario();
+                        user.Cedula = reader.GetInt32(0);
+                        user.Nombre = reader.GetString(1);
+                        user.Apellido = reader.GetString(2);
+                        user.Telefono = reader.GetInt32(3);
+                        user.Direccion = reader.GetInt32(4);
+                        user.Pin = reader.GetInt32(5);
+                        users.Add(user);
+                    }
                 }
             }
-        }
 
-        foreach (var user in users)
-        {
-            using (MySqlCommand cmdDocente = new MySqlCommand("SELECT COUNT(*) FROM docente WHERE cedula=@Cedula", _conection))
-            using (MySqlCommand cmdEstudiante = new MySqlCommand("SELECT COUNT(*) FROM estudiante WHERE cedula=@Cedula", _conection))
-            using (MySqlCommand cmdOperador = new MySqlCommand("SELECT COUNT(*) FROM operador WHERE cedula=@Cedula", _conection))
-            using (MySqlCommand cmdAdministrador = new MySqlCommand("SELECT COUNT(*) FROM administrador WHERE cedula=@Cedula", _conection))
+            foreach (var user in users)
             {
-                cmdDocente.Parameters.AddWithValue("@Cedula", user.Cedula);
-                cmdEstudiante.Parameters.AddWithValue("@Cedula", user.Cedula);
-                cmdOperador.Parameters.AddWithValue("@Cedula", user.Cedula);
-                cmdAdministrador.Parameters.AddWithValue("@Cedula", user.Cedula);
+                using (MySqlCommand cmdDocente = new MySqlCommand("SELECT COUNT(*) FROM docente WHERE cedula=@Cedula", _conection))
+                using (MySqlCommand cmdEstudiante = new MySqlCommand("SELECT COUNT(*) FROM estudiante WHERE cedula=@Cedula", _conection))
+                using (MySqlCommand cmdOperador = new MySqlCommand("SELECT COUNT(*) FROM operador WHERE cedula=@Cedula", _conection))
+                using (MySqlCommand cmdAdministrador = new MySqlCommand("SELECT COUNT(*) FROM administrador WHERE cedula=@Cedula", _conection))
+                {
+                    cmdDocente.Parameters.AddWithValue("@Cedula", user.Cedula);
+                    cmdEstudiante.Parameters.AddWithValue("@Cedula", user.Cedula);
+                    cmdOperador.Parameters.AddWithValue("@Cedula", user.Cedula);
+                    cmdAdministrador.Parameters.AddWithValue("@Cedula", user.Cedula);
 
-                int countDocente = Convert.ToInt32(cmdDocente.ExecuteScalar());
-                int countEstudiante = Convert.ToInt32(cmdEstudiante.ExecuteScalar());
-                int countOperador = Convert.ToInt32(cmdOperador.ExecuteScalar());
-                int countAdministrador = Convert.ToInt32(cmdAdministrador.ExecuteScalar());
+                    int countDocente = Convert.ToInt32(cmdDocente.ExecuteScalar());
+                    int countEstudiante = Convert.ToInt32(cmdEstudiante.ExecuteScalar());
+                    int countOperador = Convert.ToInt32(cmdOperador.ExecuteScalar());
+                    int countAdministrador = Convert.ToInt32(cmdAdministrador.ExecuteScalar());
 
-                if (countDocente != 0)
-                {
-                    user.Rol = "Docente";
-                }
-                else if (countEstudiante != 0)
-                {
-                    user.Rol = "Estudiante";
-                }
-                else if (countOperador != 0)
-                {
-                    user.Rol = "Operador";
-                }
-                else if (countAdministrador != 0)
-                {
-                    user.Rol = "Administrador";
+                    if (countDocente != 0)
+                    {
+                        user.Rol = "Docente";
+                    }
+                    else if (countEstudiante != 0)
+                    {
+                        user.Rol = "Estudiante";
+                    }
+                    else if (countOperador != 0)
+                    {
+                        user.Rol = "Operador";
+                    }
+                    else if (countAdministrador != 0)
+                    {
+                        user.Rol = "Administrador";
+                    }
                 }
             }
+
+
+            return users;
         }
-    
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            // Manejar la excepción según tus necesidades
+            return new List<Usuario>();
+        }
 
-    return users;
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.Message);
-    // Manejar la excepción según tus necesidades
-    return new List<Usuario>();
-}
 
-            
     }
-    
-  
-
-    public Usuario GetUserRol(Usuario user)
-    {
-        throw new NotImplementedException();
-    }
-
-    public List<Usuario> GetUserRolist(List<Usuario> listuser)
-    {
-        throw new NotImplementedException();
-    }
-
-
-
-
 
 
 }

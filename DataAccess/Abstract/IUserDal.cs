@@ -5,8 +5,7 @@ using DataAccess.DTOs;
 
 public interface IUserDal 
 {
-  public Usuario GetUserRol(Usuario user);
-  public List<Usuario> GetUserRolist (List<Usuario> listuser);
+
 
   public Usuario Get (int cedula);
 

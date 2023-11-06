@@ -48,7 +48,7 @@ public class UserManager : IUserServices
         {
             return new ErrorDataResult<Usuario>("usuario no encontrado", null);
         }
-        user= _userDal.GetUserRol(user);
+     
        
         return new SuccessResultData<Usuario>(user);
     }
