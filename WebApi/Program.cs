@@ -23,7 +23,7 @@ builder.Services.AddScoped<IOperadorDal, EfOperadorDal>();
 builder.Services.AddScoped<IAuthServices, AuthManager>();
 
 builder.Services.AddScoped<ICursoServices, CursoManager>();
-builder.Services.AddScoped<ICursoDal, EfCursosDal>();
+builder.Services.AddScoped<ICursoDal, RepositorySqlCursos>();
 builder.Services.AddScoped<IMateriaServices, MateriaManager>();
 builder.Services.AddScoped<ICursoMateria, EfCursoMaterialDal>();
 builder.Services.AddScoped<IMateriaDal, EfMateriaDal>();

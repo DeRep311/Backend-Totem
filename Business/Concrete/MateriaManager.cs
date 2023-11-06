@@ -17,19 +17,19 @@ public class MateriaManager : IMateriaServices
     }
 
     
-    public IResult Add(Materium materia, int IdCurso)
-    {
-        var result = _cursoservices.Get(IdCurso);
-        if (result.Success)
-        {
-            _materiadal.Add(materia);
-            return new SuccessResult();
-        }
-        else
-        {
-            return new ErrorResult("Curso no encontrado");
-        }
-    }
+    // public IResult Add(CursoDTO curso)
+    // {
+    //     var result = _cursoservices.Get(curso);
+    //     if (result.Success)
+    //     {
+    //         _materiadal.Add(materia);
+    //         return new SuccessResult();
+    //     }
+    //     else
+    //     {
+    //         return new ErrorResult("Curso no encontrado");
+    //     }
+    // }
 
     public IResult Add(Materium materia)
     {

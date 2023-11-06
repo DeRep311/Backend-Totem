@@ -2,7 +2,7 @@ using Base.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-public class EfCursosDal : EfEntityRepositoryBase<Curso, DatabaseContext>, ICursoDal
+public class EfCursosDal : EfEntityRepositoryBase<Curso, DatabaseContext>
 {
     public List<Materium> GetYourMaterias(int IdC)
     {
