@@ -1,6 +1,8 @@
 using Base.Models;
 using Microsoft.AspNetCore.Mvc;
 
+[Route("api/[controller]")]
+    [ApiController]
 public class GroupController: ControllerBase
  {
 
@@ -12,8 +14,7 @@ public class GroupController: ControllerBase
         _GroupServices = groupServices;
 
     }
-[Route("api/[controller]")]
-    [HttpGet("Get/{IdG}")]
+
 
     public async Task<IActionResult> Get(String IdG)
     {
@@ -33,7 +34,7 @@ public class GroupController: ControllerBase
 
     [HttpPost("Add")]
 
-    public async Task<IActionResult> Add(GrupoDTO group)
+    public async Task<IActionResult> Add([FromBody] GrupoDTO group)
     {
         var result = _GroupServices.CreateGroup(group);
         if (result.Success)

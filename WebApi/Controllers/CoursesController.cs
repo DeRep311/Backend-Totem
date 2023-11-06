@@ -36,7 +36,7 @@ using Microsoft.AspNetCore.Mvc;
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(CursoDTO curso)
+        public async Task<IActionResult> Add([FromBody] CursoDTO curso)
         {
             var result = _CursoServices.Add(curso);
             if (result.Success)

@@ -1,7 +1,8 @@
 
 using Base.Models;
 using Microsoft.AspNetCore.Mvc;
-
+[Route("api/[controller]")]
+    [ApiController]
 public class MateriaController : ControllerBase
  {
 
@@ -15,8 +16,7 @@ public class MateriaController : ControllerBase
         _AssignServices = assignServices;
 
     }
-[Route("api/[controller]")]
-    [HttpGet("Get/{IdM}")]
+
 
     public async Task<IActionResult> Get(String IdM)
     {
@@ -36,7 +36,7 @@ public class MateriaController : ControllerBase
 
     [HttpPost("Add")]
 
-    public async Task<IActionResult> Add(Materium materia)
+    public async Task<IActionResult> Add([FromBody] Materium materia)
     {
         var result = _MateriaServices.Add(materia);
         if (result.Success)

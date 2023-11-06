@@ -48,7 +48,7 @@ namespace Name.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Horario horario)
+        public async Task<IActionResult> Post([FromBody] Horario horario)
         {
             var result = _HorarioServices.CreateHorario(horario);
             if (result.Success)

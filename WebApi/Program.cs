@@ -34,6 +34,8 @@ builder.Services.AddScoped<IHorarioDal, EfHorarioDal>();
 builder.Services.AddScoped<IGroupServices, GroupManager>();
 builder.Services.AddScoped<IGroupDal, EfGroupDal>();
 builder.Services.AddScoped<IHorarioMateriaDal, EfHorarioMateriaDal>();
+builder.Services.AddScoped<IPlanosDal, EfPlanosDal>();
+builder.Services.AddScoped<IPlanosServices, PlanosManager>();
 
 
 builder.Services.AddScoped<IUbicationMateriaDal, EfUbicationMateriaDal>();

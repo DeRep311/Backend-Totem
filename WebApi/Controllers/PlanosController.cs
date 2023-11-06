@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
+[Route("api/[controller]")]
+[ApiController]
+public class PlanosController : ControllerBase
+{
 
-public class PlanosController: ControllerBase
- {
+    private IPlanosServices _Planos;
 
-    private IPlanosDal _Planos;
-
-    public PlanosController(IPlanosDal Ubication)
+    public PlanosController(IPlanosServices Ubication)
     {
         _Planos = Ubication;
     }
-    [Route("api/[controller]")]
 
     [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()
@@ -34,45 +34,45 @@ public class PlanosController: ControllerBase
         }
     }
 
-  [HttpPost("Add")]
-public async Task<IActionResult> Add([FromForm] PlanosDTO planos, IFormFile file)
-{
-    // Accede a los datos de PlanosDTO
-    var codigoPlano = planos.Plano;
-    
-   
-    if (file.Length > 0)
+    [HttpPost("Add")]
+    public async Task<IActionResult> Add([FromForm] PlanosDTO planos, IFormFile file)
     {
-        // Genera un nombre único para el archivo
-        var nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+        // Accede a los datos de PlanosDTO
+        var codigoPlano = planos.Plano;
 
-        // Ruta donde se almacenará el archivo
-        var rutaArchivo = Path.Combine("imagenes", nombreArchivo);
 
-        // Guarda el archivo en la carpeta
-        using (var stream = new FileStream(rutaArchivo, FileMode.Create))
+        if (file.Length > 0)
         {
-            await file.CopyToAsync(stream);
+            // Genera un nombre único para el archivo
+            var nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+            // Ruta donde se almacenará el archivo
+            var rutaArchivo = Path.Combine("imagenes", nombreArchivo);
+
+            // Guarda el archivo en la carpeta
+            using (var stream = new FileStream(rutaArchivo, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Aquí puedes procesar los datos de PlanosDTO y la ruta del archivo según tus necesidades
+            // Por ejemplo, puedes guardar la información en la base de datos y asociar la ruta del archivo.
+
+            // Devuelve una respuesta adecuada, por ejemplo, un objeto JSON con el resultado de la operación
+            return Ok(new { message = "Plano agregado exitosamente" });
         }
 
-        // Aquí puedes procesar los datos de PlanosDTO y la ruta del archivo según tus necesidades
-        // Por ejemplo, puedes guardar la información en la base de datos y asociar la ruta del archivo.
-
-        // Devuelve una respuesta adecuada, por ejemplo, un objeto JSON con el resultado de la operación
-        return Ok(new { message = "Plano agregado exitosamente" });
+        // Devuelve una respuesta de error si no se envió ningún archivo
+        return BadRequest(new { message = "No se proporcionó ningún archivo" });
     }
 
-    // Devuelve una respuesta de error si no se envió ningún archivo
-    return BadRequest(new { message = "No se proporcionó ningún archivo" });
-} 
+    [HttpDelete("Delete")]
+    public async Task<IActionResult> Delete(PlanosDTO planos)
+    {
 
-[HttpDelete("Delete")]
-public async Task<IActionResult> Delete(PlanosDTO planos)
-{
+        _Planos.Delete(planos);
 
-   _Planos.Delete(planos.Plano);
-    
-    return Ok();
+        return Ok();
 
+    }
 }
- }

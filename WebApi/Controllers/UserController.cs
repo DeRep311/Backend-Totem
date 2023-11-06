@@ -93,7 +93,7 @@ namespace Name.Controllers
         public async Task<IActionResult> Auth ([FromBody] AuthDTO data){
         
             var result = _AuthManager.Login(data);
-            System.Console.WriteLine(data);
+            System.Console.WriteLine(data.ToString());
             if (result.Success)
             {
                 return Ok(result);
