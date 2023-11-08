@@ -23,7 +23,9 @@ public class AuthManager : IAuthServices
 
       if (result.Pin == datos.Pin)
       {
-        UsuarioDTO user = new(result);
+        UsuarioDTO user = new(new UsuarioDTO{
+          
+        });
         return new SuccessResultData<UsuarioDTO>(user);
       }
       return new ErrorDataResult<UsuarioDTO>("Pin incorrecto", null);
