@@ -87,6 +87,20 @@ namespace Name.Controllers
             }
 
         }
+        [HttpPut("Update/{cedula}")]
+        public async Task<IActionResult> Update (int cedula, [FromBody]Usuario user){
+
+            var result=_userManager.Update(cedula, user);
+
+            if (result.Success)
+            {
+                return Ok();
+                
+            }else{
+                return BadRequest();
+            }
+
+        }
 
         [HttpPost("Auth")]
 

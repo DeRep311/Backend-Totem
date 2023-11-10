@@ -110,4 +110,70 @@ public class DpUserDal : DapperRepositoryBase<Usuario>, IUserDal
               }
         return user;
     }
+
+    public new virtual void Update(Usuario usernew, Expression<Func<Usuario, bool>> filter)
+    {
+        Usuario userold = this.Get(filter);
+        
+
+        if (userold.Rol == usernew.Rol)
+        {
+            return;
+        }else{
+            switch (userold.Rol)
+            {
+                case "Docente":
+                    _docenteDal.Delete( e => e.Cedula == userold.Cedula);
+                    break;
+                case "Estudiante":
+                    _estudianteDal.Delete( e => e.Cedula == userold.Cedula);
+                    break;
+                
+                case "Administrador":
+                    _administradorDal.Delete( e => e.Cedula == userold.Cedula);
+                    break;
+
+                case "Operador":
+                    _operadorDal.Delete( e => e.Cedula == userold.Cedula);
+                    break;
+            }
+            base.Update(usernew, e => e.Cedula == userold.Cedula);
+            switch (usernew.Rol)
+            {
+                case "Docente":
+                    Docente docente = new()
+                    {
+                        Cedula = usernew.Cedula
+                    };
+                    _docenteDal.Add(docente);
+                    break;
+                case "Estudiante":
+                    Estudiante estudiante = new(){
+                        Cedula = usernew.Cedula
+                    };
+                    _estudianteDal.Add(estudiante);
+                    break;
+                
+                case "Administrador":
+                    Administrador administrador = new(){
+                        Cedula = usernew.Cedula
+                    };
+                    _administradorDal.Add(administrador);
+                    break;
+
+                case "Operador":
+                    Operador operador = new(){
+                        Cedula = usernew.Cedula
+                    };
+                    _operadorDal.Add(operador);
+                    break;
+            }
+        
+          
+        
+        }
+
+       
+    
+    }
 }
