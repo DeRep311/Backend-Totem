@@ -6,6 +6,7 @@ using DataAccess.DTOs;
 public interface IUserDal 
 {
 
+<<<<<<< Updated upstream
 
   public Usuario Get (int cedula);
 
@@ -18,4 +19,6 @@ public interface IUserDal
   public void DeleteUser (int cedula);
 
 
+=======
+>>>>>>> Stashed changes
 }

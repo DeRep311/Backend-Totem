@@ -21,13 +21,15 @@ where Tcontext : DbContext, new()
         context.SaveChanges();
     }
 
-    public virtual void Delete(TEntity entity)
+    public virtual void Delete(Expression<Func<TEntity, bool>> filter)
     {
         using Tcontext context = new();
         
-        var deleteEntity = context.Entry(entity);
-        deleteEntity.State = EntityState.Deleted;
+        var deleteEntity = context.Set<TEntity>().Where(filter).FirstOrDefault();
+        var deleteContext = context.Entry(deleteEntity);
+        deleteContext.State = EntityState.Deleted;
         context.SaveChanges();
+
     }
     public virtual void DeleteRaw(List<TEntity> entities){
         using Tcontext context = new();
@@ -50,15 +52,16 @@ where Tcontext : DbContext, new()
         
         }
 
-    public virtual void Update(TEntity newentity, TEntity oldentity)
+    public virtual void Update(TEntity newentity, Expression<Func<TEntity, bool>> filter)
     {
         using Tcontext context = new();
 
-        context.Entry(oldentity).State= EntityState.Detached;
-        var updatecontext = context.Entry(newentity);
-        updatecontext.State= EntityState.Modified;
-        context.Entry(oldentity).CurrentValues.SetValues(newentity);
+        var updateEntity = context.Set<TEntity>().Where(filter).FirstOrDefault();
+        var updateContext = context.Entry(updateEntity);
+        updateContext.State = EntityState.Detached;
+        updateContext.State = EntityState.Modified;
         context.SaveChanges();
+        
     }
 }
 

@@ -4,7 +4,7 @@ using Core.entities;
 
 namespace Base.Models;
 
-public partial class Imparte : IEntity
+public partial class Imparte:IEntity
 {
     public int? Cedula { get; set; }
 

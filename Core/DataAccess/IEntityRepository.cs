@@ -17,12 +17,11 @@ public interface IEntityRepository <T> where T:class,IEntity,new()
 
     void AddRaw(List<T> entities);
 
-    void Delete(T entity);
+    void Delete(Expression<Func<T, bool>> filter);
 
     void DeleteRaw(List<T> entities);
 
-    void Update(T newentity, T oldentity);
-
+    void Update(T newentity, Expression<Func<T, bool>> filter);
 
 
 }}

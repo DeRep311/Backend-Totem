@@ -10,7 +10,4 @@ public partial class Cm: IEntity
 
     public string NombreMateria { get; set; }
 
-    public virtual Curso IdCNavigation { get; set; }
-
-    public virtual Materium NombreMateriaNavigation { get; set; }
 }

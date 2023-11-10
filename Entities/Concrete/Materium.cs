@@ -4,7 +4,7 @@ using Core.entities;
 
 namespace Base.Models;
 
-public partial class Materium : IEntity
+public partial class Materium:IEntity
 {
     public string NombreMateria { get; set; }
 }

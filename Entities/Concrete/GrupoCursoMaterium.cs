@@ -4,7 +4,7 @@ using Core.entities;
 
 namespace Base.Models;
 
-public partial class GrupoCursoMaterium : IEntity
+public partial class GrupoCursoMaterium:IEntity
 {
     public string NombreGrupo { get; set; }
 
@@ -12,5 +12,5 @@ public partial class GrupoCursoMaterium : IEntity
 
     public int IdC { get; set; }
 
-    public virtual Grupo NombreGrupoNavigation { get; set; }
+    
 }

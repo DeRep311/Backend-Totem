@@ -4,7 +4,7 @@ using Core.entities;
 
 namespace Base.Models;
 
-public partial class Horario : IEntity
+public partial class Horario:IEntity
 {
     public int IdH { get; set; }
 

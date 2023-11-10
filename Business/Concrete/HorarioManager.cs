@@ -41,7 +41,7 @@ public class HorarioManager : IHorariosServices
         var result = this.GetHorary(IdH);
         if (result.Success)
         {
-            _HorarioDal.Delete(result.Data);
+            _HorarioDal.Delete(e=> e.IdH == IdH);
             return new SuccessResult();
             
         }
@@ -66,7 +66,7 @@ public class HorarioManager : IHorariosServices
         var result = this.GetHorary(idH);
         if (result.Success)
         {
-            _HorarioDal.Update(horarionew, result.Data);
+            _HorarioDal.Update(horarionew, e=> e.IdH == idH);
             return new SuccessResult();
             
         }

@@ -4,7 +4,7 @@ using Core.entities;
 
 namespace Base.Models;
 
-public partial class CursoHorarioUbicacion : IEntity
+public partial class CursoHorarioUbicacion: IEntity
 {
     public int IdH { get; set; }
 
@@ -16,5 +16,5 @@ public partial class CursoHorarioUbicacion : IEntity
 
     public string CodigoUbicaciones { get; set; }
 
-    public virtual Ubicacione CodigoUbicacionesNavigation { get; set; }
+   
 }

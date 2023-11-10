@@ -46,6 +46,19 @@
           }
         }
       },
+      "Dapper/2.1.15": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Google.Protobuf/3.21.9": {
         "type": "package",
         "compile": {
@@ -1310,6 +1323,25 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "Dapper/2.1.15": {
+      "sha512": "1aWSAosZymEM+mRwfrXteRIN74/JTUjqj9B/KqEbanH6vfUKy9D9cemRN0q1ZOEfSB7d1PpFTpVOCbf2Uv70Og==",
+      "type": "package",
+      "path": "dapper/2.1.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.1.15.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net5.0/Dapper.dll",
+        "lib/net5.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml",
+        "readme.md"
       ]
     },
     "Google.Protobuf/3.21.9": {
@@ -3762,6 +3794,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Dapper >= 2.1.15",
       "Microsoft.EntityFrameworkCore >= 7.0.11",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.9",
       "MySql.EntityFrameworkCore >= 7.0.5",
@@ -3774,11 +3807,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\core\\Core.csproj",
       "packagesPath": "C:\\Users\\DeRep\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Core\\obj\\",
+      "outputPath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DeRep\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3807,6 +3840,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Dapper": {
+            "target": "Package",
+            "version": "[2.1.15, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[7.0.11, )"

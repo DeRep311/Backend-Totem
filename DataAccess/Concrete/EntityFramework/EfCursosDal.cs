@@ -13,8 +13,8 @@ public class EfCursosDal : EfEntityRepositoryBase<Curso, DatabaseContext>
         List<Materium> materias = new();
         foreach (var item in result)
         {
-            var materia = item.NombreMateriaNavigation;
-            materias.Add(materia);
+        
+  
         }
         return materias;
             

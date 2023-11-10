@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "0yyxBRCWhH4ajzn04m/LoNS11h52MZb83Q53ScEVz07A7Pmz1/XvLNBiG5g6S+c81dKAT8qY85PeX6l719FzSw==",
+  "dgSpecHash": "HPrBeIxl7R2EWzS9p5XEFxY4zr1EqKAT7bdUO/+UhZn+IOFAm2aUD1Gr5phqUYsvsuDMhXpNf/s5U1CtkiHLQQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\DeRep\\Desktop\\Aphebackend-Definitivo\\Aphebackend-Definitivo\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DeRep\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\DeRep\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\DeRep\\.nuget\\packages\\dapper\\2.1.15\\dapper.2.1.15.nupkg.sha512",
     "C:\\Users\\DeRep\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\DeRep\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",
     "C:\\Users\\DeRep\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.5\\k4os.compression.lz4.streams.1.3.5.nupkg.sha512",

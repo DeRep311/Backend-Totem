@@ -20,7 +20,7 @@ public class PlanosManager: IPlanosServices {
     public IResult Delete (PlanosDTO planos) {
         var result = _planosDal.Get (p => p.CodigoP == planos.Plano.CodigoP);
         if (result != null) {
-            _planosDal.Delete (result);
+            _planosDal.Delete (p => p.CodigoP == planos.Plano.CodigoP);
             return new SuccessResult ();
         } else {
             return new ErrorResult ("No existe un plano con ese codigo");

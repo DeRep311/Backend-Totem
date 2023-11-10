@@ -50,7 +50,7 @@ public class MateriaManager : IMateriaServices
         var result = this.Get(IdM);
         if (result.Success)
         {
-            _materiadal.Delete(result.Data);
+            _materiadal.Delete(e=> e.NombreMateria == IdM);
             return new SuccessResult();
 
         }
@@ -89,7 +89,7 @@ public class MateriaManager : IMateriaServices
         var result = _materiadal.Get(e => e.NombreMateria == IdM);
         if (result != null)
         {
-            _materiadal.Update(materianew, result);
+            _materiadal.Update(materianew, e => e.NombreMateria == IdM);
             return new SuccessResult();
         }
         else

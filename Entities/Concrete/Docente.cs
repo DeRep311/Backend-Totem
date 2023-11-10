@@ -4,9 +4,9 @@ using Core.entities;
 
 namespace Base.Models;
 
-public partial class Docente : IEntity
+public partial class Docente: IEntity
 {
     public int? Cedula { get; set; }
 
-    public virtual Usuario CedulaNavigation { get; set; }
+  
 }

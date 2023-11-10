@@ -11,7 +11,10 @@ public class UsuarioDTO: IDTO
 
 
 public Usuario User { get; set;}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
     public UsuarioDTO(Usuario user){
 

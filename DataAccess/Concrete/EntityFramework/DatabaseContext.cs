@@ -53,7 +53,7 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<Tiene> Tienes { get; set; }
 
-    public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
+    public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
 
     public virtual DbSet<UbicacionesDependiente> UbicacionesDependientes { get; set; }
 
@@ -84,7 +84,13 @@ public partial class DatabaseContext : DbContext
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
 
+<<<<<<< Updated upstream
             
+=======
+            // entity.HasOne(d => d.CedulaNavigation).WithMany()
+            //     .HasForeignKey(d => d.Cedula)
+            //     .HasConstraintName("FK_administrador_usuario");
+>>>>>>> Stashed changes
         });
 
         modelBuilder.Entity<Anio>(entity =>
@@ -116,13 +122,13 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
 
-            entity.HasOne(d => d.AnioNavigation).WithMany()
-                .HasForeignKey(d => d.Anio)
-                .HasConstraintName("FK_anio-grupo_anio");
+        //     entity.HasOne(d => d.AnioNavigation).WithMany()
+        //         .HasForeignKey(d => d.Anio)
+        //         .HasConstraintName("FK_anio-grupo_anio");
 
-            entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
-                .HasForeignKey(d => d.NombreGrupo)
-                .HasConstraintName("a");
+        //     entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+        //         .HasForeignKey(d => d.NombreGrupo)
+        //         .HasConstraintName("a");
         });
 
         modelBuilder.Entity<Cm>(entity =>
@@ -144,15 +150,15 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
 
-            entity.HasOne(d => d.IdCNavigation).WithMany()
-                .HasForeignKey(d => d.IdC)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_cm_curso");
+            // entity.HasOne(d => d.IdCNavigation).WithMany()
+            //     .HasForeignKey(d => d.IdC)
+            //     .OnDelete(DeleteBehavior.ClientSetNull)
+            //     .HasConstraintName("FK_cm_curso");
 
-            entity.HasOne(d => d.NombreMateriaNavigation).WithMany()
-                .HasForeignKey(d => d.NombreMateria)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_cm_materia");
+            // entity.HasOne(d => d.NombreMateriaNavigation).WithMany()
+            //     .HasForeignKey(d => d.NombreMateria)
+            //     .OnDelete(DeleteBehavior.ClientSetNull)
+            //     .HasConstraintName("FK_cm_materia");
         });
 
         modelBuilder.Entity<Coordenada>(entity =>
@@ -226,9 +232,9 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
 
-            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
-                .HasForeignKey(d => d.CodigoUbicaciones)
-                .HasConstraintName("Ubicacion");
+            // entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+            //     .HasForeignKey(d => d.CodigoUbicaciones)
+            //     .HasConstraintName("Ubicacion");
         });
 
         modelBuilder.Entity<Docente>(entity =>
@@ -243,9 +249,9 @@ public partial class DatabaseContext : DbContext
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
 
-            entity.HasOne(d => d.CedulaNavigation).WithMany()
-                .HasForeignKey(d => d.Cedula)
-                .HasConstraintName("FK_docente_usuario");
+            // entity.HasOne(d => d.CedulaNavigation).WithMany()
+            //     .HasForeignKey(d => d.Cedula)
+            //     .HasConstraintName("FK_docente_usuario");
         });
 
         modelBuilder.Entity<EstudiaEn>(entity =>
@@ -265,9 +271,9 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
 
-            entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
-                .HasForeignKey(d => d.NombreGrupo)
-                .HasConstraintName("FK_estudia_en_grupo");
+            // entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+            //     .HasForeignKey(d => d.NombreGrupo)
+            //     .HasConstraintName("FK_estudia_en_grupo");
         });
 
         modelBuilder.Entity<Estudiante>(entity =>
@@ -282,20 +288,20 @@ public partial class DatabaseContext : DbContext
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
 
-            entity.HasOne(d => d.CedulaNavigation).WithMany()
-                .HasForeignKey(d => d.Cedula)
-                .HasConstraintName("FK_estudiante_usuario");
+            // entity.HasOne(d => d.CedulaNavigation).WithMany()
+            //     .HasForeignKey(d => d.Cedula)
+            //     .HasConstraintName("FK_estudiante_usuario");
         });
 
         modelBuilder.Entity<Grupo>(entity =>
         {
-            entity.HasKey(e => e.NombreGrupo).HasName("PRIMARY");
+            // entity.HasKey(e => e.NombreGrupo).HasName("PRIMARY");
 
-            entity.ToTable("grupo");
+            // entity.ToTable("grupo");
 
-            entity.Property(e => e.NombreGrupo)
-                .HasMaxLength(10)
-                .HasColumnName("nombre_grupo");
+            // entity.Property(e => e.NombreGrupo)
+            //     .HasMaxLength(10)
+            //     .HasColumnName("nombre_grupo");
         });
 
         modelBuilder.Entity<GrupoCursoMaterium>(entity =>
@@ -321,9 +327,9 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
 
-            entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
-                .HasForeignKey(d => d.NombreGrupo)
-                .HasConstraintName("FK_grupo-curso-materia_grupo");
+            // entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+            //     .HasForeignKey(d => d.NombreGrupo)
+            //     .HasConstraintName("FK_grupo-curso-materia_grupo");
         });
 
         modelBuilder.Entity<Horario>(entity =>
@@ -373,10 +379,10 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
 
-            entity.HasOne(d => d.IdHNavigation).WithMany()
-                .HasForeignKey(d => d.IdH)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Horario");
+            // entity.HasOne(d => d.IdHNavigation).WithMany()
+            //     .HasForeignKey(d => d.IdH)
+            //     .OnDelete(DeleteBehavior.ClientSetNull)
+            //     .HasConstraintName("Horario");
         });
 
         modelBuilder.Entity<Imparte>(entity =>
@@ -434,9 +440,9 @@ public partial class DatabaseContext : DbContext
 
             entity.Property(e => e.Cedula).HasColumnType("int(8)");
 
-            entity.HasOne(d => d.CedulaNavigation).WithMany()
-                .HasForeignKey(d => d.Cedula)
-                .HasConstraintName("FK_operador_usuario");
+            // entity.HasOne(d => d.CedulaNavigation).WithMany()
+            //     .HasForeignKey(d => d.Cedula)
+            //     .HasConstraintName("FK_operador_usuario");
         });
 
         modelBuilder.Entity<Plano>(entity =>
@@ -470,16 +476,16 @@ public partial class DatabaseContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("id_c");
 
-            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
-                .HasForeignKey(d => d.CodigoUbicaciones)
-                .HasConstraintName("FK_tiene_ubicaciones");
+            // entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+            //     .HasForeignKey(d => d.CodigoUbicaciones)
+            //     .HasConstraintName("FK_tiene_ubicaciones");
 
-            entity.HasOne(d => d.IdCNavigation).WithMany()
-                .HasForeignKey(d => d.IdC)
-                .HasConstraintName("FK_Coordenadas");
+            // entity.HasOne(d => d.IdCNavigation).WithMany()
+            //     .HasForeignKey(d => d.IdC)
+            //     .HasConstraintName("FK_Coordenadas");
         });
 
-        modelBuilder.Entity<Ubicacione>(entity =>
+        modelBuilder.Entity<Ubicaciones>(entity =>
         {
             entity.HasKey(e => e.CodigoUbicaciones).HasName("PRIMARY");
 
@@ -520,13 +526,13 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones-dep");
 
-            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
-                .HasForeignKey(d => d.CodigoUbicaciones)
-                .HasConstraintName("FK_ubicaciones_dependiente_ubicaciones");
+            // entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+            //     .HasForeignKey(d => d.CodigoUbicaciones)
+            //     .HasConstraintName("FK_ubicaciones_dependiente_ubicaciones");
 
-            entity.HasOne(d => d.CodigoUbicacionesDepNavigation).WithMany()
-                .HasForeignKey(d => d.CodigoUbicacionesDep)
-                .HasConstraintName("ubicaciones_dependiente_ibfk_1");
+            // entity.HasOne(d => d.CodigoUbicacionesDepNavigation).WithMany()
+            //     .HasForeignKey(d => d.CodigoUbicacionesDep)
+            //     .HasConstraintName("ubicaciones_dependiente_ibfk_1");
         });
 
         modelBuilder.Entity<Up>(entity =>
@@ -546,13 +552,13 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones");
 
-            entity.HasOne(d => d.CodigoPNavigation).WithMany()
-                .HasForeignKey(d => d.CodigoP)
-                .HasConstraintName("FK_up_planos");
+            // entity.HasOne(d => d.CodigoPNavigation).WithMany()
+            //     .HasForeignKey(d => d.CodigoP)
+            //     .HasConstraintName("FK_up_planos");
 
-            entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
-                .HasForeignKey(d => d.CodigoUbicaciones)
-                .HasConstraintName("FK_up_ubicaciones");
+            // entity.HasOne(d => d.CodigoUbicacionesNavigation).WithMany()
+            //     .HasForeignKey(d => d.CodigoUbicaciones)
+            //     .HasConstraintName("FK_up_ubicaciones");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
@@ -587,7 +593,7 @@ public partial class DatabaseContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
-    }
-
+    
+        } 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

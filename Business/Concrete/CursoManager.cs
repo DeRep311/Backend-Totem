@@ -23,6 +23,7 @@ public class CursoManager : ICursoServices
 
     public IResult Add(CursoDTO cursonew)
     {
+<<<<<<< Updated upstream
         var result = _CursoDal.Get(cursonew);
         if (result == null)
         {
@@ -36,14 +37,57 @@ public class CursoManager : ICursoServices
             return new ErrorResult("Curso ya existente");
         }
 
+=======
+       throw new System.NotImplementedException();
+>>>>>>> Stashed changes
 
     }
 
     public IResult Delete(CursoDTO curso)
     {
+<<<<<<< Updated upstream
         var result = _CursoDal.Get(curso);
 
         _CursoDal.Delete(curso);
+=======
+        var result = this.Get(curso.IdC);
+        if (result.Success)
+        {
+            _CursoDal.Delete(e=> e.IdC == curso.IdC);
+            foreach (var item in result.Data.Materias)
+            {
+                _cursoMateria.Delete(e=> e.IdC == curso.IdC);
+            }
+            return new SuccessResult();
+
+        }
+        else
+        {
+
+            return new ErrorResult("Curso no encontrado");
+
+        }
+    }
+
+    public IResult DeleteCourseWithSomeMaterias(CursoDTO cursowithMaterias){
+        var result = this.Get(cursowithMaterias.IdC);
+        if (result != null)
+        {
+            foreach (var item in result.Data.Materias)
+            {
+                _cursoMateria.Delete(e=> e.IdC == cursowithMaterias.IdC);
+                _MateriaDal.Delete(e=> e.NombreMateria == item.NombreMateria);
+            }
+            _CursoDal.Delete(e=> e.IdC == cursowithMaterias.IdC);
+        }
+        else
+        {
+            return new ErrorResult("Curso no encontrado");
+        }
+        {
+            
+        }
+>>>>>>> Stashed changes
 
 
 
@@ -76,6 +120,38 @@ public class CursoManager : ICursoServices
     }
 
 
+<<<<<<< Updated upstream
+=======
+        _CursoDal.Update(new Curso()
+        {
+            IdC = Cursonew.IdC,
+            NombreCurso = Cursonew.NombreCurso
+        }, e=> e.IdC == Cursonew.IdC);
+
+
+        var result = _cursoMateria.GetAll(e => e.IdC == Cursonew.IdC);
+        _cursoMateria.DeleteRaw(result);
+
+        foreach (var item in Cursonew.Materias)
+        {
+           if (_MateriaDal.Get(e => e.NombreMateria == item.NombreMateria) == null)
+           {
+               _MateriaDal.Add(new Materium(){
+                   NombreMateria = item.NombreMateria
+               });
+           }
+              _cursoMateria.Add(new Cm(){
+                IdC = Cursonew.IdC,
+                NombreMateria = item.NombreMateria
+              });   
+             
+        
+        }
+       
+
+        return new SuccessResult();
+    }
+>>>>>>> Stashed changes
 
 
 }

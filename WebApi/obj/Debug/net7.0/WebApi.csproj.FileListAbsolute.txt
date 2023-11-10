@@ -186,3 +186,4 @@ C:\Users\yanro\OneDrive\Documents\GitHub\Backend-Totem\WebApi\obj\Debug\net7.0\r
 C:\Users\yanro\OneDrive\Documents\GitHub\Backend-Totem\WebApi\obj\Debug\net7.0\WebApi.pdb
 C:\Users\yanro\OneDrive\Documents\GitHub\Backend-Totem\WebApi\obj\Debug\net7.0\WebApi.genruntimeconfig.cache
 C:\Users\yanro\OneDrive\Documents\GitHub\Backend-Totem\WebApi\obj\Debug\net7.0\ref\WebApi.dll
+C:\Users\DeRep\Desktop\Aphebackend-Definitivo\Aphebackend-Definitivo\webapi\bin\Debug\net7.0\Dapper.dll

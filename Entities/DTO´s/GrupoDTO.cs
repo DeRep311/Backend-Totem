@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Base.Models;
 using Core.entities;
 using DataAccess.DTOs;
@@ -13,8 +14,9 @@ public class GrupoDTO:IDTO
 
 
     #nullable enable
-
+[NotMapped]
     public int Idc {get; set;}
+    [NotMapped]
 
    public List<MateriasDTO>? Materias {get; set;}
 
