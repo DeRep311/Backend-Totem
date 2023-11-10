@@ -59,8 +59,6 @@ namespace Name.Controllers
 
         [HttpPost("Add")]
         public async Task<IActionResult> Add (Usuario user){
-            System.Console.WriteLine(user.Cedula);
- 
             var result=_userManager.Add(user);
 
             if (result.Success)

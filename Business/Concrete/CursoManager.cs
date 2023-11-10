@@ -11,45 +11,25 @@ public class CursoManager : ICursoServices
     private IMateriaDal _MateriaDal;
     private ICursoMateria _cursoMateria;
 
-    public CursoManager(ICursoDal cursoDal)
+    public CursoManager(ICursoDal cursoDal, IMateriaDal MateriaDal, ICursoMateria cursoMateria)
     {
 
         _CursoDal = cursoDal;
-
-
+        _MateriaDal = MateriaDal;
+        _cursoMateria = cursoMateria;
+        
 
     }
 
 
     public IResult Add(CursoDTO cursonew)
     {
-<<<<<<< Updated upstream
-        var result = _CursoDal.Get(cursonew);
-        if (result == null)
-        {
-            _CursoDal.Add(cursonew);
-
-            return new SuccessResult();
-
-        }
-        else
-        {
-            return new ErrorResult("Curso ya existente");
-        }
-
-=======
        throw new System.NotImplementedException();
->>>>>>> Stashed changes
 
     }
 
     public IResult Delete(CursoDTO curso)
     {
-<<<<<<< Updated upstream
-        var result = _CursoDal.Get(curso);
-
-        _CursoDal.Delete(curso);
-=======
         var result = this.Get(curso.IdC);
         if (result.Success)
         {
@@ -87,18 +67,35 @@ public class CursoManager : ICursoServices
         {
             
         }
->>>>>>> Stashed changes
 
 
 
         return new SuccessResult();
 
-
-
     }
 
+    public IDataResult<CursoDTO> Get(int IdC)
+    {
+        var result = _CursoDal.Get(e => e.IdC == IdC);
 
+        if (result != null)
+        {
 
+            var materias = _CursoDal.GetYourMaterias(IdC);
+            return new SuccessResultData<CursoDTO>(new CursoDTO(){
+                IdC = result.IdC,
+                NombreCurso = result.NombreCurso,
+                Materias = materias
+            
+            });
+
+        }
+        else
+        {
+            return new ErrorDataResult<CursoDTO>();
+        }
+
+    }
 
     public IDataResult<List<MateriasDTO>> GetMateriasbyGroup(String Id)
     {
@@ -110,18 +107,37 @@ public class CursoManager : ICursoServices
 
     public IDataResult<List<CursoDTO>> GetAll()
     {
-
-        List<CursoDTO> cursos = _CursoDal.GetAll();
-
-
-        return new SuccessResultData<List<CursoDTO>>(cursos);
-
-
+        List<CursoDTO> cursosconmateria = new();
+        List<Curso> cursos = _CursoDal.GetAll();
+        if (cursos == null)
+        {
+            return new SuccessResultData<List<CursoDTO>>(cursosconmateria);
+            
+        }else{
+        foreach (var item in cursos)
+        {
+            var materias = _CursoDal.GetYourMaterias(item.IdC);
+            cursosconmateria.Add(new CursoDTO()
+            {
+                IdC = item.IdC,
+                NombreCurso = item.NombreCurso,
+                Materias = materias
+            });
+            
+        }
+        return new SuccessResultData<List<CursoDTO>>(cursosconmateria);
+        }
+        
     }
 
+    public IResult Update(CursoDTO Cursonew)
+    {
+        Curso Cursoold = _CursoDal.Get(e => e.IdC == Cursonew.IdC);
+        if (Cursoold == null)
+        {
+            return new ErrorResult("Curso No encontrado");
+        }
 
-<<<<<<< Updated upstream
-=======
         _CursoDal.Update(new Curso()
         {
             IdC = Cursonew.IdC,
@@ -151,7 +167,6 @@ public class CursoManager : ICursoServices
 
         return new SuccessResult();
     }
->>>>>>> Stashed changes
 
 
 }

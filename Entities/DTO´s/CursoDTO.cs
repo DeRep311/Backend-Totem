@@ -8,7 +8,7 @@ public class CursoDTO: IDTO
  {
     public String NombreCurso { get; set; }
     public int IdC { get; set; }
-    public List<Materium>? Materias { get; set; }
+    public List<Materium> Materias { get; set; }
 
     
 }

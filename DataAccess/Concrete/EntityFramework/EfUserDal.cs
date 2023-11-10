@@ -1,75 +1,75 @@
-// using System.Linq.Expressions;
-// using Base.Models;
-// using Core.DataAccess;
+using System.Linq.Expressions;
+using Base.Models;
+using Core.DataAccess;
 
-// using Microsoft.EntityFrameworkCore.Storage;
-// using Microsoft.Identity.Client;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Identity.Client;
 
-// public class EfUserDal : EfEntityRepositoryBase<Usuario, DatabaseContext>
-// {
+public class EfUserDal : EfEntityRepositoryBase<Usuario, DatabaseContext>, IUserDal
+{
 
-//     public Usuario GetUserRol(Usuario user)
-//     {
+    public Usuario GetUserRol(Usuario user)
+    {
 
-//         try
-//         {
-//             using DatabaseContext context = new();
-//             var result = context.Docentes.Any(d => d.Cedula == user.Cedula);
-//             if (result)
-//             {
-//                 user.Rol = "Docente";
-//                 return user;
-//             }
-//             result = context.Estudiantes.Any(d => d.Cedula == user.Cedula);
+        try
+        {
+            using DatabaseContext context = new();
+            var result = context.Docentes.Any(d => d.Cedula == user.Cedula);
+            if (result)
+            {
+                user.Rol = "Docente";
+                return user;
+            }
+            result = context.Estudiantes.Any(d => d.Cedula == user.Cedula);
 
-//             if (result)
-//             {
-//                 user.Rol = "Estudiante";
-//                 return user;
-//             }
-//             result = context.Administradors.Any(d => d.Cedula == user.Cedula);
-//             if (result)
-//             {
-//                 user.Rol = "Administrador";
-//                 return user;
-//             }
-//             result = context.Operadors.Any(d => d.Cedula == user.Cedula);
-//             if (result)
-//             {
-//                 user.Rol = "Operador";
-//                 return user;
-//             }
-//             return user;
-//         }
-//         catch (System.Exception e)
-//         {
+            if (result)
+            {
+                user.Rol = "Estudiante";
+                return user;
+            }
+            result = context.Administradors.Any(d => d.Cedula == user.Cedula);
+            if (result)
+            {
+                user.Rol = "Administrador";
+                return user;
+            }
+            result = context.Operadors.Any(d => d.Cedula == user.Cedula);
+            if (result)
+            {
+                user.Rol = "Operador";
+                return user;
+            }
+            return user;
+        }
+        catch (System.Exception e)
+        {
 
-//             System.Console.WriteLine(e.Message);
-//             return user;
-//         }
-//     }
+            System.Console.WriteLine(e.Message);
+            return user;
+        }
+    }
 
-//     public List<Usuario> GetUserRolist(List<Usuario> listuser)
-//     {
+    public List<Usuario> GetUserRolist(List<Usuario> listuser)
+    {
 
-//         using DatabaseContext context = new();
-//         List<Usuario> ListaConType = new();
+        using DatabaseContext context = new();
+        List<Usuario> ListaConType = new();
 
-//         foreach (var user in listuser)
-//         {
-//            this.GetUserRol(user);
+        foreach (var user in listuser)
+        {
+           this.GetUserRol(user);
 
-//             ListaConType.Add(user);
+            ListaConType.Add(user);
 
 
-//         }
+        }
 
-//         return ListaConType;
-//     }
+        return ListaConType;
+    }
 
   
 
 
 
 
-// }
+}

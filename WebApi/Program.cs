@@ -16,15 +16,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IDbConnection>(new MySqlConnection("server=localhost;database=apheleontotem;user=root"));
 //Inyecciones de dependencias
 builder.Services.AddScoped<IUserServices, UserManager>();
-<<<<<<< Updated upstream
-builder.Services.AddScoped<IUserDal, RepositorySql>();
-builder.Services.AddScoped<IAdministradorDal, EfAdministradorDal>();
-builder.Services.AddScoped<IDocenteDal, EfDocenteDal>();
-builder.Services.AddScoped<IEstudianteDal, EfEstudianteDal>();
-builder.Services.AddScoped<IOperadorDal, EfOperadorDal>();
-
-=======
->>>>>>> Stashed changes
 
 builder.Services.AddScoped<IUserDal, DpUserDal>();
 builder.Services.AddScoped<IAdministradorDal, DpAdministradorDal>();
@@ -35,22 +26,6 @@ builder.Services.AddScoped<IAuthServices, AuthManager>();
 builder.Services.AddScoped<ICoordenadasDal, DpCoordenadasDal>();
 builder.Services.AddScoped<ITieneDal, DpTieneDal>();
 
-<<<<<<< Updated upstream
-builder.Services.AddScoped<ICursoServices, CursoManager>();
-builder.Services.AddScoped<ICursoDal, RepositorySqlCursos>();
-builder.Services.AddScoped<IMateriaServices, MateriaManager>();
-builder.Services.AddScoped<ICursoMateria, EfCursoMaterialDal>();
-builder.Services.AddScoped<IMateriaDal, EfMateriaDal>();
-builder.Services.AddScoped<IUbicationServices, UbicationManager>();
-builder.Services.AddScoped<IUbicationDal, EfUbicacionDal>();
-builder.Services.AddScoped<IHorariosServices, HorarioManager>();
-builder.Services.AddScoped<IHorarioDal, EfHorarioDal>();
-builder.Services.AddScoped<IGroupServices, GroupManager>();
-builder.Services.AddScoped<IGroupDal, EfGroupDal>();
-builder.Services.AddScoped<IHorarioMateriaDal, EfHorarioMateriaDal>();
-builder.Services.AddScoped<IPlanosDal, EfPlanosDal>();
-builder.Services.AddScoped<IPlanosServices, PlanosManager>();
-=======
 // builder.Services.AddScoped<ICursoServices, CursoManager>();
 // builder.Services.AddScoped<ICursoDal, EfCursosDal>();
 // builder.Services.AddScoped<IMateriaServices, MateriaManager>();
@@ -65,7 +40,6 @@ builder.Services.AddScoped<IPlanosServices, PlanosManager>();
 // builder.Services.AddScoped<IHorarioMateriaDal, EfHorarioMateriaDal>();
 // builder.Services.AddScoped<IPlanosDal, EfPlanosDal>();
 // builder.Services.AddScoped<IPlanosServices, PlanosManager>();
->>>>>>> Stashed changes
 
 
 builder.Services.AddScoped<IUbicationMateriaDal, EfUbicationMateriaDal>();

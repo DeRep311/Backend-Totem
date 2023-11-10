@@ -63,7 +63,7 @@ public partial class DatabaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;database=apheleontotem;user=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.28-mariadb"));
+        => optionsBuilder.UseMySql("server=localhost;database=apheleondb;user=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.28-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,24 +73,19 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Administrador>(entity =>
         {
-           
-
-            entity.ToTable("administrador");
+            entity
+                .HasNoKey()
+                .ToTable("administrador");
 
             entity.HasIndex(e => e.Cedula, "FK_administrador_usuario");
 
-           
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
 
-<<<<<<< Updated upstream
-            
-=======
             // entity.HasOne(d => d.CedulaNavigation).WithMany()
             //     .HasForeignKey(d => d.Cedula)
             //     .HasConstraintName("FK_administrador_usuario");
->>>>>>> Stashed changes
         });
 
         modelBuilder.Entity<Anio>(entity =>
