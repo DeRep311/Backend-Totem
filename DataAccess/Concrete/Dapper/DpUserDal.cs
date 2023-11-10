@@ -110,6 +110,28 @@ public class DpUserDal : DapperRepositoryBase<Usuario>, IUserDal
               }
         return user;
     }
+    public new virtual void Delete (Expression<Func<Usuario, bool>> filter){
+        Usuario user = this.Get(filter);
+            switch (user.Rol)
+            {
+                case "Docente":
+                    _docenteDal.Delete( e => e.Cedula == user.Cedula);
+                    break;
+                case "Estudiante":
+                    _estudianteDal.Delete( e => e.Cedula == user.Cedula);
+                    break;
+                
+                case "Administrador":
+                    _administradorDal.Delete( e => e.Cedula == user.Cedula);
+                    break;
+
+                case "Operador":
+                    _operadorDal.Delete( e => e.Cedula == user.Cedula);
+                    break;
+            }
+            base.Delete(filter);
+        }
+    
 
     public new virtual void Update(Usuario usernew, Expression<Func<Usuario, bool>> filter)
     {
