@@ -11,7 +11,9 @@ public class UbicationManager : IUbicationServices
         }
         public IResult Add(UbicationDTO Ubicationdto)
         {
-         throw new System.NotImplementedException();
+         _UbicationDal.AddC(Ubicationdto);
+
+         return new SuccessResult();
          
         }
         public IResult Delete(UbicationDTO ubication)

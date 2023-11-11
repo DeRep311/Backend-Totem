@@ -13,17 +13,27 @@ public class DpUbicacionesDal :  DapperRepositoryBase<Ubicaciones>, IUbicationDa
         _tieneDal = tieneDal;
     }
 
-    public virtual void Add(UbicationDTO ubicacione){
+    public virtual void AddC(UbicationDTO ubicacione){
 
-        Ubicaciones ubi = new Ubicaciones();
-
+        Ubicaciones ubi = new Ubicaciones(){
+            CodigoUbicaciones = ubicacione.CodigoUbicaciones,
+            Nombre = ubicacione.Nombre,
+            Publico = ubicacione.Publico,
+            Privado = ubicacione.Privado
+        };
         base.Add(ubi);
 
-        Coordenada coordenada = new Coordenada(){
-
-
-        };
-        _coordenadasDal.Add(coordenada);
+        foreach (var item in ubicacione.IdCs)
+        {
+            Coordenada coor = new Coordenada(){
+                CooX = item.CooX,
+                CooY = item.CooY,
+                Foto = item.Foto,
+                Inicio = item.Inicio,
+                Final = item.Final
+            };
+            _coordenadasDal.Add(coor);
+        }
 
         Tiene tiene = new Tiene();
         

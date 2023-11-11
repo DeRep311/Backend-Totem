@@ -74,13 +74,13 @@ public class DapperRepositoryBase<T> : IEntityRepository<T> where T : class, IEn
             System.Console.WriteLine("Datos de la consulta");
             System.Console.WriteLine(expr);
             System.Console.WriteLine(sql);
-            var result= _connection.QueryFirstOrDefault<T>(sql);
+            var result= _connection.QueryFirst<T>(sql);
             return result;
         }
         else
         {
             string sql = $"SELECT * FROM {tableName}";
-            return _connection.QueryFirstOrDefault<T>(sql);
+            return _connection.QueryFirst<T>(sql);
         }
       
     }
