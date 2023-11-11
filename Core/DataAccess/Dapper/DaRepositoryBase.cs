@@ -63,33 +63,51 @@ public class DapperRepositoryBase<T> : IEntityRepository<T> where T : class, IEn
 
     public T Get(Expression<Func<T, bool>> filter)
     {
-        string tableName= typeof(T).Name;
+       try
+       {
+         string tableName= typeof(T).Name;
+         
+     
+         if (GetFilterExpression(filter) != null)
+         {
+             string sql = $"SELECT * FROM {tableName} WHERE {GetFilterExpression(filter)}";
+             
+             String expr= GetFilterExpression(filter);
+             System.Console.WriteLine("Datos de la consulta");
+             System.Console.WriteLine(expr);
+             System.Console.WriteLine(sql);
+             var result= _connection.QueryFirst<T>(sql);
+             return result;
+         }
+         else
+         {
+             string sql = $"SELECT * FROM {tableName}";
+             return _connection.QueryFirst<T>(sql);
+         }
+       }
+       catch (System.Exception)
+       {
         
-    
-        if (GetFilterExpression(filter) != null)
-        {
-            string sql = $"SELECT * FROM {tableName} WHERE {GetFilterExpression(filter)}";
-            
-            String expr= GetFilterExpression(filter);
-            System.Console.WriteLine("Datos de la consulta");
-            System.Console.WriteLine(expr);
-            System.Console.WriteLine(sql);
-            var result= _connection.QueryFirst<T>(sql);
-            return result;
-        }
-        else
-        {
-            string sql = $"SELECT * FROM {tableName}";
-            return _connection.QueryFirst<T>(sql);
-        }
+        return null;
+       }
       
     }
 
-    public List<T> GetAll(Expression<Func<T, bool>>? filter = null)
+    public List<T> GetAll(Expression<Func<T, bool>>? filter)
     {
-        string tableName = typeof(T).Name;
-        string sql = $"SELECT * FROM {tableName}";
-        return new List<T>(_connection.Query<T>(sql).ToList());
+        if (filter != null)
+        {
+            string tableName = typeof(T).Name;
+            string sql = $"SELECT * FROM {tableName} WHERE {GetFilterExpression(filter)}";
+            return new List<T>(_connection.Query<T>(sql).ToList());
+        }
+        else
+        {
+            string tableName = typeof(T).Name;
+            string sql = $"SELECT * FROM {tableName}";
+            return new List<T>(_connection.Query<T>(sql).ToList());
+        }
+     
     }
 
     public void Update(T newentity, Expression<Func<T, bool>> filter)

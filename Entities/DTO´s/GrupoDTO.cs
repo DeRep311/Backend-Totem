@@ -13,12 +13,9 @@ public class GrupoDTO:IDTO
 
 
 
-    #nullable enable
-[NotMapped]
+    public List<Materium>? Materias {get; set;}
     public int Idc {get; set;}
-    [NotMapped]
 
-   public List<MateriasDTO>? Materias {get; set;}
 
    public List<Estudiante>? Estudiantes {get; set;}
     

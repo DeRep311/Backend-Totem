@@ -1,6 +1,6 @@
 using Base.Models;
 
-public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>, IGroupDal
+public class EfGroupDal: EfEntityRepositoryBase<Grupo, DatabaseContext>
  {
     public void AddCourseToGroup(String idGroup, int idCourse)
     {

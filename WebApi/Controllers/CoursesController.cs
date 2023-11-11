@@ -69,22 +69,9 @@ using Microsoft.AspNetCore.Mvc;
          
         }
 
-        [HttpDelete("DeleteCourseWithSomeMaterias/")]
-        public async Task<IActionResult> DeleteCourseWithSomeMaterias(CursoDTO cursowithMaterias)
-        {
-            var result = _CursoServices.DeleteCourseWithSomeMaterias(cursowithMaterias);
-            if (result.Success)
-            {
-                return Ok(result.Message);
-            }
-            else
-            {
-                return BadRequest(result.Message);
-            }
 
             
-         
-        }
+   
 
         [HttpPut("Update/{IdC}")]
         public async Task<IActionResult> Update(CursoDTO curso)
@@ -121,20 +108,5 @@ using Microsoft.AspNetCore.Mvc;
          
         }
 
-        [HttpGet("GetMateriasbyGroup/{Id}")]
-        public async Task<IActionResult> GetMateriasbyGroup(String Id)
-        {
-            var result = _CursoServices.GetMateriasbyGroup(Id);
-            if (result.Success)
-            {
-                return Ok(result.Data);
-            }
-            else
-            {
-                return BadRequest(result.Message);
-            }
-
-            
-         
-        }
+     
     }

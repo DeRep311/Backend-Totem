@@ -1,6 +1,6 @@
 using Base.Models;
 
-public class AssignManager : IAssignServices
+public class AssignManager 
 {
     private IHorarioDal _HorarioDal;
     private IUbicationDal _UbicacionDal;
@@ -60,36 +60,36 @@ public class AssignManager : IAssignServices
          }
     }
 
-    public IResult AssignUbicationtoMateria(String IdU, String group, String Nmateria)
-    {
-        var result = _UbicacionDal.Get(e=> e.CodigoUbicaciones == IdU);
-        if (result != null)
-        {
-            var grupo = _GroupServices.Get(group);
-            var resultMateria = grupo.Data.Materias.Find(e=> e.NombreMateria == Nmateria);
-            if (resultMateria != null)
-            {
-                var resultUbicationMateria = _UbicacionMateriaDal.Get(e=> e.CodigoUbicaciones == result.CodigoUbicaciones && e.NombreMateria == resultMateria.NombreMateria);
-                if (resultUbicationMateria == null)
-                {
-                    _UbicacionMateriaDal.Add(new CursoHorarioUbicacion{
-                        CodigoUbicaciones = result.CodigoUbicaciones, NombreMateria = resultMateria.NombreMateria, IdC = grupo.Data.Idc, IdH = resultMateria.Horarios.IdH
-                    });
-                    return new SuccessResult("Se asigno correctamente");
-                }
-                else
-                {
-                    return new ErrorResult("Ya se encuentra asignado");
-                }
-            }
-            else
-            {
-                return new ErrorResult("No se encontro la materia");
-            }
-        }
-        else
-        {
-            return new ErrorResult("No se encontro la ubicacion");
-        }
-    }
+    // public IResult AssignUbicationtoMateria(String IdU, String group, String Nmateria)
+    // {
+    //     var result = _UbicacionDal.Get(e=> e.CodigoUbicaciones == IdU);
+    //     if (result != null)
+    //     {
+    //         var grupo = _GroupServices.Get(group);
+    //         var resultMateria = grupo.Data.Materias.Find(e=> e.NombreMateria == Nmateria);
+    //         if (resultMateria != null)
+    //         {
+    //             var resultUbicationMateria = _UbicacionMateriaDal.Get(e=> e.CodigoUbicaciones == result.CodigoUbicaciones && e.NombreMateria == resultMateria.NombreMateria);
+    //             if (resultUbicationMateria == null)
+    //             {
+    //                 _UbicacionMateriaDal.Add(new CursoHorarioUbicacion{
+    //                     CodigoUbicaciones = result.CodigoUbicaciones, NombreMateria = resultMateria.NombreMateria, IdC = grupo.Data.Idc, IdH = resultMateria.Horarios.IdH
+    //                 });
+    //                 return new SuccessResult("Se asigno correctamente");
+    //             }
+    //             else
+    //             {
+    //                 return new ErrorResult("Ya se encuentra asignado");
+    //             }
+    //         }
+    //         else
+    //         {
+    //             return new ErrorResult("No se encontro la materia");
+    //         }
+    //     }
+    //     else
+    //     {
+    //         return new ErrorResult("No se encontro la ubicacion");
+    //     }
+    // }
 }

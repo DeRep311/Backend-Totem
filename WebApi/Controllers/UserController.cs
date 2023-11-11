@@ -63,10 +63,10 @@ namespace Name.Controllers
 
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
                 
             }else{
-                return BadRequest();
+                return BadRequest(result);
             }
 
            

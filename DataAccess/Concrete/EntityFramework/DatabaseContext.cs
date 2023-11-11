@@ -299,33 +299,33 @@ public partial class DatabaseContext : DbContext
             //     .HasColumnName("nombre_grupo");
         });
 
-        modelBuilder.Entity<GrupoCursoMaterium>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("grupo-curso-materia");
+        // modelBuilder.Entity<GrupoCursoMaterium>(entity =>
+        // {
+        //     entity
+        //         .HasNoKey()
+        //         .ToTable("grupo-curso-materia");
 
-            entity.HasIndex(e => e.IdC, "FK_grupo-curso-materia_curso");
+        //     entity.HasIndex(e => e.IdC, "FK_grupo-curso-materia_curso");
 
-            entity.HasIndex(e => e.NombreGrupo, "FK_grupo-curso-materia_grupo");
+        //     entity.HasIndex(e => e.NombreGrupo, "FK_grupo-curso-materia_grupo");
 
-            entity.HasIndex(e => e.NombreMateria, "FK_grupo-curso-materia_materia");
+        //     entity.HasIndex(e => e.NombreMateria, "FK_grupo-curso-materia_materia");
 
-            entity.Property(e => e.IdC)
-                .ValueGeneratedOnAdd()
-                .HasColumnType("int(255)")
-                .HasColumnName("id_c");
-            entity.Property(e => e.NombreGrupo)
-                .HasMaxLength(10)
-                .HasColumnName("nombre_grupo");
-            entity.Property(e => e.NombreMateria)
-                .HasMaxLength(30)
-                .HasColumnName("nombre_materia");
+        //     entity.Property(e => e.IdC)
+        //         .ValueGeneratedOnAdd()
+        //         .HasColumnType("int(255)")
+        //         .HasColumnName("id_c");
+        //     entity.Property(e => e.NombreGrupo)
+        //         .HasMaxLength(10)
+        //         .HasColumnName("nombre_grupo");
+        //     entity.Property(e => e.NombreMateria)
+        //         .HasMaxLength(30)
+        //         .HasColumnName("nombre_materia");
 
-            // entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
-            //     .HasForeignKey(d => d.NombreGrupo)
-            //     .HasConstraintName("FK_grupo-curso-materia_grupo");
-        });
+        //     // entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+        //     //     .HasForeignKey(d => d.NombreGrupo)
+        //     //     .HasConstraintName("FK_grupo-curso-materia_grupo");
+        // });
 
         modelBuilder.Entity<Horario>(entity =>
         {

@@ -1,17 +1,13 @@
 using Base.Models;
 using Core.DataAccess;
+using Microsoft.Identity.Client;
 
 public interface IGroupDal: IEntityRepository<Grupo>
 {
-     public void AddCourseToGroup(String idGroup, int idCourse);
-
-     public void DeleteCourseToGroup(String idGroup, int idCourse);
-
-     public void AddStudentToGroup(String idGroup, List<Estudiante> idStudent);
-
-     public void DeleteStudentToGroup(String idGroup, int idStudent);
-     public void DeleteStudentRawToGroup(String Group);
-
+  
+public List<Estudiante> GetStudent(String grupo);
+ public IResult AddStudents(String grupo, List<Estudiante> estudiantes);
+ public IResult DeleteStudents(String IdG);
     
 
 

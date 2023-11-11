@@ -18,8 +18,16 @@ public class UserManager : IUserServices
 
     public IResult Add(Usuario user)
     {
-        _userDal.Add(user);
-        return new SuccessResult();
+       if (_userDal.Get(e => e.Cedula == user.Cedula) != null)
+       {
+           return new ErrorResult("Usuario ya existe");
+       }
+       else
+         {
+                _userDal.Add(user);
+                return new SuccessResult();
+         }
+    
     }
 
     public IResult Delete(int cedula)

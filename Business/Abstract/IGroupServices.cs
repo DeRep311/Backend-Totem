@@ -1,3 +1,5 @@
+using Base.Models;
+
 public interface IGroupServices
 {
 
@@ -12,6 +14,9 @@ public interface IGroupServices
     public IResult DeleteGroup(String IdG);
 
     public IResult UpdateGroup(String IdG, GrupoDTO gruponew);
+
+    public IDataResult<List<Estudiante>> AddStudents (String IdG, List<Estudiante> estudiantes);
+    
 
 
 }

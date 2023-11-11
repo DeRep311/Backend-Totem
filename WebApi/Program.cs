@@ -25,18 +25,23 @@ builder.Services.AddScoped<IOperadorDal, DpOperadorDal>();
 builder.Services.AddScoped<IAuthServices, AuthManager>();
 builder.Services.AddScoped<ICoordenadasDal, DpCoordenadasDal>();
 builder.Services.AddScoped<ITieneDal, DpTieneDal>();
+builder.Services.AddScoped<IGroupDal, DpGrupoDal>();
 
-// builder.Services.AddScoped<ICursoServices, CursoManager>();
-// builder.Services.AddScoped<ICursoDal, EfCursosDal>();
+
+
+builder.Services.AddScoped<ICursoDal, DpCursosDal>();
+builder.Services.AddScoped<ICursoServices, CursoManager>();
+builder.Services.AddScoped<IGroupServices, GroupManager>();
+builder.Services.AddScoped<IEstudia_en, DpEstudiaEn>();
+builder.Services.AddScoped<IGrupoCursoMateriaDal, DpGrupoCursoMateriaDal>();
 // builder.Services.AddScoped<IMateriaServices, MateriaManager>();
-// builder.Services.AddScoped<ICursoMateria, EfCursoMaterialDal>();
-// builder.Services.AddScoped<IMateriaDal, EfMateriaDal>();
+builder.Services.AddScoped<ICursoMateria, DpCursoMateria>();
+builder.Services.AddScoped<IMateriaDal, DpMateriasDal>();
 // builder.Services.AddScoped<IUbicationServices, UbicationManager>();
 // builder.Services.AddScoped<IUbicationDal, EfUbicacionDal>();
 // builder.Services.AddScoped<IHorariosServices, HorarioManager>();
 // builder.Services.AddScoped<IHorarioDal, EfHorarioDal>();
-// builder.Services.AddScoped<IGroupServices, GroupManager>();
-// builder.Services.AddScoped<IGroupDal, EfGroupDal>();
+
 // builder.Services.AddScoped<IHorarioMateriaDal, EfHorarioMateriaDal>();
 // builder.Services.AddScoped<IPlanosDal, EfPlanosDal>();
 // builder.Services.AddScoped<IPlanosServices, PlanosManager>();
