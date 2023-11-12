@@ -22,19 +22,19 @@ public class AssignManager
        var result = _GroupServices.Get(group);
        if (result !=null)
        {
-            var ResultHorario= _HorarioDal.Get(e=> e.IdH == Horario);
+            var ResultHorario= _HorarioDal.Get(e=> e.id_h == Horario);
             if (ResultHorario != null)
             {
                var Matery= result.Data.Materias.Find(e=> e.NombreMateria == Materia);
 
                 if(Matery != null)
                 {
-               var ResultHorarioMateria = _HorarioMateriaDal.Get(e=> e.IdH == ResultHorario.IdH && e.NombreMateria == Matery.NombreMateria);
+               var ResultHorarioMateria = _HorarioMateriaDal.Get(e=> e.IdH == ResultHorario.id_h && e.NombreMateria == Matery.NombreMateria);
                           if (ResultHorarioMateria == null)
                           {
                             
                             _HorarioMateriaDal.Add(new HorarioGrupoCurso{
-                                IdH = ResultHorario.IdH, NombreGrupo = result.Data.NombreGrupo, NombreMateria = Matery.NombreMateria, IdC = result.Data.Idc});
+                                IdH = ResultHorario.id_h, NombreGrupo = result.Data.NombreGrupo, NombreMateria = Matery.NombreMateria, IdC = result.Data.Idc});
                             return new SuccessResult("Se asigno correctamente");
                           }
                           else

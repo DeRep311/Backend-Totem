@@ -79,8 +79,7 @@ public class MateriaManager : IMateriaServices
 
     public IDataResult<List<Materium>> GetAll()
     {
-        List<Materium> ListaMaterias = new();
-        ListaMaterias = _materiadal.GetAll();
+        List<Materium> ListaMaterias = _materiadal.GetAll();
         return new SuccessResultData<List<Materium>>(ListaMaterias);
     }
 

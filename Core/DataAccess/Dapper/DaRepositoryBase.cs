@@ -31,6 +31,11 @@ public class DapperRepositoryBase<T> : IEntityRepository<T> where T : class, IEn
     
     _connection.Execute(sql, entity);
 }
+public int GetId(){
+
+    string sql = $"SELECT LAST_INSERT_ID()";
+    return _connection.QuerySingle<int>(sql);
+}
 
     public void AddRaw(List<T> entities)
     {
@@ -76,7 +81,7 @@ public class DapperRepositoryBase<T> : IEntityRepository<T> where T : class, IEn
              System.Console.WriteLine("Datos de la consulta");
              System.Console.WriteLine(expr);
              System.Console.WriteLine(sql);
-             var result= _connection.QueryFirst<T>(sql);
+             var result= _connection.QuerySingle<T>(sql);
              return result;
          }
          else

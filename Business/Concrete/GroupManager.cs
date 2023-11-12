@@ -166,6 +166,11 @@ public class GroupManager : IGroupServices
             {
                 nombre_grupo = gruponew.NombreGrupo
             }, e=> e.nombre_grupo == IdG);
+            _grupoCursoMateriaDal.Update(new GrupoCursoMaterium()
+            {
+                nombre_grupo = gruponew.NombreGrupo
+            }, e=> e.nombre_grupo == IdG);
+     
 
             
 

@@ -23,5 +23,7 @@ public interface IEntityRepository <T> where T:class,IEntity,new()
 
     void Update(T newentity, Expression<Func<T, bool>> filter);
 
+    int GetId();
+
 
 }}

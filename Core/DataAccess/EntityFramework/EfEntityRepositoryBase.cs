@@ -63,5 +63,11 @@ where Tcontext : DbContext, new()
         context.SaveChanges();
         
     }
+
+    public int GetId(){
+        using Tcontext context = new();
+        var id = context.Set<TEntity>().Count();
+        return id;
+    }
 }
 

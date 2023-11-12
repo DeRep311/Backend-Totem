@@ -21,7 +21,7 @@ namespace Name.Controllers
             var result = _HorarioServices.GetAllHorary();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             else
             {
@@ -41,19 +41,19 @@ namespace Name.Controllers
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
             
          
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Horario horario)
+        public async Task<IActionResult> Post([FromBody] Horarios horario)
         {
             var result = _HorarioServices.CreateHorario(horario);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             else
             {
@@ -64,7 +64,7 @@ namespace Name.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Horario horario)
+        public async Task<IActionResult> Put(int id, Horarios horario)
         {
             var result = _HorarioServices.UpdateHorary(id, horario);
             if (result.Success)

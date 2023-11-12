@@ -22,11 +22,12 @@ public class DpUbicacionesDal :  DapperRepositoryBase<Ubicaciones>, IUbicationDa
             Privado = ubicacione.Privado
         };
         base.Add(ubi);
+        List<int> ids = new ();
 
         foreach (var item in ubicacione.IdCs)
         {
             Coordenada coor = new Coordenada(){
-                CooX = item.CooX,
+                coo_x = item.coo_x,
                 CooY = item.CooY,
                 Foto = item.Foto,
                 Inicio = item.Inicio,

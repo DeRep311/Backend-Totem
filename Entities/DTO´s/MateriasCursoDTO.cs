@@ -14,6 +14,6 @@ public class MateriasDTO:IDTO
     public string ApellidoDocente {get; set;}
     
     public String Ubicacion {get; set;}
-    public Horario Horarios {get; set;}
+    public Horarios Horarios {get; set;}
     
 }

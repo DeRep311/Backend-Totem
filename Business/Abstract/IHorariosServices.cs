@@ -4,14 +4,14 @@ using Base.Models;
 public interface IHorariosServices 
 
 {
-    public IResult CreateHorario(Horario horario);
+    public IDataResult<int> CreateHorario(Horarios horario);
     public IResult DeleteHorary(int IdH);
 
-    public IResult UpdateHorary(int IdH, Horario horarionew);
+    public IResult UpdateHorary(int IdH, Horarios horarionew);
 
-    public IDataResult<Horario> GetHorary(int idH);
+    public IDataResult<Horarios> GetHorary(int idH);
 
-    public IDataResult<List<Horario>> GetAllHorary();
+    public IDataResult<List<Horarios>> GetAllHorary();
     
     
 }

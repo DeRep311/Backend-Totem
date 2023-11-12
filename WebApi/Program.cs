@@ -39,8 +39,9 @@ builder.Services.AddScoped<ICursoMateria, DpCursoMateria>();
 builder.Services.AddScoped<IMateriaDal, DpMateriasDal>();
 // builder.Services.AddScoped<IUbicationServices, UbicationManager>();
 // builder.Services.AddScoped<IUbicationDal, EfUbicacionDal>();
-// builder.Services.AddScoped<IHorariosServices, HorarioManager>();
-// builder.Services.AddScoped<IHorarioDal, EfHorarioDal>();
+builder.Services.AddScoped<IHorarioDal, DpHorarioDal>();
+builder.Services.AddScoped<IHorariosServices, HorarioManager>();
+
 
 // builder.Services.AddScoped<IHorarioMateriaDal, EfHorarioMateriaDal>();
 // builder.Services.AddScoped<IPlanosDal, EfPlanosDal>();

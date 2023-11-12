@@ -14,19 +14,21 @@ public class HorarioManager : IHorariosServices
     }
 
 
-    public IResult CreateHorario(Horario horario)
+    public IDataResult<int> CreateHorario(Horarios horario)
     {
-        var result = _HorarioDal.Get(e=> e==horario);
-        if (result==null)
-        {
-            _HorarioDal.Add(horario);
-            return new SuccessResult();
-            
-        }
-        return new ErrorResult("Horario ya existente");
+
+
+        _HorarioDal.Add(horario);
+
+        var result2 = _HorarioDal.GetId();
+        return new SuccessResultData<int>(result2,"Se creo correctamente");
+
+
     }
 
-    public IResult CreaterawHorary(List<Horario> horarios){
+    public IResult CreaterawHorary(List<Horarios> horarios)
+    {
+
         foreach (var item in horarios)
         {
             this.CreateHorario(item);
@@ -36,50 +38,50 @@ public class HorarioManager : IHorariosServices
 
     }
 
-    public IResult DeleteHorary(int IdH)
+    public IResult DeleteHorary(int id_h)
     {
-        var result = this.GetHorary(IdH);
+        var result = this.GetHorary(id_h);
         if (result.Success)
         {
-            _HorarioDal.Delete(e=> e.IdH == IdH);
+            _HorarioDal.Delete(e => e.id_h == id_h);
             return new SuccessResult();
-            
+
         }
         return new ErrorResult("Horario no encontrado");
-        
+
     }
 
 
-    public IDataResult<Horario> GetHorary(int IdH)
+    public IDataResult<Horarios> GetHorary(int id_h)
     {
-        var result = _HorarioDal.Get(e => e.IdH == IdH);
+        var result = _HorarioDal.Get(e => e.id_h == id_h);
         if (result != null)
         {
-            return new SuccessResultData<Horario>(result);
+            return new SuccessResultData<Horarios>(result);
         }
-        return new ErrorDataResult<Horario>();
-        
+        return new ErrorDataResult<Horarios>("Horario no encontrado", null);
+
     }
 
-    public IResult UpdateHorary(int idH, Horario horarionew)
+    public IResult UpdateHorary(int id_h, Horarios horarionew)
     {
-        var result = this.GetHorary(idH);
+        var result = this.GetHorary(id_h);
         if (result.Success)
         {
-            _HorarioDal.Update(horarionew, e=> e.IdH == idH);
+            _HorarioDal.Update(horarionew, e => e.id_h == id_h);
             return new SuccessResult();
-            
+
         }
         return new ErrorResult("Horario no encontrado");
     }
 
-    public IDataResult<List<Horario>> GetAllHorary()
+    public IDataResult<List<Horarios>> GetAllHorary()
     {
         var result = _HorarioDal.GetAll();
         if (result != null)
         {
-            return new SuccessResultData<List<Horario>>(result);
+            return new SuccessResultData<List<Horarios>>(result);
         }
-        return new ErrorDataResult<List<Horario>>();
+        return new ErrorDataResult<List<Horarios>>();
     }
 }

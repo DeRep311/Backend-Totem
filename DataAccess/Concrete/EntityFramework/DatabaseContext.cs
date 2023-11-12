@@ -39,7 +39,7 @@ public partial class DatabaseContext : DbContext
 
     public virtual DbSet<GrupoCursoMaterium> GrupoCursoMateria { get; set; }
 
-    public virtual DbSet<Horario> Horarios { get; set; }
+    public virtual DbSet<Horarios> Horarios { get; set; }
 
     public virtual DbSet<HorarioGrupoCurso> HorarioGrupoCursos { get; set; }
 
@@ -117,13 +117,13 @@ public partial class DatabaseContext : DbContext
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
 
-        //     entity.HasOne(d => d.AnioNavigation).WithMany()
-        //         .HasForeignKey(d => d.Anio)
-        //         .HasConstraintName("FK_anio-grupo_anio");
+            //     entity.HasOne(d => d.AnioNavigation).WithMany()
+            //         .HasForeignKey(d => d.Anio)
+            //         .HasConstraintName("FK_anio-grupo_anio");
 
-        //     entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
-        //         .HasForeignKey(d => d.NombreGrupo)
-        //         .HasConstraintName("a");
+            //     entity.HasOne(d => d.NombreGrupoNavigation).WithMany()
+            //         .HasForeignKey(d => d.NombreGrupo)
+            //         .HasConstraintName("a");
         });
 
         modelBuilder.Entity<Cm>(entity =>
@@ -158,14 +158,14 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Coordenada>(entity =>
         {
-            entity.HasKey(e => e.IdC).HasName("PRIMARY");
+            entity.HasKey(e => e.id_c).HasName("PRIMARY");
 
             entity.ToTable("coordenadas");
 
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.CooX).HasColumnName("coo_x");
+            entity.Property(e => e.coo_x).HasColumnName("coo_x");
             entity.Property(e => e.CooY).HasColumnName("coo_y");
             entity.Property(e => e.Final)
                 .HasDefaultValueSql("b'0'")
@@ -327,22 +327,22 @@ public partial class DatabaseContext : DbContext
         //     //     .HasConstraintName("FK_grupo-curso-materia_grupo");
         // });
 
-        modelBuilder.Entity<Horario>(entity =>
+        modelBuilder.Entity<Horarios>(entity =>
         {
-            entity.HasKey(e => e.IdH).HasName("PRIMARY");
+            entity.HasKey(e => e.id_h).HasName("PRIMARY");
 
             entity.ToTable("horarios");
 
-            entity.Property(e => e.IdH)
+            entity.Property(e => e.id_h)
                 .HasColumnType("int(255)")
                 .HasColumnName("id_h");
-            entity.Property(e => e.HoraFinal)
+            entity.Property(e => e.hora_final)
                 .HasMaxLength(5)
                 .HasColumnName("hora_final");
-            entity.Property(e => e.HoraInicio)
+            entity.Property(e => e.hora_inicio)
                 .HasMaxLength(5)
                 .HasColumnName("hora_inicio");
-            entity.Property(e => e.NombreDelDia)
+            entity.Property(e => e.nombre_del_dia)
                 .HasMaxLength(9)
                 .HasColumnName("nombre_del_dia");
         });
@@ -501,7 +501,7 @@ public partial class DatabaseContext : DbContext
                 .HasDefaultValueSql("b'0'")
                 .HasColumnType("bit(1)")
                 .HasColumnName("publico");
-          
+
         });
 
         modelBuilder.Entity<UbicacionesDependiente>(entity =>
@@ -588,7 +588,7 @@ public partial class DatabaseContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
-    
-        } 
+
+    }
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

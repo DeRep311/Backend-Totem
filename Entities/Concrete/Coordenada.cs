@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Core.entities;
 
 namespace Base.Models;
 
 public partial class Coordenada: IEntity
 {
-    public int IdC { get; set; }
+    [NotMapped]
+    public int id_c { get; set; }
 
-    public float? CooX { get; set; }
+    public float? coo_x { get; set; }
 
     public float? CooY { get; set; }
 
