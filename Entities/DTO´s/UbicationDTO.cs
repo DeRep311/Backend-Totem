@@ -11,7 +11,5 @@ public class UbicationDTO {
 
     public String CodigoP { get; set; }
 
-    public String PlanoImg { get; set; }
-
     public UbicacionesDependiente? ubicacionesDependiente { get; set; }
 }

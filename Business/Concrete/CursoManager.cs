@@ -24,7 +24,7 @@ public class CursoManager : ICursoServices
 
     public IResult Add(CursoDTO cursonew)
     {
-        if (_CursoDal.Get(e => e.NombreCurso == cursonew.NombreCurso) != null)
+        if (_CursoDal.Get(e => e.nombre_curso == cursonew.NombreCurso) != null)
         {
             return new ErrorResult("Curso ya existe");
         }
@@ -32,22 +32,22 @@ public class CursoManager : ICursoServices
         {
             _CursoDal.Add(new Curso()
             {
-                NombreCurso = cursonew.NombreCurso
+                nombre_curso = cursonew.NombreCurso
             });
-            var result = _CursoDal.Get(e => e.NombreCurso == cursonew.NombreCurso);
+            var result = _CursoDal.Get(e => e.nombre_curso == cursonew.NombreCurso);
             foreach (var item in cursonew.Materias)
             {
-                if (_MateriaDal.Get(e => e.NombreMateria == item.NombreMateria) == null)
+                if (_MateriaDal.Get(e => e.nombre_materia == item.nombre_materia) == null)
                 {
                     _MateriaDal.Add(new Materium()
                     {
-                        NombreMateria = item.NombreMateria
+                        nombre_materia = item.nombre_materia
                     });
                 }
                 _cursoMateria.Add(new Cm()
                 {
-                    IdC = result.IdC,
-                    NombreMateria = item.NombreMateria
+                    id_c = result.id_c,
+                    nombre_materia = item.nombre_materia
                 });
             }
             return new SuccessResult();
@@ -60,10 +60,10 @@ public class CursoManager : ICursoServices
         var result = this.Get(curso.IdC);
         if (result.Success)
         {
-            _CursoDal.Delete(e => e.IdC == curso.IdC);
+            _CursoDal.Delete(e => e.id_c == curso.IdC);
             foreach (var item in result.Data.Materias)
             {
-                _cursoMateria.Delete(e => e.IdC == curso.IdC);
+                _cursoMateria.Delete(e => e.id_c == curso.IdC);
             }
             return new SuccessResult();
 
@@ -79,7 +79,7 @@ public class CursoManager : ICursoServices
 
     public IDataResult<CursoDTO> Get(int IdC)
     {
-        var result = _CursoDal.Get(e => e.IdC == IdC);
+        var result = _CursoDal.Get(e => e.id_c == IdC);
 
         if (result != null)
         {
@@ -87,8 +87,8 @@ public class CursoManager : ICursoServices
             var materias = _CursoDal.GetYourMaterias(IdC);
             return new SuccessResultData<CursoDTO>(new CursoDTO()
             {
-                IdC = result.IdC,
-                NombreCurso = result.NombreCurso,
+                IdC = result.id_c,
+                NombreCurso = result.nombre_curso,
                 Materias = materias
 
             });
@@ -116,11 +116,11 @@ public class CursoManager : ICursoServices
         {
             foreach (var item in cursos)
             {
-                var materias = _CursoDal.GetYourMaterias(item.IdC);
+                var materias = _CursoDal.GetYourMaterias(item.id_c);
                 cursosconmateria.Add(new CursoDTO()
                 {
-                    IdC = item.IdC,
-                    NombreCurso = item.NombreCurso,
+                    IdC = item.id_c,
+                    NombreCurso = item.nombre_curso,
                     Materias = materias
                 });
 
@@ -132,7 +132,7 @@ public class CursoManager : ICursoServices
 
     public IResult Update(CursoDTO Cursonew)
     {
-        Curso Cursoold = _CursoDal.Get(e => e.IdC == Cursonew.IdC);
+        Curso Cursoold = _CursoDal.Get(e => e.id_c == Cursonew.IdC);
         if (Cursoold == null)
         {
             return new ErrorResult("Curso No encontrado");
@@ -140,27 +140,27 @@ public class CursoManager : ICursoServices
 
         _CursoDal.Update(new Curso()
         {
-            IdC = Cursonew.IdC,
-            NombreCurso = Cursonew.NombreCurso
-        }, e => e.IdC == Cursonew.IdC);
+            id_c = Cursonew.IdC,
+            nombre_curso = Cursonew.NombreCurso
+        }, e => e.id_c == Cursonew.IdC);
 
 
-        var result = _cursoMateria.GetAll(e => e.IdC == Cursonew.IdC);
+        var result = _cursoMateria.GetAll(e => e.id_c == Cursonew.IdC);
         _cursoMateria.DeleteRaw(result);
 
         foreach (var item in Cursonew.Materias)
         {
-            if (_MateriaDal.Get(e => e.NombreMateria == item.NombreMateria) == null)
+            if (_MateriaDal.Get(e => e.nombre_materia == item.nombre_materia) == null)
             {
                 _MateriaDal.Add(new Materium()
                 {
-                    NombreMateria = item.NombreMateria
+                    nombre_materia = item.nombre_materia
                 });
             }
             _cursoMateria.Add(new Cm()
             {
-                IdC = Cursonew.IdC,
-                NombreMateria = item.NombreMateria
+                id_c = Cursonew.IdC,
+                nombre_materia = item.nombre_materia
             });
 
 

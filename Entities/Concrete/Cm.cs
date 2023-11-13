@@ -6,8 +6,8 @@ namespace Base.Models;
 
 public partial class Cm: IEntity
 {
-    public int IdC { get; set; }
+    public int id_c { get; set; }
 
-    public string NombreMateria { get; set; }
+    public string nombre_materia { get; set; }
 
 }

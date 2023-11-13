@@ -10,7 +10,7 @@ public partial class GrupoCursoMaterium:IEntity
 
     public string nombre_materia { get; set; }
 
-    public int IdC { get; set; }
+    public int id_c { get; set; }
 
     
 }

@@ -6,7 +6,7 @@ namespace Base.Models;
 
 public partial class Plano:IEntity
 {
-    public string CodigoP { get; set; }
+    public string codigo_p { get; set; }
 
-    public string PlanoImg { get; set; }
+    public string plano_img { get; set; }
 }

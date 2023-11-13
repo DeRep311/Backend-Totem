@@ -8,7 +8,7 @@ public partial class EstudiaEn: IEntity
 {
     public int? Cedula { get; set; }
 
-    public string NombreGrupo { get; set; }
+    public string nombre_grupo { get; set; }
 
   
 }

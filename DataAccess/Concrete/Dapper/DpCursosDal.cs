@@ -11,14 +11,14 @@ public class DpCursosDal : DapperRepositoryBase<Curso>, ICursoDal
 
     public List<Materium> GetYourMaterias(int IdC)
     {
-        var result = _cursoMateriaDal.GetAll(e => e.IdC== IdC);
+        var result = _cursoMateriaDal.GetAll(e => e.id_c== IdC);
         List<Materium> materias= new();
         foreach (var item in result)
         {
-            if (item.NombreMateria == null)
+            if (item.nombre_materia == null)
             {
                  materias.Add(new Materium(){
-                NombreMateria= item.NombreMateria,
+                nombre_materia= item.nombre_materia,
             });
                 
             }

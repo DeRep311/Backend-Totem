@@ -6,7 +6,7 @@ public class PlanosManager: IPlanosServices {
         _planosDal = planosDal;
     }
     public IResult Add (PlanosDTO planos) {
-        var result= _planosDal.Get (p => p.CodigoP == planos.Plano.CodigoP);
+        var result= _planosDal.Get (p => p.codigo_p == planos.Plano.codigo_p);
         if (result != null) {
             return new ErrorResult ("Ya existe un plano con ese codigo");
         } else {
@@ -18,9 +18,9 @@ public class PlanosManager: IPlanosServices {
         }
     }
     public IResult Delete (PlanosDTO planos) {
-        var result = _planosDal.Get (p => p.CodigoP == planos.Plano.CodigoP);
+        var result = _planosDal.Get (p => p.codigo_p == planos.Plano.codigo_p);
         if (result != null) {
-            _planosDal.Delete (p => p.CodigoP == planos.Plano.CodigoP);
+            _planosDal.Delete (p => p.codigo_p == planos.Plano.codigo_p);
             return new SuccessResult ();
         } else {
             return new ErrorResult ("No existe un plano con ese codigo");

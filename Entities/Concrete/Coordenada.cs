@@ -12,9 +12,9 @@ public partial class Coordenada: IEntity
 
     public float? coo_x { get; set; }
 
-    public float? CooY { get; set; }
+    public float? coo_y { get; set; }
 
-    public string Foto { get; set; }
+    public string foto { get; set; }
 
     public bool? Inicio { get; set; }
 

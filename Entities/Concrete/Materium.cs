@@ -6,5 +6,5 @@ namespace Base.Models;
 
 public partial class Materium:IEntity
 {
-    public string NombreMateria { get; set; }
+    public string nombre_materia { get; set; }
 }

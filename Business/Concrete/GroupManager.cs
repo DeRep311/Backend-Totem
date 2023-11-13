@@ -49,12 +49,12 @@ public class GroupManager : IGroupServices
             {
                 nombre_grupo = grupo.NombreGrupo
             });
-            var result2 = _cursoDal.Get(e => e.IdC == grupo.Idc);
+            var result2 = _cursoDal.Get(e => e.id_c == grupo.Idc);
             if (result2 != null)
             {
                 _grupoCursoMateriaDal.Add(new GrupoCursoMaterium()
                 {
-                    IdC = grupo.Idc,
+                    id_c = grupo.Idc,
                     nombre_grupo = grupo.NombreGrupo,
 
                 });
@@ -114,16 +114,16 @@ public class GroupManager : IGroupServices
 
                 foreach (var item in result2)
                 {
-                    materias.Add(_materiaDal.Get(e => e.NombreMateria == item.nombre_materia));
+                    materias.Add(_materiaDal.Get(e => e.nombre_materia == item.nombre_materia));
                 }
-            var curso = _cursoDal.Get(e => e.IdC == result2.FirstOrDefault().IdC);
+            var curso = _cursoDal.Get(e => e.id_c == result2.FirstOrDefault().id_c);
             var students = _groupDal.GetStudent(IdG);
 
             return new SuccessResultData<GrupoDTO>(new GrupoDTO()
             {
                 NombreGrupo = result.nombre_grupo,
                 Materias = materias,
-                NombreCurso = curso.NombreCurso,
+                NombreCurso = curso.nombre_curso,
                 Estudiantes = students
             });
         }

@@ -25,16 +25,16 @@ public class AssignManager
             var ResultHorario= _HorarioDal.Get(e=> e.id_h == Horario);
             if (ResultHorario != null)
             {
-               var Matery= result.Data.Materias.Find(e=> e.NombreMateria == Materia);
+               var Matery= result.Data.Materias.Find(e=> e.nombre_materia == Materia);
 
                 if(Matery != null)
                 {
-               var ResultHorarioMateria = _HorarioMateriaDal.Get(e=> e.IdH == ResultHorario.id_h && e.NombreMateria == Matery.NombreMateria);
+               var ResultHorarioMateria = _HorarioMateriaDal.Get(e=> e.id_h == ResultHorario.id_h && e.nombre_materia == Matery.nombre_materia);
                           if (ResultHorarioMateria == null)
                           {
                             
                             _HorarioMateriaDal.Add(new HorarioGrupoCurso{
-                                IdH = ResultHorario.id_h, NombreGrupo = result.Data.NombreGrupo, NombreMateria = Matery.NombreMateria, IdC = result.Data.Idc});
+                                id_h = ResultHorario.id_h, nombre_grupo = result.Data.NombreGrupo, nombre_materia = Matery.nombre_materia, id_c = result.Data.Idc});
                             return new SuccessResult("Se asigno correctamente");
                           }
                           else

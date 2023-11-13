@@ -11,7 +11,7 @@ public class DpGrupoDal : DapperRepositoryBase<Grupo>, IGroupDal
          _estudianteDal = estudianteDal;
     }
     public IResult DeleteStudents(String IdG){
-       List<EstudiaEn> result = _estudia_En.GetAll(x => x.NombreGrupo == IdG);
+       List<EstudiaEn> result = _estudia_En.GetAll(x => x.nombre_grupo == IdG);
         if (result == null)
         {
             return new ErrorResult("No hay estudiantes en este grupo");
@@ -20,7 +20,7 @@ public class DpGrupoDal : DapperRepositoryBase<Grupo>, IGroupDal
         {
             foreach (var item in result)
             {
-                _estudia_En.Delete(e=> e.NombreGrupo==item.NombreGrupo);
+                _estudia_En.Delete(e=> e.nombre_grupo==item.nombre_grupo);
             }
             return new SuccessResult("Estudiantes eliminados");
         }
@@ -28,7 +28,7 @@ public class DpGrupoDal : DapperRepositoryBase<Grupo>, IGroupDal
 
     public List<Estudiante> GetStudent(String grupo)
     {
-        var result = _estudia_En.GetAll(x => x.NombreGrupo == grupo);
+        var result = _estudia_En.GetAll(x => x.nombre_grupo == grupo);
           List<Estudiante> student= new();
 
         if(result == null)
@@ -63,7 +63,7 @@ public class DpGrupoDal : DapperRepositoryBase<Grupo>, IGroupDal
             
             _estudia_En.Add(new EstudiaEn(){
                 Cedula= item.Cedula,
-                NombreGrupo= grupo
+                nombre_grupo= grupo
             });
         }
         return new SuccessResult("Estudiantes agregados");

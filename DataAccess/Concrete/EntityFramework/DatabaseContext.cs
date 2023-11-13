@@ -90,11 +90,11 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Anio>(entity =>
         {
-            entity.HasKey(e => e.Anio1).HasName("PRIMARY");
+            entity.HasKey(e => e.anio).HasName("PRIMARY");
 
             entity.ToTable("anio");
 
-            entity.Property(e => e.Anio1)
+            entity.Property(e => e.anio)
                 .ValueGeneratedNever()
                 .HasColumnType("int(5)")
                 .HasColumnName("anio");
@@ -106,14 +106,14 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("anio-grupo");
 
-            entity.HasIndex(e => e.Anio, "FK_anio-grupo_anio");
+            entity.HasIndex(e => e.anio, "FK_anio-grupo_anio");
 
-            entity.HasIndex(e => e.NombreGrupo, "FK_anio-grupo_grupo");
+            entity.HasIndex(e => e.nombre_grupo, "FK_anio-grupo_grupo");
 
-            entity.Property(e => e.Anio)
+            entity.Property(e => e.anio)
                 .HasColumnType("int(5)")
                 .HasColumnName("anio");
-            entity.Property(e => e.NombreGrupo)
+            entity.Property(e => e.nombre_grupo)
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
 
@@ -132,15 +132,15 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("cm");
 
-            entity.HasIndex(e => e.IdC, "FK__curso");
+            entity.HasIndex(e => e.id_c, "FK__curso");
 
-            entity.HasIndex(e => e.NombreMateria, "FK__materia");
+            entity.HasIndex(e => e.nombre_materia, "FK__materia");
 
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("int(255)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.NombreMateria)
+            entity.Property(e => e.nombre_materia)
                 .IsRequired()
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
@@ -166,11 +166,11 @@ public partial class DatabaseContext : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("id_c");
             entity.Property(e => e.coo_x).HasColumnName("coo_x");
-            entity.Property(e => e.CooY).HasColumnName("coo_y");
+            entity.Property(e => e.coo_y).HasColumnName("coo_y");
             entity.Property(e => e.Final)
                 .HasDefaultValueSql("b'0'")
                 .HasColumnType("bit(1)");
-            entity.Property(e => e.Foto)
+            entity.Property(e => e.foto)
                 .HasMaxLength(50)
                 .HasColumnName("foto");
             entity.Property(e => e.Inicio)
@@ -180,14 +180,14 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Curso>(entity =>
         {
-            entity.HasKey(e => e.IdC).HasName("PRIMARY");
+            entity.HasKey(e => e.id_c).HasName("PRIMARY");
 
             entity.ToTable("curso");
 
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .HasColumnType("int(255)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.NombreCurso)
+            entity.Property(e => e.nombre_curso)
                 .HasMaxLength(7)
                 .HasColumnName("nombre_curso");
         });
@@ -198,31 +198,31 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("curso-horario-ubicacion");
 
-            entity.HasIndex(e => new { e.NombreGrupo, e.NombreMateria, e.IdH, e.IdC }, "Horario-Grupo-curso_idx");
+            entity.HasIndex(e => new { e.nombre_grupo, e.nombre_materia, e.id_h, e.id_c }, "Horario-Grupo-curso_idx");
 
-            entity.HasIndex(e => e.CodigoUbicaciones, "Ubicacion_idx");
+            entity.HasIndex(e => e.codigo_ubicaciones, "Ubicacion_idx");
 
-            entity.HasIndex(e => e.IdC, "id_c");
+            entity.HasIndex(e => e.id_c, "id_c");
 
-            entity.HasIndex(e => e.IdH, "id_h");
+            entity.HasIndex(e => e.id_h, "id_h");
 
-            entity.HasIndex(e => e.NombreMateria, "nombre_materia");
+            entity.HasIndex(e => e.nombre_materia, "nombre_materia");
 
-            entity.Property(e => e.CodigoUbicaciones)
+            entity.Property(e => e.codigo_ubicaciones)
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones");
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .HasColumnType("int(255)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.IdH)
+            entity.Property(e => e.id_h)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("int(255)")
                 .HasColumnName("id_h");
-            entity.Property(e => e.NombreGrupo)
+            entity.Property(e => e.nombre_grupo)
                 .IsRequired()
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
-            entity.Property(e => e.NombreMateria)
+            entity.Property(e => e.nombre_materia)
                 .IsRequired()
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
@@ -257,12 +257,12 @@ public partial class DatabaseContext : DbContext
 
             entity.HasIndex(e => e.Cedula, "FK__usuario");
 
-            entity.HasIndex(e => e.NombreGrupo, "FK_estudia_en_grupo");
+            entity.HasIndex(e => e.nombre_grupo, "FK_estudia_en_grupo");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(8)")
                 .HasColumnName("cedula");
-            entity.Property(e => e.NombreGrupo)
+            entity.Property(e => e.nombre_grupo)
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
 
@@ -353,24 +353,24 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("horario-grupo-curso");
 
-            entity.HasIndex(e => new { e.NombreGrupo, e.NombreMateria, e.IdC }, "Grupo-Curso_idx");
+            entity.HasIndex(e => new { e.nombre_grupo, e.nombre_materia, e.id_c }, "Grupo-Curso_idx");
 
-            entity.HasIndex(e => e.IdH, "Horario_idx");
+            entity.HasIndex(e => e.id_h, "Horario_idx");
 
-            entity.HasIndex(e => e.IdC, "id_c");
+            entity.HasIndex(e => e.id_c, "id_c");
 
-            entity.HasIndex(e => e.NombreMateria, "nombre_materia");
+            entity.HasIndex(e => e.nombre_materia, "nombre_materia");
 
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .HasColumnType("int(255)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.IdH)
+            entity.Property(e => e.id_h)
                 .HasColumnType("int(255)")
                 .HasColumnName("id_h");
-            entity.Property(e => e.NombreGrupo)
+            entity.Property(e => e.nombre_grupo)
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
-            entity.Property(e => e.NombreMateria)
+            entity.Property(e => e.nombre_materia)
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
 
@@ -388,39 +388,39 @@ public partial class DatabaseContext : DbContext
 
             entity.HasIndex(e => e.Cedula, "FK_imparte_docente");
 
-            entity.HasIndex(e => new { e.NombreMateria, e.NombreGrupo, e.IdC, e.IdH }, "FK_imparte_grupo-curso-materia_idx");
+            entity.HasIndex(e => new { e.nombre_materia, e.nombre_grupo, e.id_c, e.id_h }, "FK_imparte_grupo-curso-materia_idx");
 
-            entity.HasIndex(e => e.IdC, "id_c");
+            entity.HasIndex(e => e.id_c, "id_c");
 
-            entity.HasIndex(e => e.IdH, "id_h");
+            entity.HasIndex(e => e.id_h, "id_h");
 
-            entity.HasIndex(e => e.NombreGrupo, "nombre_grupo");
+            entity.HasIndex(e => e.nombre_grupo, "nombre_grupo");
 
             entity.Property(e => e.Cedula)
                 .HasColumnType("int(11)")
                 .HasColumnName("cedula");
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("int(255)")
                 .HasColumnName("id_c");
-            entity.Property(e => e.IdH)
+            entity.Property(e => e.id_h)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_h");
-            entity.Property(e => e.NombreGrupo)
+            entity.Property(e => e.nombre_grupo)
                 .HasMaxLength(10)
                 .HasColumnName("nombre_grupo");
-            entity.Property(e => e.NombreMateria)
+            entity.Property(e => e.nombre_materia)
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
         });
 
         modelBuilder.Entity<Materium>(entity =>
         {
-            entity.HasKey(e => e.NombreMateria).HasName("PRIMARY");
+            entity.HasKey(e => e.nombre_materia).HasName("PRIMARY");
 
             entity.ToTable("materia");
 
-            entity.Property(e => e.NombreMateria)
+            entity.Property(e => e.nombre_materia)
                 .HasMaxLength(30)
                 .HasColumnName("nombre_materia");
         });
@@ -442,14 +442,14 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Plano>(entity =>
         {
-            entity.HasKey(e => e.CodigoP).HasName("PRIMARY");
+            entity.HasKey(e => e.codigo_p).HasName("PRIMARY");
 
             entity.ToTable("planos");
 
-            entity.Property(e => e.CodigoP)
+            entity.Property(e => e.codigo_p)
                 .HasMaxLength(10)
                 .HasColumnName("codigo_p");
-            entity.Property(e => e.PlanoImg)
+            entity.Property(e => e.plano_img)
                 .HasMaxLength(50)
                 .HasColumnName("plano_img");
         });
@@ -460,14 +460,14 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("tiene");
 
-            entity.HasIndex(e => e.IdC, "FK_Coordenadas_idx");
-            entity.HasIndex(t => t.CodigoUbicaciones, "codigo_ubicaciones");
+            entity.HasIndex(e => e.id_c, "FK_Coordenadas_idx");
+            entity.HasIndex(t => t.codigo_ubicaciones, "codigo_ubicaciones");
 
-            entity.Property(e => e.CodigoUbicaciones)
+            entity.Property(e => e.codigo_ubicaciones)
                 .HasColumnType("varchar(5)")
                 .HasColumnName("codigo_ubicaciones");
 
-            entity.Property(e => e.IdC)
+            entity.Property(e => e.id_c)
                 .HasColumnType("int(11)")
                 .HasColumnName("id_c");
 
@@ -482,22 +482,22 @@ public partial class DatabaseContext : DbContext
 
         modelBuilder.Entity<Ubicaciones>(entity =>
         {
-            entity.HasKey(e => e.CodigoUbicaciones).HasName("PRIMARY");
+            entity.HasKey(e => e.codigo_ubicaciones).HasName("PRIMARY");
 
             entity.ToTable("ubicaciones");
 
-            entity.Property(e => e.CodigoUbicaciones)
+            entity.Property(e => e.codigo_ubicaciones)
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones");
-            entity.Property(e => e.Nombre)
+            entity.Property(e => e.nombre)
                 .IsRequired()
                 .HasMaxLength(25)
                 .HasColumnName("nombre");
-            entity.Property(e => e.Privado)
+            entity.Property(e => e.privado)
                 .HasDefaultValueSql("b'0'")
                 .HasColumnType("bit(1)")
                 .HasColumnName("privado");
-            entity.Property(e => e.Publico)
+            entity.Property(e => e.publico)
                 .HasDefaultValueSql("b'0'")
                 .HasColumnType("bit(1)")
                 .HasColumnName("publico");
@@ -510,14 +510,14 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("ubicaciones_dependiente");
 
-            entity.HasIndex(e => new { e.CodigoUbicaciones, e.CodigoUbicacionesDep }, "FK__ubicaciones");
+            entity.HasIndex(e => new { e.CodigoUbicaciones, e.codigo_ubicaciones_dep }, "FK__ubicaciones");
 
-            entity.HasIndex(e => e.CodigoUbicacionesDep, "codigo_ubicaciones-dep");
+            entity.HasIndex(e => e.codigo_ubicaciones_dep, "codigo_ubicaciones-dep");
 
             entity.Property(e => e.CodigoUbicaciones)
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones");
-            entity.Property(e => e.CodigoUbicacionesDep)
+            entity.Property(e => e.codigo_ubicaciones_dep)
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones-dep");
 
@@ -536,14 +536,14 @@ public partial class DatabaseContext : DbContext
                 .HasNoKey()
                 .ToTable("up");
 
-            entity.HasIndex(e => e.CodigoP, "FK__planos");
+            entity.HasIndex(e => e.codigo_p, "FK__planos");
 
-            entity.HasIndex(e => e.CodigoUbicaciones, "FK__ubicaciones");
+            entity.HasIndex(e => e.codigo_ubicaciones, "FK__ubicaciones");
 
-            entity.Property(e => e.CodigoP)
+            entity.Property(e => e.codigo_p)
                 .HasMaxLength(10)
                 .HasColumnName("codigo_p");
-            entity.Property(e => e.CodigoUbicaciones)
+            entity.Property(e => e.codigo_ubicaciones)
                 .HasMaxLength(5)
                 .HasColumnName("codigo_ubicaciones");
 

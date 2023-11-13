@@ -6,11 +6,13 @@ namespace Base.Models;
 
 public partial class Ubicaciones:IEntity
 {
-    public string CodigoUbicaciones { get; set; }
+    public readonly object Privado;
 
-    public string Nombre { get; set; }
+    public string codigo_ubicaciones { get; set; }
 
-    public bool Publico { get; set; }
+    public string nombre { get; set; }
 
-    public bool Privado { get; set; }
+    public bool publico { get; set; }
+
+    public bool privado { get; set; }
 }

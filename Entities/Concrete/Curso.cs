@@ -6,7 +6,7 @@ namespace Base.Models;
 
 public partial class Curso: IEntity
 {
-    public int IdC { get; set; }
+    public int id_c { get; set; }
 
-    public string NombreCurso { get; set; }
+    public string nombre_curso { get; set; }
 }

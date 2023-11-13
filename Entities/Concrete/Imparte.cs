@@ -8,11 +8,11 @@ public partial class Imparte:IEntity
 {
     public int? Cedula { get; set; }
 
-    public string NombreMateria { get; set; }
+    public string nombre_materia { get; set; }
 
-    public string NombreGrupo { get; set; }
+    public string nombre_grupo { get; set; }
 
-    public int IdC { get; set; }
+    public int id_c { get; set; }
 
-    public int? IdH { get; set; }
+    public int? id_h { get; set; }
 }

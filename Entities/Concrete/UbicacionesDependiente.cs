@@ -6,7 +6,7 @@ namespace Base.Models;
 
 public partial class UbicacionesDependiente:IEntity
 {
-    public string CodigoUbicacionesDep { get; set; }
+    public string codigo_ubicaciones_dep { get; set; }
 
     public string CodigoUbicaciones { get; set; }
 

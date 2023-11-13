@@ -16,27 +16,32 @@ public class DpUbicacionesDal :  DapperRepositoryBase<Ubicaciones>, IUbicationDa
     public virtual void AddC(UbicationDTO ubicacione){
 
         Ubicaciones ubi = new Ubicaciones(){
-            CodigoUbicaciones = ubicacione.CodigoUbicaciones,
-            Nombre = ubicacione.Nombre,
-            Publico = ubicacione.Publico,
-            Privado = ubicacione.Privado
+            codigo_ubicaciones = ubicacione.CodigoUbicaciones,
+            nombre = ubicacione.Nombre,
+            publico = ubicacione.Publico,
+            privado = ubicacione.Privado
         };
         base.Add(ubi);
-        List<int> ids = new ();
+        List<Tiene> ids = new ();
 
         foreach (var item in ubicacione.IdCs)
         {
             Coordenada coor = new Coordenada(){
                 coo_x = item.coo_x,
-                CooY = item.CooY,
-                Foto = item.Foto,
+                coo_y = item.coo_y,
+                foto = item.foto,
                 Inicio = item.Inicio,
                 Final = item.Final
             };
             _coordenadasDal.Add(coor);
+         ids.Add(new Tiene(){
+             id_c = coor.id_c,
+             codigo_ubicaciones = ubicacione.CodigoUbicaciones
+         });
         }
+        _tieneDal.AddRaw(ids);
 
-        Tiene tiene = new Tiene();
+       
         
 
 

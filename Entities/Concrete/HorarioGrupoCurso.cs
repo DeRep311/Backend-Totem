@@ -6,13 +6,13 @@ namespace Base.Models;
 
 public partial class HorarioGrupoCurso:IEntity
 {
-    public int IdH { get; set; }
+    public int id_h { get; set; }
 
-    public string NombreGrupo { get; set; }
+    public string nombre_grupo { get; set; }
 
-    public string NombreMateria { get; set; }
+    public string nombre_materia { get; set; }
 
-    public int? IdC { get; set; }
+    public int? id_c { get; set; }
 
  
 }

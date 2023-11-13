@@ -6,7 +6,7 @@ namespace Base.Models;
 
 public partial class AnioGrupo: IEntity
 {
-    public string NombreGrupo { get; set; }
+    public string nombre_grupo { get; set; }
 
-    public int? Anio { get; set; }
+    public int? anio { get; set; }
 }

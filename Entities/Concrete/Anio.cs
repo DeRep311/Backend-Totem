@@ -6,5 +6,5 @@ namespace Base.Models;
 
 public partial class Anio: IEntity
 {
-    public int Anio1 { get; set; }
+    public int anio { get; set; }
 }

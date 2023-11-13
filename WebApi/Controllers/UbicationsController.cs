@@ -75,10 +75,10 @@ namespace Name.Controllers
                 // Ahora puedes trabajar con los datos de la coordenada y la imagen almacenada en el servidor
                 var coordenada = new Coordenada
                 {
-                    IdC = idC,
-                    CooX = cooX,
-                    CooY = cooY,
-                    Foto = $"imagenes/{file.FileName}", // Ruta al archivo de imagen
+                    id_c = idC,
+                    coo_x = cooX,
+                    coo_y = cooY,
+                    foto = $"imagenes/{file.FileName}", // Ruta al archivo de imagen
                     Inicio = inicio,
                     Final = final
                 };
@@ -167,10 +167,10 @@ namespace Name.Controllers
                 // Ahora puedes trabajar con los datos de la coordenada y la imagen almacenada en el servidor
                 var coordenada = new Coordenada
                 {
-                    IdC = idC,
-                    CooX = cooX,
-                    CooY = cooY,
-                    Foto = $"imagenes/{file.FileName}", // Ruta al archivo de imagen
+                    id_c = idC,
+                    coo_x = cooX,
+                    coo_y = cooY,
+                    foto = $"imagenes/{file.FileName}", // Ruta al archivo de imagen
                     Inicio = inicio,
                     Final = final
                 };

@@ -7,9 +7,9 @@ public class EfCursosDal : EfEntityRepositoryBase<Curso, DatabaseContext>, ICurs
     public List<Materium> GetYourMaterias(int IdC)
     {
         using DatabaseContext context = new();
-        if (context.Cms.Any(e => e.IdC == IdC))
+        if (context.Cms.Any(e => e.id_c == IdC))
         {
-             List<Cm> result = context.Cms.Where(e => e.IdC == IdC).ToList();
+             List<Cm> result = context.Cms.Where(e => e.id_c == IdC).ToList();
         List<Materium> materias = new();
         foreach (var item in result)
         {
